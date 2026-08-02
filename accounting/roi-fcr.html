@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — ROI / FCR Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:53 PM</span><span>●●● 16%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>ROI Calculator (Broiler and Layer)</h1>
+      </div>
+      <div class="radio-row">
+        <label class="radio-option"><input type="radio" name="birdtype" checked onchange="showFieldGroup('roi-broiler')"> Broiler/Color bird</label>
+        <label class="radio-option"><input type="radio" name="birdtype" onchange="showFieldGroup('roi-layer')"> Layer</label>
+      </div>
+
+      <div class="screen-body">
+        <div class="calc-card">
+          <div class="field-group active" id="roi-broiler">
+            <input class="calc-input" type="text" placeholder="Opening Bird quantity" disabled>
+            <input class="calc-input" type="text" placeholder="Chick price per piece (Tk)" disabled>
+            <input class="calc-input" type="text" placeholder="Mortality Quantity" disabled>
+            <input class="calc-input" type="text" placeholder="Total feed (kg)" disabled>
+            <input class="calc-input" type="text" placeholder="Total weight (kg)" disabled>
+            <input class="calc-input" type="text" placeholder="Feed price/kg" disabled>
+            <input class="calc-input" type="text" placeholder="Market price/kg" disabled>
+          </div>
+          <div class="field-group" id="roi-layer">
+            <input class="calc-input" type="text" placeholder="Daily feed (gm)" disabled>
+            <input class="calc-input" type="text" placeholder="Hen day %" disabled>
+            <input class="calc-input" type="text" placeholder="Egg price" disabled>
+            <input class="calc-input" type="text" placeholder="Feed price/kg" disabled>
+          </div>
+          <button class="calc-btn moss" type="button">CALCULATE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, calculator not wired up yet — tap Broiler/Layer to switch fields</div>
+</div>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
