@@ -136,6 +136,11 @@ a.nav-item{ text-decoration:none; }
 .title-card-head h2{ font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:17px; color:var(--text-charcoal); }
 .title-card p{ font-size:12px; color:var(--text-secondary); }
 
+/* Inset header — a rounded colored block set in from the screen edges rather than a full-width bar (production-cost tool screens use this instead of .subpage-header) */
+.inset-header{ display:flex; align-items:center; gap:10px; margin:12px 16px 4px; padding:15px 16px; border-radius:var(--r-lg); }
+.inset-header .back-btn{ color:var(--card-white); font-size:20px; text-decoration:none; line-height:1; flex-shrink:0; }
+.inset-header h1{ font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:16px; color:var(--card-white); flex:1; text-align:center; margin-right:20px; }
+
 .radio-row{ display:flex; justify-content:center; gap:24px; padding:2px 16px 16px; }
 .radio-option{ display:flex; align-items:center; gap:7px; font-family:'Hind Siliguri',sans-serif; font-size:12.5px; color:var(--text-charcoal); }
 .radio-option input[type="radio"]{ accent-color:var(--moss); width:17px; height:17px; }
@@ -173,6 +178,14 @@ a.list-card{ text-decoration:none; color:inherit; }
 
 /* Result banner — single-line centered result (e.g. a unit conversion output) */
 .result-banner{ margin:0 16px 16px; background:var(--moss-soft); border-radius:var(--r-md); padding:14px; text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; color:var(--text-charcoal); }
+
+/* Dropdown field — same box as .calc-input plus a caret. Left enabled on mockups so the recorded open-menu state is reachable (it swaps a real state, it doesn't compute). */
+.calc-select{ appearance:none; -webkit-appearance:none; padding-right:38px; cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%235B6355'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
+
+/* Hero result card — centered caption above a single big value, for tools whose whole output is one number */
+.result-hero{ margin:0 16px 16px; background:var(--card-white); border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:18px 16px; text-align:center; }
+.result-hero .result-label{ font-family:'Hind Siliguri',sans-serif; font-size:13px; color:var(--text-secondary); margin-bottom:6px; }
+.result-hero .result-value{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:24px; color:var(--moss); }
 
 /* Labeled field (label above the input box, as opposed to placeholder-only fields) */
 .calc-field{ margin-bottom:14px; }

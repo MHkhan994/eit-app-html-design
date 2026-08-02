@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — ১ কেজি উৎপাদন খরচ হিসাব</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:59 PM</span><span>●●● 13%</span></div>
+
+      <div class="inset-header" style="background:var(--rust);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>১ কেজি উৎপাদন খরচ হিসাব</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="calc-card">
+          <select class="calc-input calc-select">
+            <option>ব্রয়লার</option>
+            <option>কালার বার্ড</option>
+            <option>সোনালি</option>
+          </select>
+          <input class="calc-input" type="text" placeholder="বাচ্চার দাম (টাকা/বাচ্চা)" disabled>
+          <input class="calc-input" type="text" placeholder="ফিডের দাম (টাকা/কেজি)" disabled>
+          <input class="calc-input" type="text" placeholder="টার্গেট ওজন (কেজি)" disabled>
+          <input class="calc-input" type="text" placeholder="টার্গেট FCR" value="1.6" disabled>
+          <button class="calc-btn rust" type="button">হিসাব করুন</button>
+        </div>
+
+        <div class="result-hero">
+          <div class="result-label">আনুমানিক উৎপাদন খরচ</div>
+          <div class="result-value">0 টাকা/কেজি</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, calculator not wired up yet</div>
+</div>
+</body>
+</html>
