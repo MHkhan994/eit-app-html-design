@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — জায়গা, ফিডার ও ড্রিংকার হিসাব</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:42 PM</span><span>●●● 36%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>জায়গা, ফিডার ও ড্রিংকার হিসাব</h1>
+      </div>
+
+      <div class="screen-body">
+        <div style="padding:0 16px;">
+          <div class="calc-field">
+            <label>মুরগির ধরন নির্বাচন করুন</label>
+            <select class="calc-input" disabled>
+              <option>ব্রয়লার</option>
+              <option>লেয়ার/কালার বার্ড/পুলেট</option>
+              <option>ব্রয়লার ব্রিডার</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label>মোট মুরগির সংখ্যা</label>
+            <input class="calc-input" type="text" placeholder="মোট মুরগির সংখ্যা" disabled>
+          </div>
+          <div class="calc-field">
+            <label>বয়স (দিন)</label>
+            <input class="calc-input" type="text" placeholder="বয়স (দিন)" disabled>
+          </div>
+        </div>
+
+        <div class="calc-btn-row" style="margin:16px;">
+          <button class="calc-btn rust" type="button">হিসাব করুন</button>
+          <button class="calc-btn dark" type="button">মুছুন</button>
+        </div>
+
+        <div class="info-block">
+          <div class="result-text">
+            <p>🐔 টাইপ: ব্রয়লার ব্রিডার<br>📅 বয়স: 90 দিন<br>🧑‍🌾 মোট মুরগি: 200</p>
+            <p>➡ প্রতি মুরগি স্পেস: 2.0 বর্গফুট<br>➡ মোট জায়গা: 400.00 বর্গফুট<br>➡ মোট জায়গা (Sq.m): 37.16 বর্গমিটার</p>
+            <p>🍽️ ফিডার: চেইন ফিডিং<br>📌 নোট (ফিডার): ৫৬ দিনের পরে: চেইন ফিডিং সিস্টেম (ফিডার আলাদা নির্দিষ্ট না)</p>
+            <p>💧 পানির পাত্র: 0 (পানির পাত্র নেই)<br>📌 নোট (পাত্র): ১৪ দিনের পরে পানির পাত্র থাকবে না — শুধুই নিপল সিস্টেম</p>
+            <p>🚿 নিপল সিস্টেম: 20 - 25 নিপল<br>📌 নোট (নিপল): নিপল রেশিও: ১ নিপল = ৮-১০ বাচ্চা (প্রয়োজন: 20 - 25 নিপল)</p>
+            <p>🔥 ব্রুডার: 0 (প্রয়োজন নেই)<br>📌 নোট (ব্রুডার): ২১ দিনের পরে ব্রুডার প্রয়োজন নেই। গরমকালে ১৪ দিন পরেই বাদ দেওয়া যেতে পারে।</p>
+            <p>⭕ গার্ডার: 0 (প্রয়োজন নেই)<br>📌 নোট (গার্ডার): ১৪ দিনের পরে আলাদা গার্ডার প্রয়োজন নেই। প্রয়োজন অনুযায়ী জায়গা বাড়ালেই যথেষ্ট।</p>
+            <p>📏 ট্রাফ স্পেস (ইঞ্চি/মুরগি): 4.0 ইঞ্চ — মোট: 66.67 ফুট</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, calculator not wired up yet</div>
+</div>
+</body>
+</html>
