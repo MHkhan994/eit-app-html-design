@@ -69,9 +69,12 @@ Core features the full app needs (from client brief): Buy/Sell marketplace, doct
 
 **Update (2026-08-02, later same day):** user asked to replace every empty/"Result will appear here"/blank-value result state across all 9 built calculators with an actual example result — **"it's for UI design, every element should be in UI, don't worry about logic."** All 9 calculator screens now show filled example output (real captured values where the recording showed a computed result — weight-uniformity, medicine-dosage, space-feeder-drinker, chick-quality; plausible synthesized values where the recording ended before Calculate was pressed or only showed a placeholder emoji — ROI/FCR, breeder-feed, temp-converter, layer-egg-production). This **supersedes** the "match the recorded default/empty state" notes in the per-screen entries above for the *results* sections specifically — form inputs above the results are still left as empty placeholders (matching the "don't worry about logic" instruction: only the output display needed to look complete, not the input state). Two new shared components came out of this: `.result-banner` (single-line centered result, e.g. temp-converter's "40°C = 104°F") and `.result-text` (multi-paragraph free-form result blocks, e.g. space-feeder-drinker and chick-quality's long emoji-bulleted output). **Going forward, every new calculator/tool screen should ship with its result section pre-filled with realistic example data, not a blank/placeholder state** — this is now the standing convention, not a one-off.
 
+15. **বয়স অনুযায়ী মুরগির স্ট্যান্ডার্ড ডাটা (standard data by age)** — `accounting/standard-data.html`, linked from the tenth (final) accounting list item. Matches structure from `WhatsApp Video 2026-08-02 at 10.15.01 PM.mp4` (only 4 seconds — just shows this one list appearing, no deeper screen). **Structurally different from the other 9 accounting tools**: this is a **sub-list/menu screen** ("Commercial Standard Data" rust header + `.list-wrap`/`.list-card`, reusing the exact same component as `accounting/index.html` itself), not a form-plus-result calculator. 4 breed options — Broiler / Color / Layer / Duck Commercial Standard Data — each with the **identical** English description text ("Please select the breed, put the age in week and click for standard data.") in the original, which reads like a copy-paste artifact rather than intentional, but was replicated as-is since that's genuinely what's recorded. The 4 breed cards aren't linked anywhere (plain, non-interactive) since their sub-screens (the actual age-based data tables) weren't recorded. **All 10 accounting tools are now built.**
+
 ## Screens NOT yet built (placeholders currently shown)
 - Home / Hatchery **sub-screens** (Troubleshooting, Fine Tuning, Embryonic Stages, Important Topics, Management, Pull-Out Check detail pages — grid tab itself is built, drill-down pages are not)
-- Accounting **1 calculator screen left**: standard data by age (weight/uniformity, ROI/FCR, egg mass, breeder feed program, temp converter, layer egg production %, medicine dosage, space/feeder/drinker calc, and chick quality check are all built as static mockups)
+- Accounting **breed-specific standard-data tables** (Broiler/Color/Layer/Duck sub-screens under `accounting/standard-data.html` — not recorded yet)
+- Accounting: **all 10 calculator/tool list items are now built** ✅
 - **Buy** (কিনুন)
 - **Sell** (বেচুন)
 - **Doctor** (ডাক্তার) — appointment booking
@@ -102,7 +105,8 @@ eti-app/
     ├── layer-egg-production.html     static mockup calculator (no working logic — by design)
     ├── medicine-dosage.html          static mockup calculator (no working logic — by design)
     ├── space-feeder-drinker.html     static mockup calculator (no working logic — by design)
-    └── chick-quality.html            static mockup calculator (no working logic — by design)
+    ├── chick-quality.html            static mockup calculator (no working logic — by design)
+    └── standard-data.html            sub-list menu (Broiler/Color/Layer/Duck), not a calculator — breed sub-screens not yet recorded
 ```
 **Conventions to keep following as more screens land:**
 - Every bottom-nav-level screen gets `<section>/index.html` (mirrors `buy/`, `sell/`, etc.) — makes room for that section growing its own sub-pages later without a rename.
