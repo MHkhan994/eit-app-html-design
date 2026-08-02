@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Chick Quality Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:56 PM</span><span>●●● 41%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="index.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="title-card">
+          <div class="title-card-head"><span class="emoji">🐤</span><h2>Chick Quality Calculator</h2></div>
+          <p>হ্যাচিং ডিম থেকে বাচ্চার এ্যাকুরেট Yield ও মেশিন স্ট্যাটাস</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="calc-field">
+            <label>প্যারেন্ট মুরগির জাত</label>
+            <select class="calc-input" disabled>
+              <option>ব্রয়লার</option>
+              <option selected>কালার বার্ড</option>
+              <option>লেয়ার</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label>হ্যাচিং ডিমের ওজন (গ্রাম)</label>
+            <input class="calc-input" type="text" placeholder="যেমন: 58" disabled>
+          </div>
+          <div class="calc-field">
+            <label>বাচ্চার ওজন (গ্রাম)</label>
+            <input class="calc-input" type="text" placeholder="যেমন: 40" disabled>
+          </div>
+          <button class="calc-btn moss" type="button" style="margin-top:14px;">Calculate</button>
+          <button class="calc-btn dark" type="button">Clear</button>
+        </div>
+
+        <div class="info-block">
+          <div class="result-text">
+            <p>🐣 প্যারেন্ট: কালার বার্ড<br>🥚 ডিমের ওজন: 58.00 g<br>🐤 বাচ্চার ওজন (Actual): 40.00 g</p>
+            <p>📊 Actual Chick Yield: 68.97 %<br>📘 Standard Chick Yield: 66.00 %</p>
+            <p>📌 Standard Chick Weight (from StdYield): 38.28 g</p>
+            <p>🔍 <strong>Hatchery Machine Status:</strong><br>ℹ Yield সামান্য বেশি (2.97%) — পুলিং সময় ও আর্দ্রতা ভ্যালু মনিটর করুন।</p>
+            <p>⚖ <strong>Weight Assessment:</strong><br>⚠ অস্বাভাবিকভাবে বেশি ওজন (4.49% বেশি)। সম্ভবত মেশিনে বেশি আর্দ্রতা বা পুলিং টাইম খুব দেরি হয়েছে।</p>
+            <p>💡 <strong>সংক্ষিপ্ত পরামর্শ:</strong><br>
+            ১) ইনকিউবেটর রেকর্ড চেক করুন — প্রতিটি ব্যাচে Temp/Humidity/Turning/Pulling time নোট করুন।<br>
+            ২) টেম্পারেচার ও আর্দ্রতা (ডাটালগ) পুনরায় যাচাই করুন; সেটপয়েন্ট ও রিডিং মিলছে কি দেখুন।<br>
+            ৩) টার্নিং মেকানিজম ও টার্নিং ফ্রিকোয়েন্সি ঠিক আছে কি না দেখুন।<br>
+            ৪) ডিম সোর্টিং ও স্টোরেজ — পরিবহন ও স্টোরেজে ঠান্ডা/গরম ফ্লাকচার আছে কি না চেক করুন।</p>
+            <p>→ Yield সামান্য বেশি: পুলিং সময় ও আর্দ্রতা মনিটর করুন; বাচ্চার ডিহাইড্রেশন লক্ষণ আছে কি দেখুন।<br>
+            → ওজন বেশি: মেশিনে অতিরিক্ত আর্দ্রতা বা পুলিং দেরি থাকলে এমন হয় — পুলিং টাইম ও শেল-ড্রাইভ পদ্ধতি পুনঃপরীক্ষা করুন।</p>
+            <p>৫) ক্রস-চেক: যদি Yield ও Weight দুটোই ব্যতিক্রমী হয়, তবে measurement method (sample selection, scale calibration) যাচাই করুন।<br>
+            ৬) রুট-কজ এনালাইসিস: 3 ব্যাচের ইতিহাস তুলনা করে suspect date/time pinpoint করুন।</p>
+            <p><strong>সারাংশ:</strong> লগ রাখুন, সেন্সর ক্যালিব্রেট করুন, ছোট স্কেল টেস্ট চালিয়ে পরিবর্তন কনফার্ম করুন।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, calculator not wired up yet</div>
+</div>
+</body>
+</html>

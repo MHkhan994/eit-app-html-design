@@ -129,6 +129,13 @@ a.nav-item{ text-decoration:none; }
 .plain-header .back-btn{ color:var(--moss); font-size:20px; text-decoration:none; line-height:1; flex-shrink:0; }
 .plain-header h1{ font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:15.5px; color:var(--moss-dark); flex:1; text-align:center; margin-right:20px; }
 
+/* Title card — used by tool screens with no header bar at all, just cards straight down (back arrow via bare .plain-header, no h1) */
+.title-card{ margin:0 16px 12px; background:var(--card-white); border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:16px; }
+.title-card-head{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+.title-card-head .emoji{ font-size:22px; }
+.title-card-head h2{ font-family:'Baloo Da 2', sans-serif; font-weight:700; font-size:17px; color:var(--text-charcoal); }
+.title-card p{ font-size:12px; color:var(--text-secondary); }
+
 .radio-row{ display:flex; justify-content:center; gap:24px; padding:2px 16px 16px; }
 .radio-option{ display:flex; align-items:center; gap:7px; font-family:'Hind Siliguri',sans-serif; font-size:12.5px; color:var(--text-charcoal); }
 .radio-option input[type="radio"]{ accent-color:var(--moss); width:17px; height:17px; }
@@ -164,6 +171,9 @@ a.list-card{ text-decoration:none; color:inherit; }
 .calc-btn-row{ display:flex; gap:10px; }
 .calc-btn-row .calc-btn{ flex:1; margin-bottom:0; }
 
+/* Result banner — single-line centered result (e.g. a unit conversion output) */
+.result-banner{ margin:0 16px 16px; background:var(--moss-soft); border-radius:var(--r-md); padding:14px; text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; color:var(--text-charcoal); }
+
 /* Labeled field (label above the input box, as opposed to placeholder-only fields) */
 .calc-field{ margin-bottom:14px; }
 .calc-field:last-of-type{ margin-bottom:0; }
@@ -183,5 +193,11 @@ a.list-card{ text-decoration:none; color:inherit; }
 .calc-result-row:last-child{ border-bottom:none; }
 .calc-result-row .label{ font-weight:600; color:var(--text-charcoal); font-family:'Hind Siliguri',sans-serif; }
 .calc-result-row .value{ font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--moss-dark); flex-shrink:0; }
+
+/* Free-form result text — long multi-section calculator output (notes, assessments, tips) */
+.result-text{ font-size:12.5px; color:var(--text-charcoal); line-height:1.6; }
+.result-text p{ margin-bottom:12px; }
+.result-text p:last-child{ margin-bottom:0; }
+.result-text strong{ font-weight:700; }
 
 .caption{ text-align:center; margin-top:18px; font-family:'Hind Siliguri',sans-serif; font-size:12px; color:#7A7568; }
