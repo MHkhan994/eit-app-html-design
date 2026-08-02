@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — মেডিসিন হিসাব করুন</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:27 PM</span><span>●●● 30%</span></div>
+
+      <div class="subpage-header" style="background:var(--rust);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>মেডিসিন হিসাব করুন</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="calc-card">
+          <div class="calc-field">
+            <label>মোরগ মুরগির সংখ্যা:</label>
+            <input class="calc-input" type="text" placeholder="Chicken Qty" disabled>
+          </div>
+          <div class="calc-field">
+            <label>গড় ওজন (g):</label>
+            <input class="calc-input" type="text" placeholder="g/chicken" disabled>
+          </div>
+          <div class="calc-field">
+            <label>ডোজ/কেজি:</label>
+            <input class="calc-input" type="text" placeholder="mg/kg" disabled>
+          </div>
+          <div class="calc-field">
+            <label>মেডিসিন/গ্রাম:</label>
+            <input class="calc-input" type="text" placeholder="mg/gm" disabled>
+          </div>
+        </div>
+
+        <div class="calc-btn-row" style="margin:16px;">
+          <button class="calc-btn rust" type="button">হিসাব করুন</button>
+          <button class="calc-btn dark" type="button">মুছুন</button>
+        </div>
+
+        <div class="info-block">
+          <div class="info-value">Result will appear here</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, calculator not wired up yet</div>
+</div>
+</body>
+</html>
