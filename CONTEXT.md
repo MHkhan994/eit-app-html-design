@@ -92,6 +92,14 @@ Core features the full app needs (from client brief): Buy/Sell marketplace, doct
 
 19. **১টি ডিমের উৎপাদন খরচ (per-egg production cost) calculator** — `production-cost/egg-cost.html`, linked from the third production-cost list item. Static mockup, default state (matches structure from `WhatsApp Video 2026-08-02 at 22.14.54.mp4`). Zero new CSS. **No breed dropdown at all** on this one (the screen is layer-specific), just three inputs — লেয়ার বাচ্চার দাম, ফিডের দাম (টাকা/কেজি), মোট ডিমের সংখ্যা (HH) — then a rust **হিসাব করুন** button and a **0 টাকা/ডিম** result. ✅ **This completes all three production-cost tools.** Taken together they're the clearest case yet of near-identical siblings differing in the details: same `.inset-header`/`.calc-card`/`.result-hero` skeleton every time, but the field sets, the presence of a breed `<select>` (3 options / 4 options / none), the button label (হিসাব করুন / ফলাফল জানতে ক্লিক করুন / হিসাব করুন) and the result unit (টাকা/কেজি / টাকা/বাচ্চা / টাকা/ডিম) are all different. Never clone a sibling file and assume — read each recording.
 
+20. **খামার ব্যবস্থাপনা / ভ্যাকসিন তথ্য / রোগ নির্ণয় / রোগ বালাই — article list + detail template** — `farm-management/`, `vaccine-info/`, `disease-diagnosis/`, `disease-control/`, linked from the Home/General grid's remaining 4 cards. Matches structure from `WhatsApp Video 2026-08-02 at 10.58.09 PM.mp4`. User explicitly asked for a **reusable design** since all 4 sections share the same shape: rust `.subpage-header` + scrollable article list (thumbnail badge + bold title + truncated 2-line description, English all-caps subtitle line on 3 of the 4 — `.list-sub`, new) reusing `.list-wrap`/`.list-card`/`.badge-circle.sm` wholesale, and a shared **article detail template** (new `.article-hero`/`.article-hero-badge` — big emoji-in-circle standing in for the original's real infographic photos, per the standing no-real-assets rule; `.article-body`/`.article-h`/`.article-divider` for the long-form bullet-and-heading body text; the existing `.notice` component reused as-is for the closing 💡/✅ tip box). Only **one article per section got a full detail page** — matches what the recording actually tapped into and read through (the other's tap-throughs were never recorded, they went list → back → next grid card):
+    - **খামার ব্যবস্থাপনা** (rust header): 6-item list (খামারের জৈব নিরাপত্তা, **শেড পরিষ্কার এবং জীবাণুমুক্তকরণ** ← linked, শেড ফিউমিগেশন এবং ব্রুডিং হাউস তৈরি, ব্রুডিং এর সময় করণীয়, লাইটিং ম্যানেজমেন্ট, লিটার ম্যানেজমেন্ট). No English subtitle line on this list (matches recording). `farm-management/shed-cleaning.html` is the full 7-step detail article, transcribed end-to-end across the recording's scroll.
+    - **ভ্যাকসিন তথ্য** (header reads "ভ্যাকসিন সম্পর্কিত"): 6-item list (ভ্যাক্সিনেশন শিডিউল, লাইভ ভ্যাকসিন, কিল্ড ভ্যাকসিন, ভ্যাকসিন দেওয়ার সময় করণীয়, ভ্যাকসিন দেওয়ার সময় সাধারণ ভুলসমূহ, ভ্যাকসিন সফল করার জন্য করণীয়) with English subtitle line under each title. **No detail page tapped in the recording** — all 6 stay as non-linked `.list-card` divs.
+    - **রোগ নির্ণয়** (header reads "রোগ নির্ণয় কৌশল"): 6-item list (বাণিজ্যিক ব্রয়লার, বাণিজ্যিক কালার চিকেন, বাণিজ্যিক লেয়ার, ব্রয়লার প্যারেন্ট স্টক, কালার প্যারেন্ট স্টক, লেয়ার প্যারেন্ট স্টক), English subtitle per item. **No detail page tapped** — all non-linked.
+    - **রোগ বালাই** (header reads "মুরগির রোগ বালাই"): 6-item list (রাণীক্ষেত, **ব্রংকাইটিস** ← linked, গাম্বোরো রোগ, কক্সিডিওসিস রোগ, সালমোনেলা রোগ, করাইজা রোগ), English subtitle per item. `disease-control/bronchitis.html` is the full detail article (disease description, symptoms, post-mortem signs, prevention/vaccination, economic loss, closing note) transcribed end-to-end from the recording's scroll.
+    
+    Note: unlike accounting/production-cost, description text here is genuinely truncated with a trailing "…" in the source app itself (long article previews) — kept that ellipsis literally rather than inventing a full sentence for text the recording never fully revealed.
+
 ## Screens NOT yet built (placeholders currently shown)
 - Home / Hatchery **sub-screens** (Troubleshooting, Fine Tuning, Embryonic Stages, Important Topics, Management, Pull-Out Check detail pages — grid tab itself is built, drill-down pages are not)
 - Accounting: **all 10 calculator/tool list items are now built, including the 4 breed sub-screens behind standard-data.html** ✅
@@ -99,7 +107,7 @@ Core features the full app needs (from client brief): Buy/Sell marketplace, doct
 - **Sell** (বেচুন)
 - **Doctor** (ডাক্তার) — appointment booking
 - **Data Bank** (ডাটা ব্যাংক)
-- Other General-tab grid items: খামার ব্যবস্থাপনা, ভ্যাকসিন তথ্য, রোগ নির্ণয়, রোগ বালাই (not yet linked/built — উৎপাদন খরচ is now linked)
+- খামার ব্যবস্থাপনা / ভ্যাকসিন তথ্য / রোগ নির্ণয় / রোগ বালাই: **list pages are now built** ✅ — but each only has **one** article wired to a real detail page (শেড পরিষ্কার এবং জীবাণুমুক্তকরণ, ব্রংকাইটিস); the other ~20 article titles are static list-cards with no detail page yet — need more recordings or a decision to synthesize the rest
 - Blog system (mentioned in original brief, no recording yet)
 
 ## Current file structure — multi-page static site, organized by folder
@@ -131,11 +139,21 @@ eti-app/
 │   ├── standard-data-color.html      static mockup calculator (no working logic — by design)
 │   ├── standard-data-layer.html      static mockup calculator (no working logic — by design)
 │   └── standard-data-duck.html       static mockup calculator (no working logic — by design)
-└── production-cost/                  drill-down from Home's উৎপাদন খরচ grid card
-    ├── index.html                    the 3-tool list
-    ├── one-kg-cost.html              static mockup calculator (no working logic — by design)
-    ├── day-old-chick-cost.html       static mockup calculator (no working logic — by design)
-    └── egg-cost.html                 static mockup calculator (no working logic — by design)
+├── production-cost/                  drill-down from Home's উৎপাদন খরচ grid card
+│   ├── index.html                    the 3-tool list
+│   ├── one-kg-cost.html              static mockup calculator (no working logic — by design)
+│   ├── day-old-chick-cost.html       static mockup calculator (no working logic — by design)
+│   └── egg-cost.html                 static mockup calculator (no working logic — by design)
+├── farm-management/                  drill-down from Home's খামার ব্যবস্থাপনা grid card
+│   ├── index.html                    6-item article list
+│   └── shed-cleaning.html            full article detail (only one of 6 wired up — matches recording)
+├── vaccine-info/                     drill-down from Home's ভ্যাকসিন তথ্য grid card
+│   └── index.html                    6-item article list (no detail pages recorded yet)
+├── disease-diagnosis/                drill-down from Home's রোগ নির্ণয় grid card
+│   └── index.html                    6-item article list (no detail pages recorded yet)
+└── disease-control/                   drill-down from Home's রোগ বালাই grid card
+    ├── index.html                    6-item article list
+    └── bronchitis.html               full article detail (only one of 6 wired up — matches recording)
 ```
 **Conventions to keep following as more screens land:**
 - Every bottom-nav-level screen gets `<section>/index.html` (mirrors `buy/`, `sell/`, etc.) — makes room for that section growing its own sub-pages later without a rename.
