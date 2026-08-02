@@ -63,6 +63,19 @@ Core features the full app needs (from client brief): Buy/Sell marketplace, doct
 
 12. **মেডিসিনের মাত্রা (medicine dosage) calculator** — `accounting/medicine-dosage.html`, linked from the seventh accounting list item. Static mockup, default state (matches structure from `WhatsApp Video 2026-08-02 at 9.28.47 PM.mp4`). Rust `.subpage-header`, 4 `.calc-field` labeled inputs (মোরগ মুরগির সংখ্যা, গড় ওজন (g), ডোজ/কেজি, মেডিসিন/গ্রাম), rust+dark `.calc-btn-row`. Result card is the simplest yet — just a single line, "Result will appear here" (English placeholder text, in the original too), no label/value rows at all.
 
+13. **উৎপাদন খরচ জানুন (Production Cost) list** — `production-cost/index.html`, linked from the Home/General grid's উৎপাদন খরচ card. ✅ Functionality-match built (matches structure from `WhatsApp Video 2026-08-02 at 21.47.42.mp4`). Rust `.subpage-header`, no bottom nav, three `.list-card` entries: এক কেজি মুরগীর উৎপাদন খরচ (bachcha price/feed price/target weight/target FCR), এক দিনের মুরগীর বাচ্চার উৎপাদন খরচ (parent stock chick price/feed price/HH Chicks), একটি ডিমের উৎপাদন খরচ (layer chick price/feed price/HH egg). **Zero new CSS needed** — reused `.list-card`/`.list-title`/`.list-desc`/`.badge-circle.sm` from the accounting list wholesale; first screen built with no new components at all, which is the sign the design system is now covering this screen shape. Given its own folder (not a flat file) following the `accounting/` precedent, since all three items clearly drill down into input-form calculators ("...লিখুন এবং ফলাফলের জন্য ক্লিক করুন"). Cards are plain `<div>`s, not `<a>`s — those three sub-screens aren't recorded yet (recording ends on a tap ripple over card 2, before navigation). Two deliberate deviations from the original: it uses **circular emoji badges (🐔/🐤/🥚) instead of the original's real product photos** (chicken, chick group, egg basket), per the standing no-real-assets rule; and the original header has **no back arrow** (centered title only, relying on Android's system back), but one was added here since a hosted HTML demo has no equivalent affordance and every other sub-page has one.
+
+14. **১ কেজি উৎপাদন খরচ হিসাব (per-kg production cost) calculator** — `production-cost/one-kg-cost.html`, linked from the first production-cost list item. Static mockup, default state (matches structure from `WhatsApp Video 2026-08-02 at 22.00.10.mp4`). Three new components, all now in the shared CSS:
+    - **`.inset-header`** — a *rounded rust block set in from the screen edges* rather than a full-width bar. This is the **third** header pattern in the app, alongside `.subpage-header` (full-width colored bar) and `.plain-header` (no bar at all) — check which one a recording actually shows before picking.
+    - **`.calc-select`** — dropdown field: same box as `.calc-input` plus an SVG-data-URI caret. Rendered as a real `<select>` and **deliberately left enabled** while every text input on the screen stays `disabled`, because opening it reproduces a genuinely recorded state (the breed menu: ব্রয়লার / কালার বার্ড / সোনালি) rather than computing anything. Native select chrome replaces the original's Android overlay menu — same content, no JS.
+    - **`.result-hero`** — centered small caption over one big bold moss-green number, for tools whose entire output is a single value.
+    Fields, in order: breed `<select>`, বাচ্চার দাম (টাকা/বাচ্চা), ফিডের দাম (টাকা/কেজি), টার্গেট ওজন (কেজি), then a **pre-filled `1.6`** field, then a full-width rust হিসাব করুন button **inside** the same white `.calc-card` (not in a separate button row outside it, unlike the accounting tools). Result card below reads আনুমানিক উৎপাদন খরচ / **0 টাকা/কেজি** — another default-to-zero screen. Note: the `1.6` field's placeholder is never visible in the recording since the value covers it; labelled `টার্গেট FCR` here because the parent list card names target FCR as the fourth input. Recording ends on a tap ripple over the first input, so **no typed or computed state was ever captured** — nothing was invented to fill that gap.
+
+15. **১ দিনের বাচ্চার উৎপাদন খরচ (day-old chick production cost) calculator** — `production-cost/day-old-chick-cost.html`, linked from the second production-cost list item. Static mockup, default state (matches structure from `WhatsApp Video 2026-08-02 at 22.08.22.mp4`). **Zero new CSS** — same skeleton as `one-kg-cost.html` (`.inset-header` + `.calc-card` with the button inside it + `.result-hero`), which is what those three components were extracted for. Fields: breed `<select>`, প্যারেন্টস বাচ্চার দাম, ফিডের দাম (টাকা/কেজি), মোট HH বাচ্চার সংখ্যা — no pre-filled field here. Button reads **ফলাফল জানতে ক্লিক করুন**, not হিসাব করুন, and the result unit is **টাকা/বাচ্চা**, not টাকা/কেজি. **Its breed dropdown is NOT the same list as one-kg-cost's** — four options here (ব্রয়লার / কালার / সোনালি / **লেয়ার**) vs. three there (ব্রয়লার / **কালার বার্ড** / সোনালি); note both the extra লেয়ার entry and কালার vs কালার বার্ড. Sibling screens that look identical still differ in their option lists, button labels, and result units — read them off the frames per screen instead of copying the previous file's. No typed or computed state in the recording; result stays 0.
+    - Process note: with 30 frames of a near-static screen, sampling every 6th frame missed the dropdown-open state entirely. `stat -f "%N %z" f_*.jpg` and looking for the file-size outliers found it immediately (frames 22–24 dipped ~10KB below the rest because the white menu covers detail) — cheaper than reading images one by one, and worth doing whenever a recording looks like one unchanging screen.
+
+16. **১টি ডিমের উৎপাদন খরচ (per-egg production cost) calculator** — `production-cost/egg-cost.html`, linked from the third production-cost list item. Static mockup, default state (matches structure from `WhatsApp Video 2026-08-02 at 22.14.54.mp4`). Zero new CSS. **No breed dropdown at all** on this one (the screen is layer-specific), just three inputs — লেয়ার বাচ্চার দাম, ফিডের দাম (টাকা/কেজি), মোট ডিমের সংখ্যা (HH) — then a rust **হিসাব করুন** button and a **0 টাকা/ডিম** result. ✅ **This completes all three production-cost tools.** Taken together they're the clearest case yet of near-identical siblings differing in the details: same `.inset-header`/`.calc-card`/`.result-hero` skeleton every time, but the field sets, the presence of a breed `<select>` (3 options / 4 options / none), the button label (হিসাব করুন / ফলাফল জানতে ক্লিক করুন / হিসাব করুন) and the result unit (টাকা/কেজি / টাকা/বাচ্চা / টাকা/ডিম) are all different. Never clone a sibling file and assume — read each recording.
+
 ## Screens NOT yet built (placeholders currently shown)
 - Home / Hatchery **sub-screens** (Troubleshooting, Fine Tuning, Embryonic Stages, Important Topics, Management, Pull-Out Check detail pages — grid tab itself is built, drill-down pages are not)
 - Accounting **other 3 calculator screens** (weight/uniformity, ROI/FCR, egg mass, breeder feed program, temp converter, layer egg production %, and medicine dosage are built as static mockups; space/feeder/drinker calc, chick quality check, standard data by age still link nowhere)
@@ -70,7 +83,7 @@ Core features the full app needs (from client brief): Buy/Sell marketplace, doct
 - **Sell** (বেচুন)
 - **Doctor** (ডাক্তার) — appointment booking
 - **Data Bank** (ডাটা ব্যাংক)
-- Other General-tab grid items: উৎপাদন খরচ, খামার ব্যবস্থাপনা, ভ্যাকসিন তথ্য, রোগ নির্ণয়, রোগ বালাই (not yet linked/built)
+- Other General-tab grid items: খামার ব্যবস্থাপনা, ভ্যাকসিন তথ্য, রোগ নির্ণয়, রোগ বালাই (not yet linked/built — উৎপাদন খরচ is now linked)
 - Blog system (mentioned in original brief, no recording yet)
 
 ## Current file structure — multi-page static site, organized by folder
@@ -86,15 +99,20 @@ eti-app/
 ├── sell/index.html
 ├── doctor/index.html
 ├── databank/index.html
-└── accounting/                       drill-down from Home's হিসাব নিকাশ grid card
-    ├── index.html                    the 10-tool list
-    ├── weight-uniformity.html        static mockup calculator (no working logic — by design)
-    ├── roi-fcr.html                  static mockup calculator (no working logic — by design)
-    ├── egg-mass.html                 static mockup calculator (no working logic — by design)
-    ├── breeder-feed.html             static mockup calculator (no working logic — by design)
-    ├── temp-converter.html           static mockup calculator (no working logic — by design)
-    ├── layer-egg-production.html     static mockup calculator (no working logic — by design)
-    └── medicine-dosage.html          static mockup calculator (no working logic — by design)
+├── accounting/                       drill-down from Home's হিসাব নিকাশ grid card
+│   ├── index.html                    the 10-tool list
+│   ├── weight-uniformity.html        static mockup calculator (no working logic — by design)
+│   ├── roi-fcr.html                  static mockup calculator (no working logic — by design)
+│   ├── egg-mass.html                 static mockup calculator (no working logic — by design)
+│   ├── breeder-feed.html             static mockup calculator (no working logic — by design)
+│   ├── temp-converter.html           static mockup calculator (no working logic — by design)
+│   ├── layer-egg-production.html     static mockup calculator (no working logic — by design)
+│   └── medicine-dosage.html          static mockup calculator (no working logic — by design)
+└── production-cost/                  drill-down from Home's উৎপাদন খরচ grid card
+    ├── index.html                    the 3-tool list
+    ├── one-kg-cost.html              static mockup calculator (no working logic — by design)
+    ├── day-old-chick-cost.html       static mockup calculator (no working logic — by design)
+    └── egg-cost.html                 static mockup calculator (no working logic — by design)
 ```
 **Conventions to keep following as more screens land:**
 - Every bottom-nav-level screen gets `<section>/index.html` (mirrors `buy/`, `sell/`, etc.) — makes room for that section growing its own sub-pages later without a rename.
@@ -107,7 +125,9 @@ eti-app/
 
 ## How to continue a new screen
 1. User provides a screen recording of the feature.
-2. Extract frames (ffmpeg — installed via winget as `Gyan.FFmpeg`; if missing on a fresh machine, `winget install --id Gyan.FFmpeg -e --silent` and refresh PATH), identify distinct states/screens.
+2. Extract frames (ffmpeg), identify distinct states/screens. If ffmpeg is missing on a fresh machine, install per platform:
+   - **macOS:** `brew install ffmpeg` (lands at `/opt/homebrew/bin/ffmpeg` on Apple Silicon)
+   - **Windows:** `winget install --id Gyan.FFmpeg -e --silent`, then refresh PATH
 3. Decide: is this a **new top-level bottom-nav screen** (new `<section>/index.html` folder, copy the shell from an existing page) or a **drill-down from an existing grid card/list item** (new file inside the parent section's folder, styled like `accounting/index.html`, linked via `<a class="grid-card" href="...">` or `<a class="list-card" href="...">`)?
 4. Build functionality-match markup first, using the same CSS variables — don't invent new colors/fonts. If it's a calculator/tool screen, build the **static UI only** — no working computation — unless told otherwise.
 5. Wire up the link from wherever it's launched (bottom nav and/or a grid-card/list-card), double-checking relative path depth (`../assets/...` vs `assets/...`).
