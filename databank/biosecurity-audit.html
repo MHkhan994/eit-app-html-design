@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Bio-Security Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:23 AM</span><span>●●● 18%</span></div>
+
+      <div class="page-head">
+        <a class="back-btn" href="index.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero">
+          <h1>Bio-Security Audit</h1>
+          <p>Farm &amp; Hatchery Bio-Security Management System</p>
+        </div>
+
+        <div class="stat-grid cols-3">
+          <div class="stat-tile"><div class="stat-value moss">0</div><div class="stat-label">Farm Audits</div></div>
+          <div class="stat-tile"><div class="stat-value info">1</div><div class="stat-label">Hatchery Audits</div></div>
+          <div class="stat-tile"><div class="stat-value gold">83%</div><div class="stat-label">Avg Score</div></div>
+          <div class="stat-tile"><div class="stat-value rust">0</div><div class="stat-label">High Risk</div></div>
+          <div class="stat-tile"><div class="stat-value gold">0</div><div class="stat-label">Medium Risk</div></div>
+          <div class="stat-tile"><div class="stat-value moss">1</div><div class="stat-label">Low Risk</div></div>
+        </div>
+        <div class="audit-capa-note">Open CAPA: 0 · Completed CAPA: 0</div>
+
+        <div class="entry-grid">
+          <a class="entry-card" href="biosecurity-farm-audit.html">
+            <div class="badge-circle sm badge-moss">🚜</div>
+            Farm Data Entry
+          </a>
+          <a class="entry-card" href="biosecurity-hatchery-audit.html">
+            <div class="badge-circle sm badge-gold">🐣</div>
+            Hatchery Data Entry
+          </a>
+        </div>
+
+        <div class="audit-menu">
+          <div class="menu-card">
+            <button class="menu-card-head" type="button" data-target="mgmt" onclick="toggleMenu('mgmt')">Management Dashboard <span class="arrow">▼</span></button>
+            <div class="menu-panel" id="mgmt">
+              <a class="menu-row" href="biosecurity-executive-summary.html">
+                <div class="menu-row-icon indigo">📊</div>
+                <div class="menu-row-title">Executive Summary</div>
+                <div class="menu-row-chev">›</div>
+              </a>
+              <a class="menu-row" href="biosecurity-audit-history.html">
+                <div class="menu-row-icon moss">🕓</div>
+                <div class="menu-row-title">Bio-Security Audit History</div>
+                <div class="menu-row-chev">›</div>
+              </a>
+              <button class="menu-row" type="button">
+                <div class="menu-row-icon red">⚠️</div>
+                <div class="menu-row-title">Bio-Security Repeated Findings</div>
+                <div class="menu-row-chev">›</div>
+              </button>
+              <button class="menu-row" type="button">
+                <div class="menu-row-icon moss">⚖️</div>
+                <div class="menu-row-title">Audit Comparison</div>
+                <div class="menu-row-chev">›</div>
+              </button>
+              <button class="menu-row" type="button">
+                <div class="menu-row-icon indigo">📈</div>
+                <div class="menu-row-title">Risk Trend Graph</div>
+                <div class="menu-row-chev">›</div>
+              </button>
+              <button class="menu-row" type="button">
+                <div class="menu-row-icon moss">🏆</div>
+                <div class="menu-row-title">Performance Ranking</div>
+                <div class="menu-row-chev">›</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-card">
+            <button class="menu-card-head" type="button" data-target="reports" onclick="toggleMenu('reports')">Reports &amp; Compliance <span class="arrow">▼</span></button>
+            <div class="menu-panel" id="reports">
+              <a class="menu-row" href="biosecurity-previous-reports.html">
+                <div class="menu-row-icon moss">🗂️</div>
+                <div class="menu-row-title">Previous Reports</div>
+                <div class="menu-row-chev">›</div>
+              </a>
+              <button class="menu-row" type="button">
+                <div class="menu-row-icon red">🚨</div>
+                <div class="menu-row-title">Critical Alerts</div>
+                <div class="menu-row-chev">›</div>
+              </button>
+              <a class="menu-row" href="capa-tracker.html">
+                <div class="menu-row-icon moss">🛠️</div>
+                <div class="menu-row-title">CAPA Tracker (Corrective &amp; Preventive Action)</div>
+                <div class="menu-row-chev">›</div>
+              </a>
+              <a class="menu-row" href="biosecurity-pdf-reports.html">
+                <div class="menu-row-icon indigo">📄</div>
+                <div class="menu-row-title">PDF Reports</div>
+                <div class="menu-row-chev">›</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMenu(id){
+  document.querySelectorAll('.menu-panel').forEach(function(p){ if(p.id!==id) p.classList.remove('active'); });
+  document.querySelectorAll('.menu-card-head').forEach(function(b){ if(b.dataset.target!==id) b.classList.remove('open'); });
+  document.getElementById(id).classList.toggle('active');
+  document.querySelector('[data-target="'+id+'"]').classList.toggle('open');
+}
+</script>
+</body>
+</html>

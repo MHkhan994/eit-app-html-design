@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — CAPA Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:05 AM</span><span>●●● 38%</span></div>
+
+      <div class="page-head">
+        <a class="back-btn" href="biosecurity-audit.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero" style="padding-bottom:0;">
+          <h1>CAPA Tracker</h1>
+          <p>Corrective &amp; Preventive Action</p>
+        </div>
+
+        <div class="stat-grid cols-3" id="capaStatsFarm">
+          <div class="stat-tile"><div class="stat-value rust">11</div><div class="stat-label">Pending</div></div>
+          <div class="stat-tile"><div class="stat-value info">1</div><div class="stat-label">In Progress</div></div>
+          <div class="stat-tile"><div class="stat-value moss">0</div><div class="stat-label">Completed</div></div>
+          <div class="stat-tile"><div class="stat-value rust">9</div><div class="stat-label">High Priority</div></div>
+          <div class="stat-tile"><div class="stat-value gold">3</div><div class="stat-label">Medium Priority</div></div>
+          <div class="stat-tile"><div class="stat-value moss">0</div><div class="stat-label">Low Priority</div></div>
+        </div>
+        <div class="stat-grid cols-3" id="capaStatsHatchery" style="display:none;">
+          <div class="stat-tile"><div class="stat-value rust">0</div><div class="stat-label">Pending</div></div>
+          <div class="stat-tile"><div class="stat-value info">0</div><div class="stat-label">In Progress</div></div>
+          <div class="stat-tile"><div class="stat-value moss">0</div><div class="stat-label">Completed</div></div>
+          <div class="stat-tile"><div class="stat-value rust">0</div><div class="stat-label">High Priority</div></div>
+          <div class="stat-tile"><div class="stat-value gold">0</div><div class="stat-label">Medium Priority</div></div>
+          <div class="stat-tile"><div class="stat-value moss">0</div><div class="stat-label">Low Priority</div></div>
+        </div>
+
+        <div class="capa-filter-row">
+          <button class="seg-btn active" type="button" data-group="type" data-value="farm" onclick="setCapaFilter('type','farm',this)">Farm</button>
+          <button class="seg-btn" type="button" data-group="type" data-value="hatchery" onclick="setCapaFilter('type','hatchery',this)">Hatchery</button>
+        </div>
+
+        <div class="capa-chip-row">
+          <button class="filter-chip active" type="button" data-group="status" data-value="all" onclick="setCapaFilter('status','all',this)">All</button>
+          <button class="filter-chip" type="button" data-group="status" data-value="pending" onclick="setCapaFilter('status','pending',this)">Pending</button>
+          <button class="filter-chip" type="button" data-group="status" data-value="progress" onclick="setCapaFilter('status','progress',this)">In Progress</button>
+          <button class="filter-chip" type="button" data-group="status" data-value="completed" onclick="setCapaFilter('status','completed',this)">Completed</button>
+        </div>
+
+        <div id="capaList">
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-rust">🧥</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Visitors are not using visitor dress</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 10-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill high">HIGH</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Ensure visitor dress use immediately.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Keep visitor dress at entry point and monitor visitor register.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="progress">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-gold">💡</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">UV disinfection not installed or not working</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 18-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill medium">MEDIUM</span>
+              <span class="tag-pill status-progress">In Progress</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Repair or install UV disinfection system.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Check UV system weekly and maintain logbook.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-gold">🪰</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Fly movement is high</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 18-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill medium">MEDIUM</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Apply fly control measures immediately.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Maintain manure/litter hygiene and regular fly control program.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-rust">🐦</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Wild bird movement is high</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 10-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill high">HIGH</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Block wild bird entry points immediately.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Install/repair bird net and monitor weekly.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-rust">🐀</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Rat killer use is irregular or absent</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 10-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill high">HIGH</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Place rat bait immediately in risk points.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Maintain weekly rodent control program and bait map.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-gold">🧱</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Boundary wall not completed</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 18-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill medium">MEDIUM</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Start or complete boundary wall work as priority.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Management should follow construction progress weekly.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+
+          <div class="capa-card" data-type="farm" data-status="pending">
+            <div class="capa-card-top">
+              <div class="badge-circle sm badge-rust">🚧</div>
+              <div class="capa-card-headline">
+                <div class="capa-card-title">Clean and dirty area separation not established</div>
+                <div class="capa-card-sub">FARM · My Farm · Target: 10-08-2026</div>
+              </div>
+            </div>
+            <div class="capa-tags">
+              <span class="tag-pill high">HIGH</span>
+              <span class="tag-pill status-pending">Pending</span>
+            </div>
+            <div class="capa-fix">
+              <div class="capa-fix-row"><span class="capa-fix-label">Corrective</span>Mark and separate clean and dirty area immediately.</div>
+              <div class="capa-fix-row"><span class="capa-fix-label">Preventive</span>Maintain one-way movement flow and staff training.</div>
+            </div>
+            <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="openCapaModal()">Update Status</button>
+          </div>
+        </div>
+
+        <div class="empty-state" id="capaEmpty" style="display:none; padding-bottom:20px;">No matching CAPA items</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="capa-modal-overlay" id="capaModalOverlay" onclick="if(event.target===this) closeCapaModal();">
+  <div class="capa-modal">
+    <h3>Change Status</h3>
+    <label class="capa-modal-label" for="capaStatusSelect">Status</label>
+    <select class="uline-field select" id="capaStatusSelect">
+      <option>Pending</option>
+      <option>In Progress</option>
+      <option>Completed</option>
+    </select>
+    <div class="capa-modal-actions">
+      <button class="calc-btn" style="background:var(--border-soft); color:var(--text-charcoal);" type="button" onclick="closeCapaModal()">Cancel</button>
+      <button class="calc-btn" style="background:var(--moss-dark);" type="button" onclick="closeCapaModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function setCapaFilter(group, value, btn){
+  document.querySelectorAll('[data-group="' + group + '"]').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  filterCapa();
+}
+function filterCapa(){
+  var type = document.querySelector('[data-group="type"].active').dataset.value;
+  var status = document.querySelector('[data-group="status"].active').dataset.value;
+  document.getElementById('capaStatsFarm').style.display = (type === 'farm') ? '' : 'none';
+  document.getElementById('capaStatsHatchery').style.display = (type === 'hatchery') ? '' : 'none';
+  var cards = document.querySelectorAll('.capa-card');
+  var shown = 0;
+  cards.forEach(function(c){
+    var match = c.dataset.type === type && (status === 'all' || c.dataset.status === status);
+    c.style.display = match ? '' : 'none';
+    if(match) shown++;
+  });
+  document.getElementById('capaEmpty').style.display = shown === 0 ? '' : 'none';
+}
+function openCapaModal(){ document.getElementById('capaModalOverlay').classList.add('active'); }
+function closeCapaModal(){ document.getElementById('capaModalOverlay').classList.remove('active'); }
+</script>
+</body>
+</html>
