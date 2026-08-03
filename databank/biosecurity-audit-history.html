@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Audit History</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:24 AM</span><span>●●● 18%</span></div>
+
+      <div class="page-head">
+        <a class="back-btn" href="biosecurity-audit.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero"><h1>Audit History</h1></div>
+
+        <div class="radio-row">
+          <label class="radio-option"><input type="radio" name="histType" onchange="showFieldGroup('hist-farm')"> Farm</label>
+          <label class="radio-option"><input type="radio" name="histType" checked onchange="showFieldGroup('hist-hatchery')"> Hatchery</label>
+        </div>
+
+        <div class="field-group" id="hist-farm">
+          <select class="uline-field select" style="margin:0 16px 4px; width:calc(100% - 32px);">
+            <option>Select Farm</option>
+          </select>
+          <div class="empty-state" style="text-align:center; font-weight:700; color:var(--text-charcoal);">Select Farm</div>
+        </div>
+
+        <div class="field-group active" id="hist-hatchery">
+          <select class="uline-field select" style="margin:0 16px 4px; width:calc(100% - 32px);" onchange="this.value==='savar' ? document.getElementById('histResult').classList.add('active') : document.getElementById('histResult').classList.remove('active')">
+            <option>Select Hatchery</option>
+            <option value="savar" selected>Savar Hatchery</option>
+          </select>
+
+          <div class="field-group active" id="histResult">
+            <div class="empty-state" style="text-align:center; font-weight:700; color:var(--text-charcoal); margin-bottom:12px;">
+              Savar Hatchery<br>Total Audit: 1 | Avg Score: 83%<br>Total Critical Findings: 0
+            </div>
+            <div class="record-card" style="margin-top:0;">
+              <h3 style="font-size:14.5px; color:var(--moss-dark);">Savar Hatchery</h3>
+              <div class="record-facts">Date: 03-08-2026 | Type: HATCHERY<br>Answered: 60/60 | Critical Findings: 0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showFieldGroup(id){
+  document.querySelectorAll('.field-group').forEach(function(g){ g.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
