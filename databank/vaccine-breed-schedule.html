@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Breed Wise Vaccination Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:00 AM</span><span>●●● 21%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="vaccine-dashboard.html">←</a>
+        <h1>Breed Wise Schedule</h1>
+      </div>
+
+      <div class="screen-body">
+        <div style="padding:0 16px;">
+          <select class="calc-input calc-select" id="breedSelect" onchange="showToast(this.value)">
+            <option>Common Demo</option>
+            <option>Broiler</option>
+            <option>Color</option>
+            <option>Sonali</option>
+            <option>Broiler PS</option>
+            <option>Layer PS</option>
+            <option>Color PS</option>
+            <option>Layer</option>
+          </select>
+        </div>
+
+        <div style="display:flex; gap:12px; padding:0 16px 4px;">
+          <button class="calc-btn gold sm" type="button" style="flex:1;" onclick="openModal('addDiseaseModal')">নতুন রোগ যোগ করুন</button>
+          <button class="calc-btn moss sm" type="button" style="flex:1;" onclick="openModal('chooseBreedModal')">সিডিউল বানান</button>
+        </div>
+
+        <div class="sched-card">
+          <h3>Day 1 - Marek's disease</h3>
+          <div class="sched-meta">
+            Vaccine: Marek's | Route: SC | Dose: 0.20 cc<br>
+            Remarks: Built-in
+          </div>
+          <button class="calc-btn gold sm" type="button" onclick="openEditSchedule(&quot;Marek's disease&quot;, &quot;Marek's&quot;, '1', '0.20 cc', 'SC', 'Built-in')">EDIT</button>
+        </div>
+
+        <div class="sched-card">
+          <h3>Day 5 - Newcastle Disease</h3>
+          <div class="sched-meta">
+            Vaccine: ND Live | Route: Eye Drop | Dose: One Drop<br>
+            Remarks: Built-in
+          </div>
+          <button class="calc-btn gold sm" type="button" onclick="openEditSchedule('Newcastle Disease', 'ND Live', '5', 'One Drop', 'Eye Drop', 'Built-in')">EDIT</button>
+        </div>
+
+        <div class="sched-card">
+          <h3>Day 5 - IB Disease</h3>
+          <div class="sched-meta">
+            Vaccine: IB Live | Route: Eye Drop | Dose: One Drop<br>
+            Remarks: Built-in
+          </div>
+          <button class="calc-btn gold sm" type="button" onclick="openEditSchedule('IB Disease', 'IB Live', '5', 'One Drop', 'Eye Drop', 'Built-in')">EDIT</button>
+        </div>
+
+        <div class="sched-card" style="margin-bottom:16px;">
+          <h3>Day 10 - Gumboro/IBD Disease</h3>
+          <div class="sched-meta">
+            Vaccine: Unknown Vaccine | Route: Drinking Water | Dose: One Drop<br>
+            Remarks: Built-in
+          </div>
+          <button class="calc-btn gold sm" type="button" onclick="openEditSchedule('Gumboro/IBD Disease', 'Unknown Vaccine', '10', 'One Drop', 'Drinking Water', 'Built-in')">EDIT</button>
+        </div>
+      </div>
+
+      <div class="toast" id="breedToast">
+        <div class="toast-icon">🐔</div>
+        <div><span id="toastBreedName">Color</span> breed এ 18 টি demo schedule পাওয়া গেছে</div>
+      </div>
+
+      <!-- Add New Disease & Vaccine -->
+      <div class="modal-overlay" id="addDiseaseModal">
+        <div class="modal-card">
+          <div class="modal-title">নতুন রোগ ও ভ্যাকসিন যোগ করুন</div>
+          <input class="calc-input" type="text" placeholder="রোগের নাম">
+          <input class="calc-input" type="text" placeholder="Description">
+          <input class="calc-input" type="text" placeholder="ভ্যাকসিনের নাম">
+          <input class="calc-input" type="text" placeholder="Route">
+          <input class="calc-input" type="text" placeholder="Dose" style="margin-bottom:0;">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('addDiseaseModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('addDiseaseModal')">SAVE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choose breed → chains into New Schedule -->
+      <div class="modal-overlay" id="chooseBreedModal">
+        <div class="modal-card scroll">
+          <div class="modal-title">কোন Breed-এর জন্য Schedule যোগ করবেন?</div>
+          <div class="modal-radio-list">
+            <label class="modal-radio"><input type="radio" name="scheduleBreed" checked> Broiler</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Color</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Sonali</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Broiler PS</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Layer PS</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Color PS</label>
+            <label class="modal-radio"><input type="radio" name="scheduleBreed"> Layer</label>
+          </div>
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('chooseBreedModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('chooseBreedModal'); openModal('newScheduleModal')">NEXT</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Schedule -->
+      <div class="modal-overlay" id="newScheduleModal">
+        <div class="modal-card scroll">
+          <div class="modal-title">নতুন সিডিউল</div>
+          <select class="calc-input calc-select">
+            <option>Avian Encephalomylitis</option>
+            <option>Avian Influenza (H5N2)</option>
+            <option>Avian Influenza (H9N2)</option>
+            <option>Chicken Anaemia Virus</option>
+            <option>EDS Disease</option>
+            <option>Fowl Cholera Disease</option>
+            <option>Fowl Pox Disease</option>
+            <option>Gumboro/IBD Disease</option>
+            <option>IB Disease</option>
+            <option>ILT Disease</option>
+            <option>Infectious Coryza Disease</option>
+            <option>Marek's disease</option>
+            <option>Mycoplasmosis</option>
+            <option>Newcastle Disease</option>
+            <option>Reo Disease</option>
+            <option>Salmonellosis</option>
+          </select>
+          <select class="calc-input calc-select">
+            <option>AE Live</option>
+            <option>Marek's</option>
+            <option>ND Killed</option>
+            <option>ND Live</option>
+            <option>IB Live</option>
+            <option>IBD Live</option>
+            <option>POX Live</option>
+            <option>H5N1 Killed</option>
+            <option>H9N2 Killed</option>
+            <option>Coryza Killed</option>
+            <option>Fowl Cholera</option>
+            <option>CAV</option>
+            <option>ILT Live</option>
+            <option>EDS Killed</option>
+            <option>Salmonella</option>
+            <option>MG Killed</option>
+            <option>Reo Killed</option>
+          </select>
+          <input class="calc-input" type="text" placeholder="Day Number">
+          <input class="calc-input" type="text" placeholder="As per label">
+          <input class="calc-input" type="text" placeholder="WW">
+          <input class="calc-input" type="text" placeholder="Remarks" style="margin-bottom:0;">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('newScheduleModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('newScheduleModal')">SAVE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Schedule -->
+      <div class="modal-overlay" id="editScheduleModal">
+        <div class="modal-card scroll">
+          <div class="modal-title">সিডিউল এডিট</div>
+          <select class="calc-input calc-select" id="editDisease">
+            <option>Avian Encephalomylitis</option>
+            <option>Avian Influenza (H5N2)</option>
+            <option>Avian Influenza (H9N2)</option>
+            <option>Chicken Anaemia Virus</option>
+            <option>EDS Disease</option>
+            <option>Fowl Cholera Disease</option>
+            <option>Fowl Pox Disease</option>
+            <option>Gumboro/IBD Disease</option>
+            <option>IB Disease</option>
+            <option>ILT Disease</option>
+            <option>Infectious Coryza Disease</option>
+            <option>Marek's disease</option>
+            <option>Mycoplasmosis</option>
+            <option>Newcastle Disease</option>
+            <option>Reo Disease</option>
+            <option>Salmonellosis</option>
+          </select>
+          <select class="calc-input calc-select" id="editVaccine">
+            <option>Marek's</option>
+            <option>ND Killed</option>
+            <option>ND Live</option>
+            <option>IB Live</option>
+            <option>IBD Live</option>
+            <option>POX Live</option>
+            <option>H5N1 Killed</option>
+            <option>H9N2 Killed</option>
+            <option>Coryza Killed</option>
+            <option>Fowl Cholera</option>
+            <option>CAV</option>
+            <option>ILT Live</option>
+            <option>EDS Killed</option>
+            <option>Salmonella</option>
+            <option>MG Killed</option>
+            <option>Reo Killed</option>
+            <option>AE Live</option>
+          </select>
+          <input class="calc-input" type="text" id="editDay">
+          <input class="calc-input" type="text" id="editDose">
+          <input class="calc-input" type="text" id="editRoute">
+          <input class="calc-input" type="text" id="editRemarks" style="margin-bottom:0;">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('editScheduleModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('editScheduleModal')">UPDATE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · only the first 4 of the app's ~18 demo schedule rows were shown in the recording</div>
+</div>
+
+<script>
+// Visual state swaps only — dropdown selection, modal open/close, chaining "choose breed" into
+// "new schedule", and prefilling the edit modal from the tapped card. Nothing computes or saves.
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openEditSchedule(disease, vaccine, day, dose, route, remarks) {
+  document.getElementById('editDisease').value = disease;
+  document.getElementById('editVaccine').value = vaccine;
+  document.getElementById('editDay').value = day;
+  document.getElementById('editDose').value = dose;
+  document.getElementById('editRoute').value = route;
+  document.getElementById('editRemarks').value = remarks;
+  openModal('editScheduleModal');
+}
+
+var toastTimer;
+function showToast(breedName) {
+  document.getElementById('toastBreedName').textContent = breedName;
+  var toast = document.getElementById('breedToast');
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
+}
+</script>
+</body>
+</html>
