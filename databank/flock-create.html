@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Create New Flock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>7:30 AM</span><span>●●● 25%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="flock-data-management.html">←</a>
+        <h1>Create New Flock</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="calc-card">
+          <div class="form-label">Farm Name *</div>
+          <select class="calc-input calc-select" id="farmSelect">
+            <option>Select Farm</option>
+            <option>abc</option>
+            <option>hell</option>
+            <option>+ Add New Farm</option>
+          </select>
+
+          <input class="calc-input" id="newFarmName" type="text" placeholder="New Farm Name *" style="display:none;">
+
+          <input class="calc-input" type="text" placeholder="Flock Name *">
+          <input class="calc-input" type="text" placeholder="Shed / House Number *">
+          <input class="calc-input" type="text" placeholder="Placement Date *  Example: 2026-04-20">
+          <div class="form-hint">Age: 0 week 0 day</div>
+          <input class="calc-input" type="text" placeholder="Breed / Strain Name">
+
+          <div class="form-label">Flock Type</div>
+          <select class="calc-input calc-select" id="flockType">
+            <option>Broiler</option>
+            <option>Sonali</option>
+            <option>Color</option>
+            <option>Broiler Duck</option>
+            <option>Layer</option>
+            <option>Broiler Breeder</option>
+            <option>Color Breeder</option>
+            <option>Layer Breeder</option>
+          </select>
+
+          <div class="field-group active" id="meatForm">
+            <div class="form-section-title moss">Meat Production Form</div>
+            <input class="calc-input" type="text" placeholder="Initial Bird Quantity *">
+            <input class="calc-input" type="text" placeholder="Initial Chick Weight (gm)">
+            <input class="calc-input" type="text" placeholder="Expected Sale Age days">
+            <input class="calc-input" type="text" placeholder="Remarks">
+          </div>
+
+          <div class="field-group" id="layerForm">
+            <div class="form-section-title rust">Layer Production Form</div>
+            <input class="calc-input" type="text" placeholder="Initial Bird Quantity *">
+            <input class="calc-input" type="text" placeholder="Initial Chicks Weight (gm)">
+            <input class="calc-input" type="text" value="21" disabled>
+            <input class="calc-input" type="text" placeholder="Remarks">
+          </div>
+
+          <button class="calc-btn gold" type="button">Save Flock</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · pick a Farm Name or Flock Type to see the states the recording shows</div>
+</div>
+
+<script>
+// Visual state swaps only — both states come straight from the recording, nothing is computed.
+document.getElementById('farmSelect').addEventListener('change', function (e) {
+  document.getElementById('newFarmName').style.display = e.target.value === '+ Add New Farm' ? 'block' : 'none';
+});
+document.getElementById('flockType').addEventListener('change', function (e) {
+  var layer = e.target.value === 'Layer';
+  document.getElementById('meatForm').classList.toggle('active', !layer);
+  document.getElementById('layerForm').classList.toggle('active', layer);
+});
+</script>
+</body>
+</html>
