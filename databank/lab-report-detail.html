@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Flock: hhvv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:22 AM</span><span>●●● 16%</span></div>
+
+      <div class="app-bar">
+        <div class="bar-row">
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+          <div class="app-title">Poultry Solution Hub</div>
+        </div>
+        <div class="accent-stripe"></div>
+      </div>
+
+      <div class="plain-header"><a class="back-btn" href="lab-report.html">←</a></div>
+
+      <div class="screen-body">
+        <div style="padding:16px 16px 0;">
+          <h2 style="font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:19px; color:var(--text-charcoal);">Flock: hhvv</h2>
+          <div class="record-facts" style="margin-top:12px; font-size:13px;">
+            Shed: hvvv<br>
+            Age: 0 wk 0 d<br>
+            Last Report: ND HI (03-08-2026)<br>
+            Mean: 25.00 | CV: 25.00%
+          </div>
+          <div class="status-pill moderate">Moderate</div>
+        </div>
+
+        <div class="action-stack" style="padding-top:0;">
+          <button class="calc-btn moss" type="button" onclick="openModal('reportTypeModal')">Add New Report</button>
+          <a class="calc-btn info" href="lab-report-view.html">View Report</a>
+          <div class="calc-btn-row">
+            <button class="calc-btn purple" type="button">Export PDF</button>
+            <button class="calc-btn teal" type="button">Share PDF</button>
+          </div>
+          <a class="calc-btn gold" href="lab-report-graph.html">View Graph</a>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <a class="nav-item" href="../index.html"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></a>
+        <a class="nav-item" href="../buy/index.html"><div class="nav-icon">🔍</div><div class="nav-label">কিনুন</div></a>
+        <a class="nav-item" href="../sell/index.html"><div class="nav-icon">🛒</div><div class="nav-label">বেচুন</div></a>
+        <a class="nav-item" href="../doctor/index.html"><div class="nav-icon">➕</div><div class="nav-label">ডাক্তার</div></a>
+        <a class="nav-item active" href="../databank/index.html"><div class="nav-icon">📝</div><div class="nav-label">ডাটা ব্যাংক</div></a>
+      </div>
+
+      <!-- Select Report Type -->
+      <div class="modal-overlay" id="reportTypeModal">
+        <div class="modal-card">
+          <div class="modal-title">Select Report Type</div>
+          <a class="modal-option" href="#" onclick="closeModal('reportTypeModal'); openModal('titerModal'); return false;">Titer Report</a>
+          <a class="modal-option" href="#" onclick="closeModal('reportTypeModal'); return false;">Rapid Test</a>
+          <a class="modal-option" href="#" onclick="closeModal('reportTypeModal'); return false;">Drug Sensitivity</a>
+          <a class="modal-option" href="#" onclick="closeModal('reportTypeModal'); return false;">Postmortem Report</a>
+        </div>
+      </div>
+
+      <!-- Add Titer Report -->
+      <div class="modal-overlay" id="titerModal">
+        <div class="modal-card">
+          <div class="modal-title">Add Titer Report</div>
+          <select class="calc-input calc-select" id="testSelect" onchange="document.getElementById('newTestName').style.display = this.value === '+ New Test' ? 'block' : 'none';">
+            <option>ND HI</option>
+            <option>H9N2 HI</option>
+            <option>H5N1 HI</option>
+            <option>IBD ELISA</option>
+            <option>+ New Test</option>
+          </select>
+          <input class="calc-input" id="newTestName" type="text" placeholder="New Test Name" style="display:none;">
+          <input class="calc-input" type="text" value="03-08-2026">
+          <input class="calc-input" type="text" placeholder="Mean Titer">
+          <input class="calc-input" type="text" placeholder="CV %" style="margin-bottom:0;">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('titerModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('titerModal')">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · only "Titer Report" chains to a form, the other 3 report types weren't opened in the recording</div>
+</div>
+
+<script>
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+</script>
+</body>
+</html>

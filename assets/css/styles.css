@@ -12,6 +12,9 @@
   --text-secondary:#5B6355;
   --border-soft:#E2E0D3;
   --info-blue:#3B6E91;    /* status-only: "recovery"/info state on Data Bank stat tiles, no other blue in the palette */
+  --info-blue-soft:#DCE9F2;
+  --action-purple:#6C4FA0; /* Export PDF button — no purple elsewhere in the palette */
+  --action-teal:#127A73;   /* Share PDF button — kept distinct from moss so the Export/Share pair stays visually distinguishable */
   --r-sm:6px; --r-md:10px; --r-lg:16px; --r-pill:999px;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
@@ -366,5 +369,81 @@ a.list-card{ text-decoration:none; color:inherit; }
 .toast{ position:absolute; left:16px; right:16px; bottom:18px; background:var(--card-white); border-radius:var(--r-pill); box-shadow:0 8px 20px rgba(35,40,31,0.18); padding:12px 16px; display:none; align-items:center; gap:10px; font-size:12.5px; color:var(--text-charcoal); z-index:15; }
 .toast.show{ display:flex; }
 .toast .toast-icon{ width:26px; height:26px; border-radius:50%; background:var(--moss-soft); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+
+/* Search bar (e.g. "Flock Search here...") — a .calc-input with a leading icon */
+/* Full-width action button sitting directly under a search bar or heading block */
+.page-action{ padding:12px 16px 0; }
+.page-action .calc-btn{ margin-bottom:0; }
+
+.search-bar{ position:relative; margin:16px 16px 0; }
+.search-bar input{ padding-left:40px; margin-bottom:0; border-radius:var(--r-pill); }
+.search-bar .search-icon{ position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-size:14px; pointer-events:none; }
+
+.group-label.neutral{ color:var(--text-charcoal); font-size:13px; }
+
+/* Plain colour-coded status text on a list card (as opposed to .status-pill's filled badge) */
+.status-good{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13px; color:var(--moss); margin-top:6px; }
+.status-moderate{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13px; color:var(--rust); margin-top:6px; }
+
+/* Filled status pill/badge (flock detail screens) */
+.status-pill{ display:inline-block; padding:10px 22px; border-radius:var(--r-sm); font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); margin:16px 0; }
+.status-pill.moderate{ background:var(--gold-soft); }
+.status-pill.good{ background:var(--moss-soft); }
+
+.calc-btn.info{ background:var(--info-blue); }
+.calc-btn.purple{ background:var(--action-purple); }
+.calc-btn.teal{ background:var(--action-teal); }
+
+/* Data table (View Report screen) */
+.data-table{ margin:16px; background:var(--card-white); border-radius:var(--r-md); box-shadow:0 4px 14px rgba(35,40,31,0.07); overflow:hidden; }
+.data-table table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+.data-table th{ background:var(--bg-sand); text-align:left; padding:12px 14px; font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--text-charcoal); }
+.data-table td{ padding:12px 14px; color:var(--text-charcoal); border-top:1px solid var(--border-soft); }
+
+/* Test-type chip/tab (e.g. "ND HI" above the report table) */
+.test-chip{ display:inline-block; margin:0 16px 12px; padding:8px 16px; border-radius:var(--r-sm); background:var(--info-blue-soft); color:var(--info-blue); font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; }
+
+/* Chart card — single-series scatter (Titer Graph). One point, so no legend and the value is
+   direct-labeled above the mark rather than needing a hover layer (dataviz: bare-minimum form). */
+.chart-card{ margin:0 16px 16px; background:var(--card-white); border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:16px; }
+.chart-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); margin-bottom:10px; }
+.chart-card svg{ width:100%; height:auto; display:block; }
+.chart-card .axis-line{ stroke:var(--text-charcoal); stroke-width:1.5; }
+.chart-card .grid-line{ stroke:var(--border-soft); stroke-width:1; }
+.chart-card .tick-label{ font-size:10px; fill:var(--text-secondary); font-family:'Hind Siliguri',sans-serif; }
+.chart-card .data-point{ fill:var(--rust); }
+.chart-card .data-label{ font-size:11px; fill:var(--text-charcoal); font-family:'Hind Siliguri',sans-serif; }
+
+/* Step wizard (Disease Identification) — centered title + subtitle, no header bar */
+.wizard-head{ padding:18px 16px 0; text-align:center; }
+.wizard-head h1{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:19px; color:var(--text-charcoal); line-height:1.35; }
+.wizard-head .wizard-sub{ font-size:12.5px; color:var(--text-secondary); margin-top:8px; line-height:1.55; }
+
+/* Two-column checkbox grid in a card (bird type / age group / symptoms / lesions) */
+.check-card{ margin:16px 16px 0; background:var(--card-white); border-radius:var(--r-md); padding:15px 13px; }
+.check-grid{ display:grid; grid-template-columns:1fr 1fr; gap:15px 10px; }
+.check-item{ display:flex; align-items:flex-start; gap:9px; font-size:12.5px; color:var(--text-charcoal); line-height:1.4; }
+.check-item input[type="checkbox"]{ width:18px; height:18px; accent-color:var(--moss); flex-shrink:0; margin-top:1px; }
+
+/* Wizard footer — sticky, so it sits in flow on short steps and pins to the bottom on long scrolling ones.
+   Given a solid background; the original lets content scroll visibly behind the floating buttons. */
+.wizard-nav{ position:sticky; bottom:0; display:flex; gap:12px; padding:16px; margin-top:20px; background:var(--bg-sand); }
+.wizard-nav .calc-btn{ flex:1; margin-bottom:0; }
+
+/* Image-upload step */
+.upload-preview{ margin:16px 16px 0; height:165px; background:var(--card-white); border-radius:var(--r-md); }
+.upload-note{ text-align:center; font-size:12.5px; color:var(--text-secondary); margin:12px 0; }
+
+/* Diagnosis result — the app renders this as one long formatted text document */
+.diag-card{ margin:16px; background:var(--card-white); border-radius:var(--r-md); padding:18px 16px; font-size:13px; color:var(--text-charcoal); line-height:1.7; }
+.diag-key{ margin-top:16px; }
+.diag-key:first-child{ margin-top:0; }
+.diag-rule{ border:none; border-top:2px solid var(--border-soft); margin:18px 0; }
+.diag-rule.thin{ border-top:1px solid var(--border-soft); margin:16px 0; }
+.diag-alert-title{ font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--rust); }
+.diag-section-title{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14.5px; }
+.diag-disease h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); margin-bottom:4px; }
+.diag-sub{ margin-top:12px; }
+.diag-sub-title{ font-weight:700; }
 
 .caption{ text-align:center; margin-top:18px; font-family:'Hind Siliguri',sans-serif; font-size:12px; color:#7A7568; }

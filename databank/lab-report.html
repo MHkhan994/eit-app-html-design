@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Flock wise Lab Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:22 AM</span><span>●●● 16%</span></div>
+
+      <div class="app-bar">
+        <div class="bar-row">
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+          <div class="app-title">Poultry Solution Hub</div>
+        </div>
+        <div class="accent-stripe"></div>
+      </div>
+
+      <div class="plain-header"><a class="back-btn" href="index.html">←</a></div>
+
+      <div class="screen-body">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" type="text" placeholder="Flock Search here...">
+        </div>
+        <div class="page-action">
+          <button class="calc-btn gold" type="button" onclick="openModal('addFlockModal')">ADD FLOCK</button>
+        </div>
+
+        <div class="group-label neutral">adne</div>
+
+        <div class="record-card" style="margin:12px 16px 0;">
+          <h3>hh</h3>
+          <div class="record-facts">
+            Shed: jh<br>
+            Age: 0 wk 1 d<br>
+            Bird Type: g<br>
+            Last Test: IBD ELISA<br>
+            Mean: 2.00 | CV: 2.00%
+          </div>
+          <div class="status-good">Good</div>
+        </div>
+
+        <a class="record-card" href="lab-report-detail.html" style="margin:12px 16px 16px; display:block; text-decoration:none;">
+          <h3>hhvv</h3>
+          <div class="record-facts">
+            Shed: hvvv<br>
+            Age: 0 wk 0 d<br>
+            Bird Type: bb<br>
+            Last Test: ND HI<br>
+            Mean: 25.00 | CV: 25.00%
+          </div>
+          <div class="status-moderate">Moderate</div>
+        </a>
+      </div>
+
+      <div class="bottom-nav">
+        <a class="nav-item" href="../index.html"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></a>
+        <a class="nav-item" href="../buy/index.html"><div class="nav-icon">🔍</div><div class="nav-label">কিনুন</div></a>
+        <a class="nav-item" href="../sell/index.html"><div class="nav-icon">🛒</div><div class="nav-label">বেচুন</div></a>
+        <a class="nav-item" href="../doctor/index.html"><div class="nav-icon">➕</div><div class="nav-label">ডাক্তার</div></a>
+        <a class="nav-item active" href="../databank/index.html"><div class="nav-icon">📝</div><div class="nav-label">ডাটা ব্যাংক</div></a>
+      </div>
+
+      <div class="modal-overlay" id="addFlockModal">
+        <div class="modal-card">
+          <div class="modal-title">Add New Flock</div>
+          <select class="calc-input calc-select" id="farmSelect" onchange="document.getElementById('newFarmName').style.display = this.value === '+ New Farm' ? 'block' : 'none';">
+            <option>adne</option>
+            <option>+ New Farm</option>
+          </select>
+          <input class="calc-input" id="newFarmName" type="text" placeholder="New Farm Name" style="display:none;">
+          <input class="calc-input" type="text" placeholder="Flock Name">
+          <input class="calc-input" type="text" placeholder="Flock Start Date">
+          <input class="calc-input" type="text" placeholder="Shed No">
+          <input class="calc-input" type="text" placeholder="Age (Weeks)">
+          <input class="calc-input" type="text" placeholder="Bird Type" style="margin-bottom:0;">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeModal('addFlockModal')">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeModal('addFlockModal')">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · "hh" wasn't opened in the recording, so only "hhvv" links through</div>
+</div>
+
+<script>
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+</script>
+</body>
+</html>
