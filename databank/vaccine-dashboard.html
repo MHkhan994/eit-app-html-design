@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Poultry Vaccine Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>7:59 AM</span><span>●●● 21%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="vaccination-schedule.html">←</a>
+        <h1>Poultry Vaccine Dashboard</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="stat-grid">
+          <div class="stat-tile"><div class="stat-label">Total Flocks</div><div class="stat-value">1</div></div>
+          <div class="stat-tile"><div class="stat-label">Today Due</div><div class="stat-value">1</div></div>
+          <div class="stat-tile"><div class="stat-label">Completed</div><div class="stat-value">0</div></div>
+          <div class="stat-tile"><div class="stat-label">Missed</div><div class="stat-value">3</div></div>
+        </div>
+
+        <div class="action-stack" style="padding-bottom:0;">
+          <a class="calc-btn moss" href="vaccine-breed-schedule.html">BREED WISE SCHEDULE বানান</a>
+          <a class="calc-btn gold" href="vaccine-flock-new.html">NEW FLOCK যোগ করুন</a>
+        </div>
+
+        <div class="dash-head" style="padding-top:8px;">
+          <h2>Flock List</h2>
+        </div>
+        <div style="padding:12px 16px 0;">
+          <input class="calc-input" type="text" placeholder="Search by flock name" style="margin-bottom:0;">
+        </div>
+
+        <div class="record-card alert" style="margin:16px;">
+          <h3>GGGG</h3>
+          <div class="record-facts" style="margin-top:10px;">
+            Breed: Broiler<br>
+            Birds: 3000<br>
+            Start: 2026-07-25<br>
+            Age: 10 day (1 week 3 day)<br>
+            Due Today: 1<br>
+            Missed: 3<br>
+            Completed: 0%
+          </div>
+          <div class="record-status">Status: Critical</div>
+          <div class="record-actions">
+            <button class="calc-btn gold" type="button">OPEN</button>
+            <a class="calc-btn moss" href="vaccine-flock-edit.html">EDIT</a>
+          </div>
+          <div class="record-hint">Long press to delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · OPEN's per-flock vaccine tracker wasn't reached in the recording, left inert</div>
+</div>
+</body>
+</html>
