@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Flock List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>7:31 AM</span><span>●●● 25%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="flock-data-management.html">←</a>
+        <h1>Flock List</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="tabs">
+          <div class="tab active">Active</div>
+          <div class="tab">Completed</div>
+        </div>
+
+        <div class="group-label">Farm: abc</div>
+
+        <div class="record-card">
+          <h3>Ff</h3>
+          <div class="record-key">Type: Broiler | Start Bird: 3000</div>
+          <div class="record-sub">Start Date: 2026-07-23</div>
+          <div class="record-age">Age: 1 weeks 4 days</div>
+          <div class="record-facts">
+            Shed: 221<br>
+            Current Bird: 2916<br>
+            Feed: 3.00 Kg<br>
+            Mortality: 26 | Culling/Sale: 58<br>
+            Avg Weight: 0.00 gm<br>
+            Live Weight: 0.00 Kg<br>
+            Current FCR: -
+          </div>
+          <div class="record-actions">
+            <button class="calc-btn moss" type="button">EDIT</button>
+            <button class="calc-btn rust delete-btn" type="button">DELETE</button>
+          </div>
+        </div>
+
+        <div class="record-card">
+          <h3>Janina</h3>
+          <div class="record-key">Type: Broiler | Start Bird: 22</div>
+          <div class="record-sub">Start Date: 2026-08-02</div>
+          <div class="record-age">Age: 0 weeks 1 days</div>
+          <div class="record-facts">
+            Shed: H<br>
+            Current Bird: 22<br>
+            Feed: 0.00 Kg<br>
+            Mortality: 0 | Culling/Sale: 0<br>
+            Avg Weight: 0.00 gm<br>
+            Live Weight: 0.00 Kg<br>
+            Current FCR: -
+          </div>
+          <div class="record-actions">
+            <button class="calc-btn moss" type="button">EDIT</button>
+            <button class="calc-btn rust delete-btn" type="button">DELETE</button>
+          </div>
+        </div>
+
+        <div class="group-label">Farm: hell</div>
+
+        <div class="record-card" style="margin-bottom:16px;">
+          <h3>Hhg</h3>
+          <div class="record-key">Type: Layer | Start Bird: 1</div>
+          <div class="record-sub">Start Date: 2026-08-02</div>
+          <div class="record-age">Age: 0 weeks 1 days</div>
+          <div class="record-facts">
+            Shed: Jg<br>
+            Current Bird: 0<br>
+            Feed: 20.00 Kg<br>
+            Mortality: 0 | Culling/Sale: 1<br>
+            Avg Weight: 0.00 gm<br>
+            Live Weight: 0.00 Kg<br>
+            Current FCR: -
+          </div>
+          <div class="record-actions">
+            <button class="calc-btn moss" type="button">EDIT</button>
+            <button class="calc-btn rust delete-btn" type="button">DELETE</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="deleteModal">
+        <div class="modal-card">
+          <div class="modal-title">Delete Flock</div>
+          <div class="modal-text">এই flock এবং এর সব daily entry delete হবে। আপনি নিশ্চিত?</div>
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeDelete()">CANCEL</button>
+            <button class="modal-btn danger" type="button" onclick="closeDelete()">DELETE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · DELETE opens the confirm dialog, nothing is removed</div>
+</div>
+
+<script>
+// Shows the recorded confirm dialog. No record is touched either way.
+var deleteModal = document.getElementById('deleteModal');
+document.querySelectorAll('.delete-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () { deleteModal.classList.add('open'); });
+});
+function closeDelete() { deleteModal.classList.remove('open'); }
+</script>
+</body>
+</html>
