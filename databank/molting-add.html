@@ -21,56 +21,71 @@
 
       <div class="screen-body">
         <div class="calc-card">
-          <input class="calc-input" type="text" placeholder="Flock Name" disabled>
+          <div class="form-section-title moss"><span class="sec-icon">🐔</span>Basic Flock Info</div>
+          <div class="form-label">Flock Name</div>
+          <input class="calc-input" type="text" placeholder="e.g. Layer Flock B2" disabled>
+          <div class="form-label">Flock Type</div>
           <select class="calc-input calc-select">
             <option selected>Layer</option>
             <option>Breeder</option>
           </select>
+          <div class="form-label">Bird Number</div>
           <input class="calc-input" type="text" placeholder="Bird Number" disabled>
+          <div class="form-label">Age in Weeks</div>
           <input class="calc-input" type="text" placeholder="Age in weeks" disabled>
+          <div class="form-label">Current Production %</div>
           <input class="calc-input" type="text" placeholder="Current Production %" disabled>
+          <div class="form-label">Start Average Body Weight (gm)</div>
           <input class="calc-input" type="text" placeholder="Start Average Body Weight gm" disabled>
 
-          <button class="calc-btn moss" type="button">SELECT MOLTING START DATE</button>
+          <button class="calc-btn outline" type="button">SELECT MOLTING START DATE</button>
           <div class="field-tag">Start Date: 2026-08-01</div>
 
-          <div class="form-block-title">Market and Prediction Data</div>
+          <div class="form-section-title moss" style="margin-top:22px;"><span class="sec-icon">📈</span>Market and Prediction Data</div>
+          <div class="form-label">Expected Feed Intake (gm/bird/day)</div>
           <input class="calc-input" type="text" placeholder="Expected Feed Intake gm/bird/day" disabled>
+          <div class="form-label">Feed Price (Tk/kg)</div>
           <input class="calc-input" type="text" placeholder="Feed Price Tk/kg" disabled>
+          <div class="form-label">Egg Price (Tk/egg, for Layer)</div>
           <input class="calc-input" type="text" placeholder="Egg Price Tk/egg for Layer" disabled>
+          <div class="form-label">Expected Post-Molt Production %</div>
           <input class="calc-input" type="text" placeholder="Expected Post-Molt Production %" disabled>
+          <div class="form-label">Expected Second Cycle Duration (weeks)</div>
           <input class="calc-input" type="text" placeholder="Expected Second Cycle Duration weeks" disabled>
+          <div class="form-label">Expected Molting Mortality %</div>
           <input class="calc-input" type="text" placeholder="Expected Molting Mortality %" disabled>
 
-          <div class="field-tag">Mortality Trend</div>
-          <select class="calc-input calc-select">
-            <option selected>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
+          <div class="form-section-title moss" style="margin-top:22px;"><span class="sec-icon">🎯</span>Risk and Strategy Assessment</div>
 
-          <div class="field-tag">Body Condition</div>
-          <select class="calc-input calc-select">
-            <option selected>Good</option>
-            <option>Fair</option>
-            <option>Poor</option>
-          </select>
+          <div class="form-label">Mortality Trend</div>
+          <div class="chip-select-row">
+            <input class="sr-only" type="radio" name="mortalityTrend" id="mt-low" checked><label class="chip-radio" for="mt-low">Low</label>
+            <input class="sr-only" type="radio" name="mortalityTrend" id="mt-med"><label class="chip-radio" for="mt-med">Medium</label>
+            <input class="sr-only" type="radio" name="mortalityTrend" id="mt-high"><label class="chip-radio" for="mt-high">High</label>
+          </div>
 
-          <div class="field-tag">Market Demand</div>
-          <select class="calc-input calc-select">
-            <option>Low</option>
-            <option>Medium</option>
-            <option selected>High</option>
-          </select>
+          <div class="form-label">Body Condition</div>
+          <div class="chip-select-row">
+            <input class="sr-only" type="radio" name="bodyCondition" id="bc-good" checked><label class="chip-radio" for="bc-good">Good</label>
+            <input class="sr-only" type="radio" name="bodyCondition" id="bc-fair"><label class="chip-radio" for="bc-fair">Fair</label>
+            <input class="sr-only" type="radio" name="bodyCondition" id="bc-poor"><label class="chip-radio" for="bc-poor">Poor</label>
+          </div>
 
-          <div class="field-tag">Molting Strategy</div>
-          <select class="calc-input calc-select">
-            <option selected>Auto Recommended</option>
-            <option>Moderate Controlled</option>
-            <option>Aggressive</option>
-          </select>
+          <div class="form-label">Market Demand</div>
+          <div class="chip-select-row">
+            <input class="sr-only" type="radio" name="marketDemand" id="md-low"><label class="chip-radio" for="md-low">Low</label>
+            <input class="sr-only" type="radio" name="marketDemand" id="md-med"><label class="chip-radio" for="md-med">Medium</label>
+            <input class="sr-only" type="radio" name="marketDemand" id="md-high" checked><label class="chip-radio" for="md-high">High</label>
+          </div>
 
-          <div class="form-block-title">Pre-Molting Checklist</div>
+          <div class="form-label">Molting Strategy</div>
+          <div class="chip-select-row">
+            <input class="sr-only" type="radio" name="moltingStrategy" id="ms-auto" checked><label class="chip-radio" for="ms-auto">Auto Recommended</label>
+            <input class="sr-only" type="radio" name="moltingStrategy" id="ms-mod"><label class="chip-radio" for="ms-mod">Moderate Controlled</label>
+            <input class="sr-only" type="radio" name="moltingStrategy" id="ms-agg"><label class="chip-radio" for="ms-agg">Aggressive</label>
+          </div>
+
+          <div class="form-section-title moss" style="margin-top:22px;"><span class="sec-icon">✅</span>Pre-Molting Checklist</div>
           <div class="checklist-row"><input type="checkbox" id="c1"><label for="c1">Flock healthy আছে</label></div>
           <div class="checklist-row"><input type="checkbox" id="c2"><label for="c2">Mortality normal আছে</label></div>
           <div class="checklist-row"><input type="checkbox" id="c3"><label for="c3">Water line ঠিক আছে</label></div>
@@ -80,22 +95,52 @@
           <div class="checklist-row"><input type="checkbox" id="c7"><label for="c7">Vitamin-electrolyte/mineral support ready আছে</label></div>
           <div class="checklist-row"><input type="checkbox" id="c8"><label for="c8">Heat stress control করা যাবে</label></div>
 
-          <button class="calc-btn moss" type="button" style="margin-top:14px;">CHECK DECISION</button>
+          <button class="calc-btn gold" type="button" style="margin-top:16px;">CHECK DECISION</button>
         </div>
 
-        <div class="decision-result">
-          <div class="decision-flag">❌ NOT RECOMMENDED</div>
-          <p>Type: Layer<br>Health Score: 100%<br>Age Score: 40%<br>Market Score: 100%</p>
-          <strong>Recommended Strategy: Moderate Controlled</strong>
-          <p><strong>Moderate Controlled Strategy:</strong><br>Default safe system. Day 1-3 feed 50-60%, Day 4-10 feed 30-40%, target weight loss 20-25% এবং production 0-5%.</p>
-          <p>Expected Income: 302,400.00 Tk<br>Expected Feed Cost: 2,268,000.00 Tk<br>Approx Molting Cost: 16,000.00 Tk<br>Expected Net Profit: -1,981,600.00 Tk</p>
-          <strong>Advice:</strong>
-          <p>এই ফ্লক মোল্টিং করা risky বা profitable না। আগে flock stabilize করুন অথবা replacement চিন্তা করুন।</p>
+        <div class="form-block-title" style="padding:0 16px;">Decision Result</div>
+        <div class="decision-card">
+          <div class="decision-banner no">❌ NOT RECOMMENDED</div>
+
+          <div class="stat-grid cols-3" style="padding:0; margin-bottom:16px;">
+            <div class="stat-tile"><div class="stat-value moss">100%</div><div class="stat-label">Health Score</div></div>
+            <div class="stat-tile"><div class="stat-value gold">40%</div><div class="stat-label">Age Score</div></div>
+            <div class="stat-tile"><div class="stat-value moss">100%</div><div class="stat-label">Market Score</div></div>
+          </div>
+
+          <span class="decision-strategy">Recommended Strategy: Moderate Controlled</span>
+
+          <div class="decision-note">
+            <b>Moderate Controlled Strategy</b>
+            Default safe system. Day 1-3 feed 50-60%, Day 4-10 feed 30-40%, target weight loss 20-25% এবং production 0-5%.
+          </div>
+
+          <div class="info-block" style="margin:0 0 16px;">
+            <div class="info-row">
+              <div class="info-label moss">Expected Income</div>
+              <div class="info-value strong">302,400.00 Tk</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Expected Feed Cost</div>
+              <div class="info-value strong">2,268,000.00 Tk</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Approx Molting Cost</div>
+              <div class="info-value strong">16,000.00 Tk</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label" style="color:var(--rust);">Expected Net Profit</div>
+              <div class="info-value strong" style="color:var(--rust);">-1,981,600.00 Tk</div>
+            </div>
+          </div>
+
+          <div class="notice" style="margin:0;">
+            <p><b>Advice:</b> এই ফ্লক মোল্টিং করা risky বা profitable না। আগে flock stabilize করুন অথবা replacement চিন্তা করুন।</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="caption">ETI-App prototype · static mockup, decision result is a real captured example from the recording</div>
 </div>
 </body>
 </html>
