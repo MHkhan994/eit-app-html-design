@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Molting Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>7:50 AM</span><span>●●● 17%</span></div>
+
+      <div class="page-head">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>Molting Management</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="action-stack" style="padding-bottom:0;">
+          <a class="calc-btn moss" href="molting-add.html">ADD NEW MOLTING FLOCK</a>
+          <a class="calc-btn moss" href="molting-guide.html">MOLTING PROTOCOL GUIDE</a>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-tile"><div class="stat-label">Active</div><div class="stat-value moss">0</div></div>
+          <div class="stat-tile"><div class="stat-label">Danger</div><div class="stat-value rust">0</div></div>
+          <div class="stat-tile"><div class="stat-label">Recovery</div><div class="stat-value info">0</div></div>
+          <div class="stat-tile"><div class="stat-label">Pending Entry</div><div class="stat-value gold">0</div></div>
+        </div>
+
+        <div class="form-block-title" style="padding:0 16px;">Active Molting Flocks</div>
+        <div class="empty-state">No active molting flock</div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, stat tiles default to 0 as recorded (no flock added yet)</div>
+</div>
+</body>
+</html>

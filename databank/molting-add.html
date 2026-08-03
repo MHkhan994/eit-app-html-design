@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Add Molting Flock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>7:51 AM</span><span>●●● 17%</span></div>
+
+      <div class="page-head">
+        <a class="back-btn" href="molting-monitoring.html">←</a>
+        <h1>Add Molting Flock</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="calc-card">
+          <input class="calc-input" type="text" placeholder="Flock Name" disabled>
+          <select class="calc-input calc-select">
+            <option selected>Layer</option>
+            <option>Breeder</option>
+          </select>
+          <input class="calc-input" type="text" placeholder="Bird Number" disabled>
+          <input class="calc-input" type="text" placeholder="Age in weeks" disabled>
+          <input class="calc-input" type="text" placeholder="Current Production %" disabled>
+          <input class="calc-input" type="text" placeholder="Start Average Body Weight gm" disabled>
+
+          <button class="calc-btn moss" type="button">SELECT MOLTING START DATE</button>
+          <div class="field-tag">Start Date: 2026-08-01</div>
+
+          <div class="form-block-title">Market and Prediction Data</div>
+          <input class="calc-input" type="text" placeholder="Expected Feed Intake gm/bird/day" disabled>
+          <input class="calc-input" type="text" placeholder="Feed Price Tk/kg" disabled>
+          <input class="calc-input" type="text" placeholder="Egg Price Tk/egg for Layer" disabled>
+          <input class="calc-input" type="text" placeholder="Expected Post-Molt Production %" disabled>
+          <input class="calc-input" type="text" placeholder="Expected Second Cycle Duration weeks" disabled>
+          <input class="calc-input" type="text" placeholder="Expected Molting Mortality %" disabled>
+
+          <div class="field-tag">Mortality Trend</div>
+          <select class="calc-input calc-select">
+            <option selected>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+
+          <div class="field-tag">Body Condition</div>
+          <select class="calc-input calc-select">
+            <option selected>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+          </select>
+
+          <div class="field-tag">Market Demand</div>
+          <select class="calc-input calc-select">
+            <option>Low</option>
+            <option>Medium</option>
+            <option selected>High</option>
+          </select>
+
+          <div class="field-tag">Molting Strategy</div>
+          <select class="calc-input calc-select">
+            <option selected>Auto Recommended</option>
+            <option>Moderate Controlled</option>
+            <option>Aggressive</option>
+          </select>
+
+          <div class="form-block-title">Pre-Molting Checklist</div>
+          <div class="checklist-row"><input type="checkbox" id="c1"><label for="c1">Flock healthy আছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c2"><label for="c2">Mortality normal আছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c3"><label for="c3">Water line ঠিক আছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c4"><label for="c4">Ventilation ঠিক আছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c5"><label for="c5">Vaccine schedule review করা হয়েছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c6"><label for="c6">Deworming/parasite status review করা হয়েছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c7"><label for="c7">Vitamin-electrolyte/mineral support ready আছে</label></div>
+          <div class="checklist-row"><input type="checkbox" id="c8"><label for="c8">Heat stress control করা যাবে</label></div>
+
+          <button class="calc-btn moss" type="button" style="margin-top:14px;">CHECK DECISION</button>
+        </div>
+
+        <div class="decision-result">
+          <div class="decision-flag">❌ NOT RECOMMENDED</div>
+          <p>Type: Layer<br>Health Score: 100%<br>Age Score: 40%<br>Market Score: 100%</p>
+          <strong>Recommended Strategy: Moderate Controlled</strong>
+          <p><strong>Moderate Controlled Strategy:</strong><br>Default safe system. Day 1-3 feed 50-60%, Day 4-10 feed 30-40%, target weight loss 20-25% এবং production 0-5%.</p>
+          <p>Expected Income: 302,400.00 Tk<br>Expected Feed Cost: 2,268,000.00 Tk<br>Approx Molting Cost: 16,000.00 Tk<br>Expected Net Profit: -1,981,600.00 Tk</p>
+          <strong>Advice:</strong>
+          <p>এই ফ্লক মোল্টিং করা risky বা profitable না। আগে flock stabilize করুন অথবা replacement চিন্তা করুন।</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup, decision result is a real captured example from the recording</div>
+</div>
+</body>
+</html>
