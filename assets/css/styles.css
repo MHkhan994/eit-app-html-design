@@ -16,6 +16,7 @@
   --action-purple:#6C4FA0; /* Export PDF button — no purple elsewhere in the palette */
   --action-teal:#127A73;   /* Share PDF button — kept distinct from moss so the Export/Share pair stays visually distinguishable */
   --indigo-soft:#E7E8F3;  /* pale card background for Bio-Security Audit's Executive Summary / PDF report screens */
+  --chart-blue:#2A6E9E;   /* chart-line variant of --info-blue — the token itself fails the categorical chroma floor as a 2px stroke */
   --r-sm:6px; --r-md:10px; --r-lg:16px; --r-pill:999px;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
@@ -685,3 +686,98 @@ a.list-card{ text-decoration:none; color:inherit; }
 /* Compact stacked form — tighter than the default .calc-input rhythm */
 .form-tight .calc-input{ margin-bottom:10px; }
 .form-tight .field-row{ gap:10px; }
+
+/* ── Breeder Development Monitor ──────────────────────────────────────────────
+   Design pass: the original is flat tinted bars over flat text blocks. Rebuilt on
+   the house treatment — one white shadowed card per section, icon badges, chip
+   tags for data values, and a meter for actual-vs-target.                      */
+
+/* Flock hero — merges the original's Select Flock field and its Flock Summary
+   section into one card, since the summary just restated the selected flock. */
+.flock-hero{ margin:0 16px 12px; background:var(--card-white); border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:16px; }
+.flock-hero-top{ display:flex; align-items:center; gap:12px; }
+.flock-hero-id{ min-width:0; }
+.flock-name{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:17px; color:var(--text-charcoal); line-height:1.2; }
+.flock-type{ font-size:11px; color:var(--text-secondary); letter-spacing:.4px; margin-top:2px; }
+.flock-hero .calc-input{ margin:14px 0 0; }
+.flock-hero .std-chips{ margin-top:12px; }
+
+/* Section cards — head + body live in one white card, no floating tinted bar */
+.acc-sec{ margin:0 16px 10px; background:var(--card-white); border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); overflow:hidden; }
+.acc-head{ width:100%; display:flex; align-items:center; gap:11px; padding:13px 16px; background:none; border:none; text-align:left; cursor:pointer; }
+.acc-ico{ width:30px; height:30px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:14px; }
+.acc-ico.gold{ background:var(--gold-soft); }
+.acc-ico.rust{ background:var(--rust-soft); }
+.acc-ico.moss{ background:var(--moss-soft); }
+.acc-ico.indigo{ background:var(--indigo-soft); }
+.acc-title{ flex:1; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); }
+.acc-arrow{ font-size:9px; color:var(--text-secondary); transform:rotate(-90deg); transition:transform .2s; flex-shrink:0; }
+.acc-head.open .acc-arrow{ transform:rotate(0deg); }
+.acc-body{ display:none; padding:0 16px 16px; }
+.acc-body.active{ display:block; }
+.acc-body .data-table{ margin:0; box-shadow:none; border:1px solid var(--border-soft); }
+.acc-body .chart-card{ margin:0; padding:0; box-shadow:none; }
+
+/* Male / female status pair — big actual, meter against target, chip tags */
+.sex-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.sex-card{ border-radius:var(--r-md); padding:13px 12px; }
+.sex-card.f{ background:var(--rust-soft); }
+.sex-card.m{ background:var(--info-blue-soft); }
+.sex-head{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.sex-badge{ width:24px; height:24px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; background:var(--card-white); }
+.sex-card.f .sex-badge{ color:var(--rust); }
+.sex-card.m .sex-badge{ color:var(--info-blue); }
+.sex-head b{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13px; color:var(--text-charcoal); }
+.sex-metric{ display:flex; align-items:baseline; gap:4px; }
+.sex-metric b{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:23px; line-height:1; color:var(--text-charcoal); }
+.sex-metric span{ font-size:11px; color:var(--text-secondary); }
+.sex-target{ font-size:11px; color:var(--text-secondary); margin-top:5px; }
+.meter{ height:6px; border-radius:var(--r-pill); background:rgba(255,255,255,.75); margin:9px 0 0; overflow:hidden; }
+.meter i{ display:block; height:100%; border-radius:var(--r-pill); }
+.sex-card.f .meter i{ background:var(--rust); }
+.sex-card.m .meter i{ background:var(--chart-blue); }
+.sex-chips{ display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+
+/* Per-sex note rows — Development / Management Action */
+.sex-note{ display:flex; gap:10px; align-items:flex-start; }
+.sex-note + .sex-note{ margin-top:11px; padding-top:11px; border-top:1px solid var(--border-soft); }
+.sex-note p{ font-size:12.5px; line-height:1.65; color:var(--text-charcoal); }
+
+/* Alert rows — one tinted row per alert instead of one wall of bold text */
+.alert-row{ display:flex; gap:10px; align-items:flex-start; background:var(--gold-soft); border-left:3px solid var(--gold); border-radius:var(--r-md); padding:11px 12px; }
+.alert-row + .alert-row{ margin-top:8px; }
+.alert-row .ico{ font-size:13px; line-height:1.5; flex-shrink:0; }
+.alert-row p{ font-size:12.5px; line-height:1.6; color:#8A5E14; font-weight:600; }
+
+.data-table.compact th, .data-table.compact td{ padding:9px 8px; font-size:11.5px; }
+.data-table.compact td b{ font-family:'Baloo Da 2',sans-serif; font-weight:700; }
+.data-table.compact .sub{ color:var(--text-secondary); }
+
+/* Trend charts. Series hues are sex-coded to match the status pair above:
+   female = --rust, male = --chart-blue (a chroma-lifted --info-blue; the token
+   itself reads gray as a 2px line and fails the categorical chroma floor).
+   Target/warning thresholds are dashed + written out, so no meaning is colour-only. */
+.chart-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+.chart-legend{ display:flex; gap:14px; }
+.legend-item{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-secondary); }
+.legend-swatch{ width:14px; height:3px; border-radius:2px; flex-shrink:0; }
+.legend-swatch.female{ background:var(--rust); }
+.legend-swatch.male{ background:var(--chart-blue); }
+.chart-card .line{ fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.chart-card .line.female{ stroke:var(--rust); }
+.chart-card .line.male{ stroke:var(--chart-blue); }
+.chart-card .area.female{ fill:var(--rust); opacity:.07; }
+.chart-card .area.male{ fill:var(--chart-blue); opacity:.07; }
+.chart-card .dot{ stroke:var(--card-white); stroke-width:2; }
+.chart-card .dot.female{ fill:var(--rust); }
+.chart-card .dot.male{ fill:var(--chart-blue); }
+.chart-card .ref-line{ stroke-width:1.5; stroke-dasharray:5 4; }
+.chart-card .ref-line.target{ stroke:var(--moss); }
+.chart-card .ref-line.warn{ stroke:var(--gold); }
+.chart-card .ref-label{ font-size:9.5px; font-family:'Hind Siliguri',sans-serif; font-weight:600; }
+.chart-card .ref-label.target{ fill:var(--moss); }
+.chart-card .ref-label.warn{ fill:#8A5E14; }
+.chart-card .point-label{ font-size:10px; font-weight:600; fill:var(--text-charcoal); font-family:'Hind Siliguri',sans-serif; }
+.chart-caption{ text-align:right; font-size:10.5px; color:var(--text-secondary); margin-top:6px; }
+
+.field-row > .fr-col{ flex:1; min-width:0; }

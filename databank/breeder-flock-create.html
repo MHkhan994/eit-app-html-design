@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Create Breeder Flock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:39</span><span>●●● 57%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="breeder-monitor.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Create Breeder Flock</h1>
+          <p>Name the flock, set its breeder type and starting counts</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="form-section-title moss"><span class="sec-icon">🐔</span>Flock Identity</div>
+
+          <div class="form-label">Flock Name</div>
+          <input class="calc-input" type="text" placeholder="e.g. Broiler-PS3">
+
+          <div class="form-label">Breeder Type</div>
+          <select class="calc-input calc-select">
+            <option selected>BROILER_BREEDER</option>
+            <option>LAYER_BREEDER</option>
+            <option>COLOR_BREEDER</option>
+          </select>
+
+          <div class="form-label">Start / Hatch Date</div>
+          <input class="calc-input" type="text" placeholder="Example: 2026-08-01">
+
+          <div class="form-section-title moss" style="margin-top:18px"><span class="sec-icon">🔢</span>Starting Counts</div>
+
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Female Count</div>
+              <input class="calc-input" type="text" placeholder="0">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Male Count</div>
+              <input class="calc-input" type="text" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-label">Shed / House</div>
+          <input class="calc-input" type="text" placeholder="Shed number or name">
+
+          <div class="form-label">Remarks</div>
+          <input class="calc-input" type="text" placeholder="Optional note">
+
+          <a class="calc-btn gold" href="breeder-monitor.html">SAVE FLOCK</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
