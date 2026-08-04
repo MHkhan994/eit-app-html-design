@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Weekly Weight and Uniformity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:40</span><span>●●● 57%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="breeder-monitor.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Weekly Weight and Uniformity</h1>
+          <p>Layer-PS1 · LAYER_BREEDER · Week 5</p>
+        </div>
+
+        <!-- Verbatim from the recording — the app's own gating message, shown when the
+             selected flock hasn't completed a full week yet. -->
+        <div class="notice" style="margin:6px 16px 0">
+          <p>১ সপ্তাহ পূর্ণ হয়নি। Weekly input এখন দেওয়া যাবে না।</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="form-section-title rust"><span class="sec-icon">♀</span>Female</div>
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Weight (g)</div>
+              <input class="calc-input" type="text" placeholder="0.0">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Uniformity (%)</div>
+              <input class="calc-input" type="text" placeholder="0.0">
+            </div>
+          </div>
+
+          <div class="form-section-title moss" style="margin-top:14px"><span class="sec-icon">♂</span>Male</div>
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Weight (g)</div>
+              <input class="calc-input" type="text" placeholder="0.0">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Uniformity (%)</div>
+              <input class="calc-input" type="text" placeholder="0.0">
+            </div>
+          </div>
+
+          <div class="form-label" style="margin-top:14px">Remarks</div>
+          <input class="calc-input" type="text" placeholder="Optional note">
+
+          <a class="calc-btn gold" href="breeder-monitor.html">SAVE WEEKLY DATA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
