@@ -554,3 +554,134 @@ a.list-card{ text-decoration:none; color:inherit; }
 .capa-modal-actions{ display:flex; gap:10px; margin-top:6px; }
 .capa-modal-actions .calc-btn{ margin-bottom:0; flex:1; }
 .audit-opt input[type="radio"]{ width:16px; height:16px; accent-color:var(--moss); flex-shrink:0; }
+
+/* ── Feed Formulation (Data Bank) ─────────────────────────────────────────── */
+
+/* Green breadcrumb under a hero title (e.g. "Broiler / Broiler / Starter") */
+.audit-hero .crumb{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13.5px; color:var(--moss); margin-top:4px; }
+
+/* Tighter top block. The back-arrow row and the centred hero both carry generous padding,
+   which stacks into a lot of empty space above the content on every screen in this feature.
+   Scoped modifiers, so the shared .page-head / .audit-hero defaults other features rely on
+   are left untouched. */
+.page-head.tight{ padding:8px 16px 0; }
+.audit-hero.tight{ padding:4px 20px 2px; }
+.audit-hero.tight h1{ font-size:21px; }
+.audit-hero.tight p{ margin-top:2px; }
+
+/* Tinted menu row — icon badge + title/subtitle + chevron, laid out across the width rather
+   than stacked, so the card earns its height. The original's four menu colours map onto
+   existing tokens; no new colours introduced. */
+.tint-menu{ display:flex; flex-direction:column; gap:10px; padding:2px 16px 16px; }
+.tint-card{ display:flex; align-items:center; gap:13px; padding:13px 14px; border-radius:var(--r-lg); text-decoration:none; }
+.tint-card .tint-icon{ width:44px; height:44px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:21px; background:rgba(255,255,255,0.6); }
+.tint-card .tint-text{ flex:1; min-width:0; }
+.tint-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:16px; line-height:1.25; }
+.tint-card p{ font-size:12px; line-height:1.45; margin-top:3px; }
+.tint-card .tint-chev{ font-size:19px; flex-shrink:0; opacity:.55; }
+.tint-card.moss{ background:var(--moss-soft); }
+.tint-card.moss h3, .tint-card.moss p, .tint-card.moss .tint-chev{ color:var(--moss-dark); }
+.tint-card.info{ background:var(--info-blue-soft); }
+.tint-card.info h3, .tint-card.info p, .tint-card.info .tint-chev{ color:var(--info-blue); }
+.tint-card.gold{ background:var(--gold-soft); }
+.tint-card.gold h3, .tint-card.gold p, .tint-card.gold .tint-chev{ color:var(--rust); }
+.tint-card.indigo{ background:var(--indigo-soft); }
+.tint-card.indigo h3, .tint-card.indigo p, .tint-card.indigo .tint-chev{ color:var(--action-purple); }
+
+/* Two-up picker grid — group micro-label over bird name, stage as a chip */
+.feed-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:12px 16px 16px; }
+.feed-card{ display:block; background:var(--card-white); border-radius:var(--r-md); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:10px 11px 11px; text-decoration:none; }
+.feed-card .feed-group{ font-size:9.5px; font-weight:600; letter-spacing:.4px; text-transform:uppercase; color:var(--text-secondary); }
+.feed-card .feed-bird{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); line-height:1.2; margin:1px 0 6px; }
+.feed-card .feed-stage{ display:inline-block; background:var(--moss-soft); color:var(--moss-dark); font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:11px; padding:3px 9px; border-radius:var(--r-pill); }
+
+/* Heading + hint inside a .calc-card */
+.card-title{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; color:var(--text-charcoal); margin-bottom:10px; }
+.card-note{ font-size:11.5px; color:var(--text-secondary); margin:-6px 0 10px; }
+
+/* Add-ingredient row — select and button side by side instead of stacked */
+.add-ing-row{ display:flex; gap:10px; align-items:center; }
+.add-ing-row .calc-input{ flex:1; min-width:0; margin-bottom:0; }
+.add-ing-row .calc-btn{ width:auto; flex-shrink:0; margin-bottom:0; padding:12px 16px; }
+
+/* Ingredient rows — the list scrolls inside its own card, as in the original */
+.ing-list{ max-height:340px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding-right:4px; }
+.ing-row{ display:flex; align-items:center; gap:10px; border:1px solid var(--border-soft); border-radius:var(--r-md); padding:8px 10px; }
+.ing-info{ flex:1; min-width:0; }
+.ing-name{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13px; color:var(--text-charcoal); }
+.ing-meta{ font-size:10px; color:var(--text-secondary); margin-top:2px; }
+.ing-amount{ width:72px; flex-shrink:0; text-align:center; border:none; background:var(--bg-sand); border-radius:var(--r-sm); padding:9px 6px; font-family:'Hind Siliguri',sans-serif; font-size:13px; color:var(--text-charcoal); }
+.ing-amount:focus{ outline:none; box-shadow:0 0 0 2px rgba(232,169,62,0.35); }
+
+/* Action bar (100 kg / Balance / Result / Save). The original floats these as a vertical
+   right-hand stack, which sits permanently on top of the nutrient readout's right column —
+   laid out here as a sticky footer row instead (same pattern as .wizard-nav) so nothing is
+   occluded and the width is put to use. */
+.fab-stack{ position:sticky; bottom:0; display:flex; gap:8px; padding:10px 16px 14px; background:var(--bg-sand); z-index:12; }
+.fab-pill{ flex:1; min-width:0; display:inline-flex; align-items:center; justify-content:center; gap:5px; border:none; border-radius:var(--r-pill); padding:11px 6px; color:var(--card-white); font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:11px; white-space:nowrap; box-shadow:0 4px 12px rgba(35,40,31,0.18); cursor:pointer; }
+.fab-pill.info{ background:var(--info-blue); }
+.fab-pill.teal{ background:var(--action-teal); }
+.fab-pill.purple{ background:var(--action-purple); }
+.fab-pill.moss{ background:var(--moss); }
+
+/* Ingredient Library card — two lines: name + price on one row, CP/ME on the next.
+   The original's green/blue/orange trio maps onto existing tokens. */
+.ing-card{ margin:0 16px 8px; background:var(--card-white); border-radius:var(--r-md); box-shadow:0 4px 14px rgba(35,40,31,0.07); padding:11px 14px; }
+.ing-card-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.ing-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14.5px; color:var(--text-charcoal); min-width:0; }
+.ing-card .ing-price{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:13px; color:var(--rust); flex-shrink:0; }
+.ing-card-stats{ display:flex; gap:14px; font-size:11.5px; margin-top:4px; }
+.ing-card-stats .ing-cp{ color:var(--moss); }
+.ing-card-stats .ing-me{ color:var(--info-blue); }
+
+/* Saved-formula card (Formula History) — whole card is the tap target, opens the details modal */
+.formula-card{ display:block; width:calc(100% - 32px); margin:0 16px 10px; padding:13px 15px; background:var(--card-white); border:none; border-radius:var(--r-md); box-shadow:0 4px 14px rgba(35,40,31,0.07); text-align:left; font-family:'Hind Siliguri',sans-serif; cursor:pointer; }
+.formula-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15.5px; color:var(--text-charcoal); }
+.formula-card .formula-meta{ font-size:11.5px; color:var(--text-secondary); margin-top:3px; }
+.formula-card .formula-stats{ font-size:12px; color:var(--moss-dark); line-height:1.65; margin-top:6px; }
+.formula-card .formula-hint{ font-size:10.5px; color:var(--text-secondary); margin-top:6px; }
+
+/* Nutrient Standard card — category badge + breed/phase header, then the seven targets as
+   pill chips instead of the original's pipe-separated text lines. Keeps the original's
+   three-way colour grouping (energy · minerals · amino acids + fiber) mapped onto existing
+   tokens, but the values become scannable rather than a run-on string. */
+.std-card{ display:block; width:calc(100% - 32px); margin:0 16px 10px; padding:12px 14px; background:var(--card-white); border:none; border-radius:var(--r-lg); box-shadow:0 4px 14px rgba(35,40,31,0.07); text-align:left; font-family:'Hind Siliguri',sans-serif; cursor:pointer; }
+.std-top{ display:flex; align-items:center; gap:11px; }
+.std-card .badge-circle{ width:38px; height:38px; font-size:18px; }
+.std-head{ flex:1; min-width:0; }
+.std-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14.5px; color:var(--text-charcoal); line-height:1.25; }
+.std-card .std-cat{ font-size:10px; font-weight:600; letter-spacing:.4px; text-transform:uppercase; color:var(--text-secondary); margin-top:2px; }
+.std-card .std-chev{ font-size:17px; color:var(--border-soft); flex-shrink:0; }
+
+.std-chips{ display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.std-chip{ display:inline-flex; align-items:baseline; gap:4px; padding:4px 9px; border-radius:var(--r-pill); font-size:10.5px; font-weight:600; }
+.std-chip b{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:11.5px; }
+.std-chip.energy{ background:var(--moss-soft); color:var(--moss-dark); }
+.std-chip.mineral{ background:var(--info-blue-soft); color:var(--info-blue); }
+.std-chip.amino{ background:var(--rust-soft); color:var(--rust); }
+
+/* Formula Details modal body — the original renders it as one plain-text block */
+.formula-detail{ font-size:12.5px; color:var(--text-charcoal); line-height:1.7; }
+.formula-detail .fd-head{ font-family:'Baloo Da 2',sans-serif; font-weight:700; margin-top:12px; }
+.formula-detail ul{ list-style:none; margin-top:2px; }
+.formula-detail li{ padding-left:12px; position:relative; }
+.formula-detail li::before{ content:"•"; position:absolute; left:0; color:var(--moss); }
+.formula-detail .fd-warn{ color:var(--rust); }
+.modal-actions.three{ justify-content:space-between; gap:10px; }
+
+/* Live nutrient readout — mint card. The original stacks eight nutrients as one long text
+   column; laid out here as a 2-column label/value grid so the block is half as tall and
+   scannable, with the headline total and the cost figures bracketing it. */
+.nutrient-card{ margin:0 16px 14px; padding:14px 16px; background:var(--moss-soft); border-radius:var(--r-md); }
+.nutrient-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.nutrient-card h3{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; color:var(--moss-dark); }
+.nutrient-total{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:14px; color:var(--text-charcoal); flex-shrink:0; }
+.nutrient-grid{ display:grid; grid-template-columns:1fr 1fr; gap:5px 14px; margin-top:10px; }
+.nutrient-grid div{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; font-size:12px; color:var(--text-secondary); }
+.nutrient-grid b{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:12.5px; color:var(--text-charcoal); }
+.nutrient-cost{ display:flex; justify-content:space-between; gap:10px; margin-top:11px; padding-top:9px; border-top:1px solid rgba(46,85,64,0.18); font-size:12px; color:var(--text-secondary); }
+.nutrient-cost b{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:12.5px; color:var(--moss-dark); }
+
+/* Compact stacked form — tighter than the default .calc-input rhythm */
+.form-tight .calc-input{ margin-bottom:10px; }
+.form-tight .field-row{ gap:10px; }

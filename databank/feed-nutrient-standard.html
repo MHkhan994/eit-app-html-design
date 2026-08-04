@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Nutrient Standard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:31 PM</span><span>●●● 31%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-formulation.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Nutrient Standard</h1>
+          <p>Total Standards: <span id="std-count">28</span></p>
+        </div>
+
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" type="text" id="std-search" placeholder="Search: Broiler, Layer, Starter..." oninput="filterStandards()">
+        </div>
+
+        <div style="height:12px"></div>
+
+        <!-- One target standard per feed type — the same 28 the picker lists, ordered exactly
+             as the app does: all 15 Breeder entries first, then Broiler, Color, Layer, Sonali.
+             Every figure is read off this screen's own cards. Cross-check: the Broiler - Finisher
+             target Lys of 0.95% is what the saved formula in Formula History warns against
+             ("Lysine is high: 1.05% | Target: 0.95%"), which confirms the transcription. -->
+        <div id="std-cards">
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Broiler Breeder" data-phase="Breeder Phase-1"
+            data-cp="16.5" data-me="2800.0" data-ca="3.2" data-avp="0.42" data-lys="0.8" data-met="0.35" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Broiler Breeder - Breeder Phase-1</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.5%</b></span>
+              <span class="std-chip energy">ME <b>2800.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.2%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.42%</b></span>
+              <span class="std-chip amino">Lys <b>0.8%</b></span>
+              <span class="std-chip amino">Met <b>0.35%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Broiler Breeder" data-phase="Breeder Phase-2"
+            data-cp="15.5" data-me="2750.0" data-ca="3.5" data-avp="0.4" data-lys="0.75" data-met="0.32" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Broiler Breeder - Breeder Phase-2</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>15.5%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.5%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.75%</b></span>
+              <span class="std-chip amino">Met <b>0.32%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Broiler Breeder" data-phase="Grower"
+            data-cp="15.0" data-me="2700.0" data-ca="0.9" data-avp="0.38" data-lys="0.65" data-met="0.28" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Broiler Breeder - Grower</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>15.0%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.65%</b></span>
+              <span class="std-chip amino">Met <b>0.28%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Broiler Breeder" data-phase="Pre-Breeder"
+            data-cp="16.0" data-me="2750.0" data-ca="1.5" data-avp="0.4" data-lys="0.75" data-met="0.32" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Broiler Breeder - Pre-Breeder</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.0%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.5%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.75%</b></span>
+              <span class="std-chip amino">Met <b>0.32%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Broiler Breeder" data-phase="Starter"
+            data-cp="20.0" data-me="2850.0" data-ca="1.0" data-avp="0.45" data-lys="1.0" data-met="0.4" data-fiber="6.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Broiler Breeder - Starter</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>20.0%</b></span>
+              <span class="std-chip energy">ME <b>2850.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>1.0%</b></span>
+              <span class="std-chip amino">Met <b>0.4%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Color Breeder" data-phase="Breeder Phase-1"
+            data-cp="16.5" data-me="2750.0" data-ca="3.3" data-avp="0.42" data-lys="0.78" data-met="0.34" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Color Breeder - Breeder Phase-1</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.5%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.3%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.42%</b></span>
+              <span class="std-chip amino">Lys <b>0.78%</b></span>
+              <span class="std-chip amino">Met <b>0.34%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Color Breeder" data-phase="Breeder Phase-2"
+            data-cp="15.5" data-me="2700.0" data-ca="3.6" data-avp="0.4" data-lys="0.72" data-met="0.32" data-fiber="8.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Color Breeder - Breeder Phase-2</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>15.5%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.6%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.72%</b></span>
+              <span class="std-chip amino">Met <b>0.32%</b></span>
+              <span class="std-chip amino">Max Fiber <b>8.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Color Breeder" data-phase="Grower"
+            data-cp="15.0" data-me="2650.0" data-ca="0.9" data-avp="0.38" data-lys="0.65" data-met="0.28" data-fiber="8.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Color Breeder - Grower</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>15.0%</b></span>
+              <span class="std-chip energy">ME <b>2650.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.65%</b></span>
+              <span class="std-chip amino">Met <b>0.28%</b></span>
+              <span class="std-chip amino">Max Fiber <b>8.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Color Breeder" data-phase="Pre-Breeder"
+            data-cp="16.0" data-me="2700.0" data-ca="1.5" data-avp="0.4" data-lys="0.72" data-met="0.3" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Color Breeder - Pre-Breeder</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.0%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.5%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.72%</b></span>
+              <span class="std-chip amino">Met <b>0.3%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Color Breeder" data-phase="Starter"
+            data-cp="19.0" data-me="2800.0" data-ca="1.0" data-avp="0.45" data-lys="0.95" data-met="0.38" data-fiber="6.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Color Breeder - Starter</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>19.0%</b></span>
+              <span class="std-chip energy">ME <b>2800.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>0.95%</b></span>
+              <span class="std-chip amino">Met <b>0.38%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Layer Breeder" data-phase="Breeder Phase-1"
+            data-cp="17.0" data-me="2750.0" data-ca="3.8" data-avp="0.42" data-lys="0.82" data-met="0.36" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Layer Breeder - Breeder Phase-1</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>17.0%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.8%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.42%</b></span>
+              <span class="std-chip amino">Lys <b>0.82%</b></span>
+              <span class="std-chip amino">Met <b>0.36%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Layer Breeder" data-phase="Breeder Phase-2"
+            data-cp="16.0" data-me="2700.0" data-ca="4.0" data-avp="0.4" data-lys="0.78" data-met="0.34" data-fiber="8.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Layer Breeder - Breeder Phase-2</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.0%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>4.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.78%</b></span>
+              <span class="std-chip amino">Met <b>0.34%</b></span>
+              <span class="std-chip amino">Max Fiber <b>8.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Layer Breeder" data-phase="Grower"
+            data-cp="15.5" data-me="2650.0" data-ca="0.9" data-avp="0.38" data-lys="0.68" data-met="0.28" data-fiber="8.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Layer Breeder - Grower</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>15.5%</b></span>
+              <span class="std-chip energy">ME <b>2650.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.68%</b></span>
+              <span class="std-chip amino">Met <b>0.28%</b></span>
+              <span class="std-chip amino">Max Fiber <b>8.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Layer Breeder" data-phase="Pre-Breeder"
+            data-cp="16.0" data-me="2700.0" data-ca="1.8" data-avp="0.4" data-lys="0.72" data-met="0.3" data-fiber="7.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Layer Breeder - Pre-Breeder</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.0%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.8%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.72%</b></span>
+              <span class="std-chip amino">Met <b>0.3%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Breeder" data-breed="Layer Breeder" data-phase="Starter"
+            data-cp="19.0" data-me="2800.0" data-ca="1.0" data-avp="0.45" data-lys="0.95" data-met="0.38" data-fiber="6.5">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🪺</div>
+              <div class="std-head">
+                <h3>Layer Breeder - Starter</h3>
+                <div class="std-cat">Breeder</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>19.0%</b></span>
+              <span class="std-chip energy">ME <b>2800.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>0.95%</b></span>
+              <span class="std-chip amino">Met <b>0.38%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Broiler" data-breed="Broiler" data-phase="Finisher"
+            data-cp="19.0" data-me="3200.0" data-ca="0.85" data-avp="0.38" data-lys="0.95" data-met="0.4" data-fiber="5.5">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐔</div>
+              <div class="std-head">
+                <h3>Broiler - Finisher</h3>
+                <div class="std-cat">Broiler</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>19.0%</b></span>
+              <span class="std-chip energy">ME <b>3200.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.85%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.95%</b></span>
+              <span class="std-chip amino">Met <b>0.4%</b></span>
+              <span class="std-chip amino">Max Fiber <b>5.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Broiler" data-breed="Broiler" data-phase="Grower"
+            data-cp="20.5" data-me="3100.0" data-ca="0.9" data-avp="0.4" data-lys="1.05" data-met="0.45" data-fiber="5.0">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐔</div>
+              <div class="std-head">
+                <h3>Broiler - Grower</h3>
+                <div class="std-cat">Broiler</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>20.5%</b></span>
+              <span class="std-chip energy">ME <b>3100.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>1.05%</b></span>
+              <span class="std-chip amino">Met <b>0.45%</b></span>
+              <span class="std-chip amino">Max Fiber <b>5.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Broiler" data-breed="Broiler" data-phase="Starter"
+            data-cp="22.5" data-me="3000.0" data-ca="1.0" data-avp="0.45" data-lys="1.2" data-met="0.5" data-fiber="5.0">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐔</div>
+              <div class="std-head">
+                <h3>Broiler - Starter</h3>
+                <div class="std-cat">Broiler</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>22.5%</b></span>
+              <span class="std-chip energy">ME <b>3000.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>1.2%</b></span>
+              <span class="std-chip amino">Met <b>0.5%</b></span>
+              <span class="std-chip amino">Max Fiber <b>5.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Color" data-breed="Color" data-phase="Finisher"
+            data-cp="18.0" data-me="3050.0" data-ca="0.85" data-avp="0.38" data-lys="0.85" data-met="0.35" data-fiber="6.5">
+            <div class="std-top">
+              <div class="badge-circle badge-moss">🐓</div>
+              <div class="std-head">
+                <h3>Color - Finisher</h3>
+                <div class="std-cat">Color</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>18.0%</b></span>
+              <span class="std-chip energy">ME <b>3050.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.85%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.85%</b></span>
+              <span class="std-chip amino">Met <b>0.35%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Color" data-breed="Color" data-phase="Grower"
+            data-cp="19.0" data-me="3000.0" data-ca="0.9" data-avp="0.4" data-lys="0.95" data-met="0.38" data-fiber="6.0">
+            <div class="std-top">
+              <div class="badge-circle badge-moss">🐓</div>
+              <div class="std-head">
+                <h3>Color - Grower</h3>
+                <div class="std-cat">Color</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>19.0%</b></span>
+              <span class="std-chip energy">ME <b>3000.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.95%</b></span>
+              <span class="std-chip amino">Met <b>0.38%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Color" data-breed="Color" data-phase="Starter"
+            data-cp="21.0" data-me="2950.0" data-ca="1.0" data-avp="0.45" data-lys="1.1" data-met="0.45" data-fiber="5.5">
+            <div class="std-top">
+              <div class="badge-circle badge-moss">🐓</div>
+              <div class="std-head">
+                <h3>Color - Starter</h3>
+                <div class="std-cat">Color</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>21.0%</b></span>
+              <span class="std-chip energy">ME <b>2950.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>1.1%</b></span>
+              <span class="std-chip amino">Met <b>0.45%</b></span>
+              <span class="std-chip amino">Max Fiber <b>5.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Layer" data-breed="Layer" data-phase="Chick"
+            data-cp="20.0" data-me="2850.0" data-ca="1.0" data-avp="0.45" data-lys="1.05" data-met="0.42" data-fiber="6.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🥚</div>
+              <div class="std-head">
+                <h3>Layer - Chick</h3>
+                <div class="std-cat">Layer</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>20.0%</b></span>
+              <span class="std-chip energy">ME <b>2850.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>1.05%</b></span>
+              <span class="std-chip amino">Met <b>0.42%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Layer" data-breed="Layer" data-phase="Grower"
+            data-cp="16.5" data-me="2700.0" data-ca="0.9" data-avp="0.38" data-lys="0.75" data-met="0.32" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🥚</div>
+              <div class="std-head">
+                <h3>Layer - Grower</h3>
+                <div class="std-cat">Layer</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>16.5%</b></span>
+              <span class="std-chip energy">ME <b>2700.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.38%</b></span>
+              <span class="std-chip amino">Lys <b>0.75%</b></span>
+              <span class="std-chip amino">Met <b>0.32%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Layer" data-breed="Layer" data-phase="Layer"
+            data-cp="17.5" data-me="2750.0" data-ca="3.8" data-avp="0.42" data-lys="0.85" data-met="0.38" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🥚</div>
+              <div class="std-head">
+                <h3>Layer - Layer</h3>
+                <div class="std-cat">Layer</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>17.5%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>3.8%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.42%</b></span>
+              <span class="std-chip amino">Lys <b>0.85%</b></span>
+              <span class="std-chip amino">Met <b>0.38%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Layer" data-breed="Layer" data-phase="Pre-Layer"
+            data-cp="17.0" data-me="2750.0" data-ca="2.2" data-avp="0.42" data-lys="0.8" data-met="0.35" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-gold">🥚</div>
+              <div class="std-head">
+                <h3>Layer - Pre-Layer</h3>
+                <div class="std-cat">Layer</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>17.0%</b></span>
+              <span class="std-chip energy">ME <b>2750.0</b></span>
+              <span class="std-chip mineral">Ca <b>2.2%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.42%</b></span>
+              <span class="std-chip amino">Lys <b>0.8%</b></span>
+              <span class="std-chip amino">Met <b>0.35%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Sonali" data-breed="Sonali" data-phase="Finisher"
+            data-cp="17.0" data-me="3000.0" data-ca="0.85" data-avp="0.36" data-lys="0.75" data-met="0.32" data-fiber="7.0">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐤</div>
+              <div class="std-head">
+                <h3>Sonali - Finisher</h3>
+                <div class="std-cat">Sonali</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>17.0%</b></span>
+              <span class="std-chip energy">ME <b>3000.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.85%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.36%</b></span>
+              <span class="std-chip amino">Lys <b>0.75%</b></span>
+              <span class="std-chip amino">Met <b>0.32%</b></span>
+              <span class="std-chip amino">Max Fiber <b>7.0%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Sonali" data-breed="Sonali" data-phase="Grower"
+            data-cp="18.0" data-me="2950.0" data-ca="0.9" data-avp="0.4" data-lys="0.85" data-met="0.35" data-fiber="6.5">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐤</div>
+              <div class="std-head">
+                <h3>Sonali - Grower</h3>
+                <div class="std-cat">Sonali</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>18.0%</b></span>
+              <span class="std-chip energy">ME <b>2950.0</b></span>
+              <span class="std-chip mineral">Ca <b>0.9%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.4%</b></span>
+              <span class="std-chip amino">Lys <b>0.85%</b></span>
+              <span class="std-chip amino">Met <b>0.35%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.5%</b></span>
+            </div>
+          </button>
+          <button class="std-card" type="button" onclick="openStd(this)"
+            data-cat="Sonali" data-breed="Sonali" data-phase="Starter"
+            data-cp="20.5" data-me="2900.0" data-ca="1.0" data-avp="0.45" data-lys="1.05" data-met="0.42" data-fiber="6.0">
+            <div class="std-top">
+              <div class="badge-circle badge-rust">🐤</div>
+              <div class="std-head">
+                <h3>Sonali - Starter</h3>
+                <div class="std-cat">Sonali</div>
+              </div>
+              <div class="std-chev">›</div>
+            </div>
+            <div class="std-chips">
+              <span class="std-chip energy">CP <b>20.5%</b></span>
+              <span class="std-chip energy">ME <b>2900.0</b></span>
+              <span class="std-chip mineral">Ca <b>1.0%</b></span>
+              <span class="std-chip mineral">Av.P <b>0.45%</b></span>
+              <span class="std-chip amino">Lys <b>1.05%</b></span>
+              <span class="std-chip amino">Met <b>0.42%</b></span>
+              <span class="std-chip amino">Max Fiber <b>6.0%</b></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="std-modal">
+        <div class="modal-card scroll">
+          <div class="modal-title">Nutrient Standard</div>
+          <div class="formula-detail" id="std-body"></div>
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeStd()">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Fills the detail modal from the tapped card's own data attributes. Display only —
+// the figures are static, nothing is derived.
+function openStd(btn){
+  var d = btn.dataset;
+  document.getElementById("std-body").innerHTML =
+    "Category: " + d.cat + "<br>" +
+    "Breed: " + d.breed + "<br>" +
+    "Phase: " + d.phase +
+    "<div class=\"fd-head\">&nbsp;</div>" +
+    "Target CP: " + d.cp + "%<br>" +
+    "Target ME: " + d.me + " kcal/kg<br>" +
+    "Target Calcium: " + d.ca + "%<br>" +
+    "Target Available Phosphorus: " + d.avp + "%<br>" +
+    "Target Lysine: " + d.lys + "%<br>" +
+    "Target Methionine: " + d.met + "%<br>" +
+    "Max Fiber: " + d.fiber + "%";
+  document.getElementById("std-modal").classList.add("open");
+}
+function closeStd(){ document.getElementById("std-modal").classList.remove("open"); }
+
+// Same display-only filter as the other lists in this feature. Matches the card title, so
+// "Broiler", "Layer" and "Starter" all work as the placeholder suggests.
+function filterStandards(){
+  var q = document.getElementById("std-search").value.trim().toLowerCase();
+  var shown = 0;
+  document.querySelectorAll("#std-cards .std-card").forEach(function(card){
+    var hit = card.querySelector("h3").textContent.toLowerCase().indexOf(q) !== -1;
+    card.style.display = hit ? "" : "none";
+    if(hit) shown++;
+  });
+  document.getElementById("std-count").textContent = shown;
+}
+</script>
+</body>
+</html>

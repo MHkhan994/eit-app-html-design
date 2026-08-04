@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Edit Feed Formula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:14 PM</span><span>●●● 25%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-formula-history.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <!-- Deliberate correction to the original. The real app reuses the Create screen
+             verbatim here, so it still reads "Create Feed Formula" while you are editing a
+             saved formula — clearly a bug. Retitled "Edit Feed Formula" and the formula's own
+             name added to the breadcrumb so the screen says what it is doing. -->
+        <div class="audit-hero tight">
+          <h1>Edit Feed Formula</h1>
+          <p class="crumb">Broiler Finisher · Broiler / Broiler / Finisher</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="card-title">Add Ingredient</div>
+          <div class="add-ing-row">
+          <select class="calc-input calc-select" id="ing-picker">
+            <option>DCP</option>
+            <option>DL-Methionine</option>
+            <option>Fish Meal</option>
+            <option>Full Fat Soybean</option>
+            <option>L-Lysine</option>
+            <option>Limestone</option>
+            <option>Maize</option>
+            <option>Meat Bone Meal</option>
+            <option>Rice Polish</option>
+            <option>Salt</option>
+            <option>Soybean Meal</option>
+            <option>Soybean Oil</option>
+            <option>Toxin Binder</option>
+            <option>Vitamin Mineral Premix</option>
+            <option>Wheat Bran</option>
+          </select>
+          <button class="calc-btn moss" type="button" onclick="addIngredient()">Add</button>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="card-title">Formula Ingredients</div>
+          <div class="card-note">Enter amount in kg. Long press item to remove.</div>
+          <!-- Prefilled with the saved Broiler Finisher amounts. They sum to exactly 100.00 kg
+               and reproduce the recorded CP / ME / cost figures below to the decimal. -->
+          <div class="ing-list" id="ing-list">
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Rice Polish</div><div class="ing-meta">CP 12.0% | ME 2600.0 | ৳30.0/kg</div></div><input class="ing-amount" type="text" value="2.03"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Salt</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳20.0/kg</div></div><input class="ing-amount" type="text" value="0.25"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Soybean Oil</div><div class="ing-meta">CP 0.0% | ME 8800.0 | ৳135.0/kg</div></div><input class="ing-amount" type="text" value="4.00"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Soybean Meal</div><div class="ing-meta">CP 44.0% | ME 2450.0 | ৳72.0/kg</div></div><input class="ing-amount" type="text" value="31.50"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">DL-Methionine</div><div class="ing-meta">CP 58.0% | ME 0.0 | ৳450.0/kg</div></div><input class="ing-amount" type="text" value="0.09"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Maize</div><div class="ing-meta">CP 8.5% | ME 3350.0 | ৳35.0/kg</div></div><input class="ing-amount" type="text" value="59.12"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Toxin Binder</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳180.0/kg</div></div><input class="ing-amount" type="text" value="0.20"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">DCP</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳95.0/kg</div></div><input class="ing-amount" type="text" value="1.29"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Wheat Bran</div><div class="ing-meta">CP 15.5% | ME 1700.0 | ৳28.0/kg</div></div><input class="ing-amount" type="text" value="0.03"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Limestone</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳18.0/kg</div></div><input class="ing-amount" type="text" value="1.13"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">L-Lysine</div><div class="ing-meta">CP 78.0% | ME 0.0 | ৳360.0/kg</div></div><input class="ing-amount" type="text" value="0.01"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Vitamin Mineral Premix</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳220.0/kg</div></div><input class="ing-amount" type="text" value="0.35"></div>
+          </div>
+        </div>
+
+        <!-- Total, CP, ME, Lys and both cost figures are the recording's own values for this
+             saved formula (Lys off its "Lysine is high: 1.05%" warning). Ca, Av.P, Met, Fiber
+             and Fat are plausible broiler-finisher values — per-ingredient figures for those
+             are never displayed anywhere in the app, so they can't be derived. -->
+        <div class="nutrient-card">
+          <div class="nutrient-head">
+            <h3>Live Nutrient Result</h3>
+            <div class="nutrient-total">100.00 kg</div>
+          </div>
+          <div class="nutrient-grid">
+            <div>CP <b>19.19%</b></div>
+            <div>ME kcal/kg <b>3157.56</b></div>
+            <div>Ca <b>0.95%</b></div>
+            <div>Av.P <b>0.44%</b></div>
+            <div>Lys <b>1.05%</b></div>
+            <div>Met <b>0.44%</b></div>
+            <div>Fiber <b>3.28%</b></div>
+            <div>Fat <b>6.71%</b></div>
+          </div>
+          <div class="nutrient-cost">
+            <span>Cost <b>৳52.44/kg</b></span>
+            <span>Total <b>৳5243.93</b></span>
+          </div>
+        </div>
+
+        <!-- Second correction: the original's primary action here reads "Update" with no
+             indication of what it updates. Relabelled "Save Changes". 100 kg / Balance /
+             Result rescale or recompute the formula, so they stay inert. -->
+        <div class="fab-stack">
+          <button class="fab-pill info" type="button">⬆ 100 kg</button>
+          <button class="fab-pill teal" type="button">🔧 Balance</button>
+          <button class="fab-pill purple" type="button">ⓘ Result</button>
+          <a class="fab-pill moss" href="feed-formula-history.html">💾 Save Changes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nutrient/price meta for all 15 ingredients, confirmed against the Ingredient Library screen
+// (databank/feed-ingredient-library.html) — every figure here is captured, none invented.
+var INGREDIENTS = {
+  'DCP':                    'CP 0.0% | ME 0.0 | ৳95.0/kg',
+  'DL-Methionine':          'CP 58.0% | ME 0.0 | ৳450.0/kg',
+  'Fish Meal':              'CP 55.0% | ME 2800.0 | ৳115.0/kg',
+  'Full Fat Soybean':       'CP 36.0% | ME 3300.0 | ৳78.0/kg',
+  'L-Lysine':               'CP 78.0% | ME 0.0 | ৳360.0/kg',
+  'Limestone':              'CP 0.0% | ME 0.0 | ৳18.0/kg',
+  'Maize':                  'CP 8.5% | ME 3350.0 | ৳35.0/kg',
+  'Meat Bone Meal':         'CP 48.0% | ME 2500.0 | ৳85.0/kg',
+  'Rice Polish':            'CP 12.0% | ME 2600.0 | ৳30.0/kg',
+  'Salt':                   'CP 0.0% | ME 0.0 | ৳20.0/kg',
+  'Soybean Meal':           'CP 44.0% | ME 2450.0 | ৳72.0/kg',
+  'Soybean Oil':            'CP 0.0% | ME 8800.0 | ৳135.0/kg',
+  'Toxin Binder':           'CP 0.0% | ME 0.0 | ৳180.0/kg',
+  'Vitamin Mineral Premix': 'CP 0.0% | ME 0.0 | ৳220.0/kg',
+  'Wheat Bran':             'CP 15.5% | ME 1700.0 | ৳28.0/kg'
+};
+
+// Appends the picked ingredient as a new row with an empty amount. The nutrient readout
+// above stays as-is; recalculating it is the part we deliberately don't build.
+function addIngredient(){
+  var name = document.getElementById('ing-picker').value;
+  var list = document.getElementById('ing-list');
+  var row = document.createElement('div');
+  row.className = 'ing-row';
+  row.innerHTML = '<div class="ing-info"><div class="ing-name"></div>' +
+                  '<div class="ing-meta"></div></div>' +
+                  '<input class="ing-amount" type="text" placeholder="kg">';
+  row.querySelector('.ing-name').textContent = name;
+  row.querySelector('.ing-meta').textContent = INGREDIENTS[name] || '';
+  list.appendChild(row);
+  list.scrollTop = list.scrollHeight;
+}
+</script>
+</body>
+</html>

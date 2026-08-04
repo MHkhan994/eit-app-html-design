@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Ingredient Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:49 PM</span><span>●●● 18%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-formulation.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Ingredient Library</h1>
+          <p>Total Ingredients: <span id="ing-count">15</span></p>
+        </div>
+
+        <div class="page-action">
+          <a class="calc-btn moss" href="feed-ingredient-add.html">Add New Ingredient</a>
+        </div>
+
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" type="text" id="ing-search" placeholder="Search ingredient..." oninput="filterIngredients()">
+        </div>
+
+        <div style="height:12px"></div>
+
+        <!-- All 15 ingredients with their real captured figures, read off this screen's own
+             cards. The count above is the recording's starting state (a test "rice" entry was
+             added later in the video, taking it to 16 — not carried over). -->
+        <div id="ing-cards">
+          <div class="ing-card"><div class="ing-card-top"><h3>DCP</h3><div class="ing-price">৳ 95.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>DL-Methionine</h3><div class="ing-price">৳ 450.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 58.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Fish Meal</h3><div class="ing-price">৳ 115.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 55.0%</span><span class="ing-me">ME: 2800.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Full Fat Soybean</h3><div class="ing-price">৳ 78.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 36.0%</span><span class="ing-me">ME: 3300.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>L-Lysine</h3><div class="ing-price">৳ 360.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 78.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Limestone</h3><div class="ing-price">৳ 18.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Maize</h3><div class="ing-price">৳ 35.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 8.5%</span><span class="ing-me">ME: 3350.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Meat Bone Meal</h3><div class="ing-price">৳ 85.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 48.0%</span><span class="ing-me">ME: 2500.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Rice Polish</h3><div class="ing-price">৳ 30.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 12.0%</span><span class="ing-me">ME: 2600.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Salt</h3><div class="ing-price">৳ 20.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Soybean Meal</h3><div class="ing-price">৳ 72.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 44.0%</span><span class="ing-me">ME: 2450.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Soybean Oil</h3><div class="ing-price">৳ 135.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 8800.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Toxin Binder</h3><div class="ing-price">৳ 180.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Vitamin Mineral Premix</h3><div class="ing-price">৳ 220.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 0.0%</span><span class="ing-me">ME: 0.0 kcal/kg</span></div></div>
+          <div class="ing-card"><div class="ing-card-top"><h3>Wheat Bran</h3><div class="ing-price">৳ 28.0/kg</div></div><div class="ing-card-stats"><span class="ing-cp">CP: 15.5%</span><span class="ing-me">ME: 1700.0 kcal/kg</span></div></div>
+        </div>
+
+        <div style="height:8px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Same display-only filter as the Select Feed Type picker. Searching wasn't demonstrated on
+// this screen, but the field is the same component in the same feature, so it behaves the same.
+function filterIngredients(){
+  var q = document.getElementById('ing-search').value.trim().toLowerCase();
+  var shown = 0;
+  document.querySelectorAll('#ing-cards .ing-card').forEach(function(card){
+    var hit = card.querySelector('h3').textContent.toLowerCase().indexOf(q) !== -1;
+    card.style.display = hit ? '' : 'none';
+    if(hit) shown++;
+  });
+  document.getElementById('ing-count').textContent = shown;
+}
+</script>
+</body>
+</html>

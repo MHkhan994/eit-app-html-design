@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Select Feed Type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:06 PM</span><span>●●● 17%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-formulation.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Select Feed Type</h1>
+          <p>Total Feed Types: <span id="feed-count">28</span></p>
+        </div>
+
+        <!-- Live filter over the card list. This swaps between recorded states (the recording
+             shows "b" → 18 types and "boi" → 0, with the header count following) — it filters
+             what is displayed, it does not compute anything. -->
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" type="text" id="feed-search" placeholder="Search feed type" oninput="filterFeeds()">
+        </div>
+
+        <div class="feed-grid" id="feed-grid">
+          <a class="feed-card" href="feed-formula-create.html?t=Broiler|Broiler|Starter"><div class="feed-group">Broiler</div><div class="feed-bird">Broiler</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Broiler|Broiler|Grower"><div class="feed-group">Broiler</div><div class="feed-bird">Broiler</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Broiler|Broiler|Finisher"><div class="feed-group">Broiler</div><div class="feed-bird">Broiler</div><div class="feed-stage">Finisher</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Color|Color|Starter"><div class="feed-group">Color</div><div class="feed-bird">Color</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Color|Color|Grower"><div class="feed-group">Color</div><div class="feed-bird">Color</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Color|Color|Finisher"><div class="feed-group">Color</div><div class="feed-bird">Color</div><div class="feed-stage">Finisher</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Sonali|Sonali|Starter"><div class="feed-group">Sonali</div><div class="feed-bird">Sonali</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Sonali|Sonali|Grower"><div class="feed-group">Sonali</div><div class="feed-bird">Sonali</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Sonali|Sonali|Finisher"><div class="feed-group">Sonali</div><div class="feed-bird">Sonali</div><div class="feed-stage">Finisher</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Layer|Layer|Chick"><div class="feed-group">Layer</div><div class="feed-bird">Layer</div><div class="feed-stage">Chick</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Layer|Layer|Grower"><div class="feed-group">Layer</div><div class="feed-bird">Layer</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Layer|Layer|Pre-Layer"><div class="feed-group">Layer</div><div class="feed-bird">Layer</div><div class="feed-stage">Pre-Layer</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Layer|Layer|Layer"><div class="feed-group">Layer</div><div class="feed-bird">Layer</div><div class="feed-stage">Layer</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Broiler Breeder|Starter"><div class="feed-group">Breeder</div><div class="feed-bird">Broiler Breeder</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Broiler Breeder|Grower"><div class="feed-group">Breeder</div><div class="feed-bird">Broiler Breeder</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Broiler Breeder|Pre-Breeder"><div class="feed-group">Breeder</div><div class="feed-bird">Broiler Breeder</div><div class="feed-stage">Pre-Breeder</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Broiler Breeder|Breeder Phase-1"><div class="feed-group">Breeder</div><div class="feed-bird">Broiler Breeder</div><div class="feed-stage">Breeder Phase-1</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Broiler Breeder|Breeder Phase-2"><div class="feed-group">Breeder</div><div class="feed-bird">Broiler Breeder</div><div class="feed-stage">Breeder Phase-2</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Color Breeder|Starter"><div class="feed-group">Breeder</div><div class="feed-bird">Color Breeder</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Color Breeder|Grower"><div class="feed-group">Breeder</div><div class="feed-bird">Color Breeder</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Color Breeder|Pre-Breeder"><div class="feed-group">Breeder</div><div class="feed-bird">Color Breeder</div><div class="feed-stage">Pre-Breeder</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Color Breeder|Breeder Phase-1"><div class="feed-group">Breeder</div><div class="feed-bird">Color Breeder</div><div class="feed-stage">Breeder Phase-1</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Color Breeder|Breeder Phase-2"><div class="feed-group">Breeder</div><div class="feed-bird">Color Breeder</div><div class="feed-stage">Breeder Phase-2</div></a>
+
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Layer Breeder|Starter"><div class="feed-group">Breeder</div><div class="feed-bird">Layer Breeder</div><div class="feed-stage">Starter</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Layer Breeder|Grower"><div class="feed-group">Breeder</div><div class="feed-bird">Layer Breeder</div><div class="feed-stage">Grower</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Layer Breeder|Pre-Breeder"><div class="feed-group">Breeder</div><div class="feed-bird">Layer Breeder</div><div class="feed-stage">Pre-Breeder</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Layer Breeder|Breeder Phase-1"><div class="feed-group">Breeder</div><div class="feed-bird">Layer Breeder</div><div class="feed-stage">Breeder Phase-1</div></a>
+          <a class="feed-card" href="feed-formula-create.html?t=Breeder|Layer Breeder|Breeder Phase-2"><div class="feed-group">Breeder</div><div class="feed-bird">Layer Breeder</div><div class="feed-stage">Breeder Phase-2</div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Show/hide cards whose bird name + stage match the query, and keep the header
+// count in step. No result is computed — this only picks which cards are visible.
+function filterFeeds(){
+  var q = document.getElementById('feed-search').value.trim().toLowerCase();
+  var shown = 0;
+  document.querySelectorAll('#feed-grid .feed-card').forEach(function(card){
+    var text = (card.querySelector('.feed-bird').textContent + ' ' +
+                card.querySelector('.feed-stage').textContent).toLowerCase();
+    var hit = text.indexOf(q) !== -1;
+    card.style.display = hit ? '' : 'none';
+    if(hit) shown++;
+  });
+  document.getElementById('feed-count').textContent = shown;
+}
+</script>
+</body>
+</html>

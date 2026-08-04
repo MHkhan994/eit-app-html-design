@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Create Feed Formula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:06 PM</span><span>●●● 17%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-select-type.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Create Feed Formula</h1>
+          <p class="crumb" id="crumb">Broiler / Broiler / Starter</p>
+        </div>
+
+        <div class="calc-card">
+          <div class="card-title">Add Ingredient</div>
+          <div class="add-ing-row">
+          <select class="calc-input calc-select" id="ing-picker">
+            <option>DCP</option>
+            <option>DL-Methionine</option>
+            <option>Fish Meal</option>
+            <option>Full Fat Soybean</option>
+            <option>L-Lysine</option>
+            <option>Limestone</option>
+            <option>Maize</option>
+            <option>Meat Bone Meal</option>
+            <option>Rice Polish</option>
+            <option>Salt</option>
+            <option>Soybean Meal</option>
+            <option>Soybean Oil</option>
+            <option>Toxin Binder</option>
+            <option>Vitamin Mineral Premix</option>
+            <option>Wheat Bran</option>
+          </select>
+          <button class="calc-btn moss" type="button" onclick="addIngredient()">Add</button>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="card-title">Formula Ingredients</div>
+          <div class="card-note">Enter amount in kg. Long press item to remove.</div>
+          <div class="ing-list" id="ing-list">
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Rice Polish</div><div class="ing-meta">CP 12.0% | ME 2600.0 | ৳30.0/kg</div></div><input class="ing-amount" type="text" value="4.00"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Salt</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳20.0/kg</div></div><input class="ing-amount" type="text" value="0.30"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Soybean Oil</div><div class="ing-meta">CP 0.0% | ME 8800.0 | ৳135.0/kg</div></div><input class="ing-amount" type="text" value="2.85"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Soybean Meal</div><div class="ing-meta">CP 44.0% | ME 2450.0 | ৳72.0/kg</div></div><input class="ing-amount" type="text" value="38.00"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">DL-Methionine</div><div class="ing-meta">CP 58.0% | ME 0.0 | ৳450.0/kg</div></div><input class="ing-amount" type="text" value="0.18"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Maize</div><div class="ing-meta">CP 8.5% | ME 3350.0 | ৳35.0/kg</div></div><input class="ing-amount" type="text" value="50.40"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Toxin Binder</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳180.0/kg</div></div><input class="ing-amount" type="text" value="0.10"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">DCP</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳95.0/kg</div></div><input class="ing-amount" type="text" value="1.60"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Wheat Bran</div><div class="ing-meta">CP 15.5% | ME 1700.0 | ৳28.0/kg</div></div><input class="ing-amount" type="text" value="1.00"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Limestone</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳18.0/kg</div></div><input class="ing-amount" type="text" value="1.30"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">L-Lysine</div><div class="ing-meta">CP 78.0% | ME 0.0 | ৳360.0/kg</div></div><input class="ing-amount" type="text" value="0.02"></div>
+            <div class="ing-row"><div class="ing-info"><div class="ing-name">Vitamin Mineral Premix</div><div class="ing-meta">CP 0.0% | ME 0.0 | ৳220.0/kg</div></div><input class="ing-amount" type="text" value="0.25"></div>
+          </div>
+        </div>
+
+        <!-- Example output, per the standing "results ship pre-filled" rule. Total / CP / ME / Cost
+             are the recording's own figures for exactly this ingredient set; Ca, Av.P, Lys, Met,
+             Fiber and Fat are plausible broiler-starter values (the ingredient rows only expose
+             CP, ME and price, so those six can't be read off the source). -->
+        <div class="nutrient-card">
+          <div class="nutrient-head">
+            <h3>Live Nutrient Result</h3>
+            <div class="nutrient-total">100.00 kg</div>
+          </div>
+          <div class="nutrient-grid">
+            <div>CP <b>21.76%</b></div>
+            <div>ME kcal/kg <b>2991.20</b></div>
+            <div>Ca <b>1.02%</b></div>
+            <div>Av.P <b>0.48%</b></div>
+            <div>Lys <b>1.28%</b></div>
+            <div>Met <b>0.52%</b></div>
+            <div>Fiber <b>3.41%</b></div>
+            <div>Fat <b>5.62%</b></div>
+          </div>
+          <div class="nutrient-cost">
+            <span>Cost <b>৳53.75/kg</b></span>
+            <span>Total <b>৳5375.35</b></span>
+          </div>
+        </div>
+
+        <!-- Only Save was tapped in the recording; 100 kg / Balance / Result all rescale or
+             recompute the formula, so they stay inert per the no-calculation rule. -->
+        <div class="fab-stack">
+          <button class="fab-pill info" type="button">⬆ 100 kg</button>
+          <button class="fab-pill teal" type="button">🔧 Balance</button>
+          <button class="fab-pill purple" type="button">ⓘ Result</button>
+          <button class="fab-pill moss" type="button" onclick="openSave()">💾 Save</button>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="save-modal">
+        <div class="modal-card">
+          <div class="modal-title">Save Formula</div>
+          <input class="uline-field" type="text" id="formula-name" value="Broiler Starter">
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="closeSave()">CANCEL</button>
+            <button class="modal-btn" type="button" onclick="closeSave()">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nutrient/price meta for all 15 ingredients, confirmed against the Ingredient Library screen
+// (databank/feed-ingredient-library.html) — every figure here is captured, none invented.
+var INGREDIENTS = {
+  'DCP':                    'CP 0.0% | ME 0.0 | ৳95.0/kg',
+  'DL-Methionine':          'CP 58.0% | ME 0.0 | ৳450.0/kg',
+  'Fish Meal':              'CP 55.0% | ME 2800.0 | ৳115.0/kg',
+  'Full Fat Soybean':       'CP 36.0% | ME 3300.0 | ৳78.0/kg',
+  'L-Lysine':               'CP 78.0% | ME 0.0 | ৳360.0/kg',
+  'Limestone':              'CP 0.0% | ME 0.0 | ৳18.0/kg',
+  'Maize':                  'CP 8.5% | ME 3350.0 | ৳35.0/kg',
+  'Meat Bone Meal':         'CP 48.0% | ME 2500.0 | ৳85.0/kg',
+  'Rice Polish':            'CP 12.0% | ME 2600.0 | ৳30.0/kg',
+  'Salt':                   'CP 0.0% | ME 0.0 | ৳20.0/kg',
+  'Soybean Meal':           'CP 44.0% | ME 2450.0 | ৳72.0/kg',
+  'Soybean Oil':            'CP 0.0% | ME 8800.0 | ৳135.0/kg',
+  'Toxin Binder':           'CP 0.0% | ME 0.0 | ৳180.0/kg',
+  'Vitamin Mineral Premix': 'CP 0.0% | ME 0.0 | ৳220.0/kg',
+  'Wheat Bran':             'CP 15.5% | ME 1700.0 | ৳28.0/kg'
+};
+
+// Appends the picked ingredient as a new row with an empty amount — the state the
+// recording shows after "Add Ingredient". The nutrient readout above stays as-is;
+// recalculating it is the part we deliberately don't build.
+function addIngredient(){
+  var name = document.getElementById('ing-picker').value;
+  var list = document.getElementById('ing-list');
+  var row = document.createElement('div');
+  row.className = 'ing-row';
+  row.innerHTML = '<div class="ing-info"><div class="ing-name"></div>' +
+                  '<div class="ing-meta"></div></div>' +
+                  '<input class="ing-amount" type="text" placeholder="kg">';
+  row.querySelector('.ing-name').textContent = name;
+  row.querySelector('.ing-meta').textContent = INGREDIENTS[name] || '';
+  list.appendChild(row);
+  list.scrollTop = list.scrollHeight;
+}
+
+function openSave(){ document.getElementById('save-modal').classList.add('open'); }
+function closeSave(){ document.getElementById('save-modal').classList.remove('open'); }
+
+// The picker passes the tapped feed type through so the breadcrumb and the default
+// save name match the card you came from. Defaults to the recorded Broiler Starter.
+(function(){
+  var t = new URLSearchParams(location.search).get('t');
+  if(!t) return;
+  var parts = t.split('|');
+  if(parts.length !== 3) return;
+  document.getElementById('crumb').textContent = parts.join(' / ');
+  document.getElementById('formula-name').value = parts[1] + ' ' + parts[2];
+})();
+</script>
+</body>
+</html>
