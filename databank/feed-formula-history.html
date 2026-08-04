@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Formula History</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>9:14 PM</span><span>●●● 25%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="feed-formulation.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Formula History</h1>
+          <p>Total Saved Formulas: <span id="formula-count">1</span></p>
+        </div>
+
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" type="text" id="formula-search" placeholder="Search formula..." oninput="filterFormulas()">
+        </div>
+
+        <div style="height:12px"></div>
+
+        <!-- One saved formula, the recording's real record. Every figure on the card and in
+             the details modal reconciles against the Ingredient Library prices/nutrients. -->
+        <div id="formula-cards">
+          <button class="formula-card" type="button" onclick="openDetails()">
+            <h3>Broiler Finisher</h3>
+            <div class="formula-meta">Broiler - Finisher | 03-08-2026 10:43 pm</div>
+            <div class="formula-stats">
+              Total: 100.00 kg | CP: 19.19% | ME: 3157.56<br>
+              Cost: ৳52.44/kg | Total: ৳5243.93
+            </div>
+            <!-- Long-press delete is named in the original's own hint text but was never
+                 demonstrated in the recording, so it isn't wired. -->
+            <div class="formula-hint">Tap: Details | Long press: Delete</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="details-modal">
+        <div class="modal-card scroll">
+          <div class="modal-title">Formula Details</div>
+          <div class="formula-detail">
+            Formula: Broiler Finisher<br>
+            Type: Broiler / Broiler / Finisher<br>
+            Date: 03-08-2026 10:43 pm
+
+            <div class="fd-head">Ingredients:</div>
+            <ul>
+              <li>Rice Polish = 2.03 kg</li>
+              <li>Salt = 0.25 kg</li>
+              <li>Soybean Oil = 4.00 kg</li>
+              <li>Soybean Meal = 31.50 kg</li>
+              <li>DL-Methionine = 0.09 kg</li>
+              <li>Maize = 59.12 kg</li>
+              <li>Toxin Binder = 0.20 kg</li>
+              <li>DCP = 1.29 kg</li>
+              <li>Wheat Bran = 0.03 kg</li>
+              <li>Limestone = 1.13 kg</li>
+              <li>L-Lysine = 0.01 kg</li>
+              <li>Vitamin Mineral Premix = 0.35 kg</li>
+            </ul>
+
+            <div class="fd-head">Result:</div>
+            Total: 100.00 kg<br>
+            CP: 19.19%<br>
+            ME: 3157.56 kcal/kg<br>
+            Cost/kg: ৳52.44
+
+            <div class="fd-head">Warnings:</div>
+            <ul>
+              <li class="fd-warn">Lysine is high: 1.05% | Target: 0.95%</li>
+            </ul>
+          </div>
+          <!-- SHARE TEXT / SHARE PDF open the Android system share sheet in the original —
+               inert here, same as Export/Share PDF elsewhere in Data Bank. -->
+          <div class="modal-actions three">
+            <button class="modal-btn" type="button">SHARE TEXT</button>
+            <button class="modal-btn" type="button">SHARE PDF</button>
+            <a class="modal-btn" href="feed-formula-edit.html">EDIT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openDetails(){ document.getElementById('details-modal').classList.add('open'); }
+
+// Same display-only filter as the other two lists in this feature.
+function filterFormulas(){
+  var q = document.getElementById('formula-search').value.trim().toLowerCase();
+  var shown = 0;
+  document.querySelectorAll('#formula-cards .formula-card').forEach(function(card){
+    var hit = card.querySelector('h3').textContent.toLowerCase().indexOf(q) !== -1;
+    card.style.display = hit ? '' : 'none';
+    if(hit) shown++;
+  });
+  document.getElementById('formula-count').textContent = shown;
+}
+</script>
+</body>
+</html>
