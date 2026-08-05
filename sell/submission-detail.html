@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — জমার বিস্তারিত</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="submissions.html">←</a>
+        <h1>জমার বিস্তারিত</h1>
+      </div>
+
+      <div class="screen-body" id="body"></div>
+
+      <div class="modal-overlay" id="cancel-modal">
+        <div class="modal-card">
+          <div class="modal-title">জমা বাতিল করবেন?</div>
+          <div class="modal-text">বাতিল করলে আমাদের প্রতিনিধি আর যোগাযোগ করবেন না। এটি ফিরিয়ে আনা যাবে না।</div>
+          <div class="modal-actions">
+            <button class="modal-btn" onclick="closeCancel()">না, থাক</button>
+            <button class="modal-btn danger" onclick="confirmCancel()">হ্যাঁ, বাতিল করুন</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · অবস্থা নিজে থেকে এগোয় না</div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script src="../assets/js/sell.js"></script>
+<script>
+Listings.seed();
+
+var listing = Listings.byId(Shop.qs('id')) || Listings.all()[0];
+
+/* Same rail as buy/order-detail.html: a cancelled submission stops where it
+   actually got to and closes with the cancellation, rather than drawing the
+   remaining stages as if they had happened. */
+function trackHTML(l){
+  var steps = [];
+
+  if(l.cancelled){
+    for(var i = 0; i <= l.stage; i++){
+      steps.push({ cls:'done', title:Listings.STAGES[i], when:i === 0 ? l.date : '' });
+    }
+    steps.push({ cls:'cancelled', title:'জমা বাতিল হয়েছে', when:'বিক্রেতার অনুরোধে' });
+  } else {
+    for(var j = 0; j < Listings.STAGES.length; j++){
+      var cls = j < l.stage ? 'done' : (j === l.stage ? 'active' : '');
+      var when = j === 0 ? l.date
+               : (j === l.stage ? 'চলমান' : (j > l.stage ? 'অপেক্ষমাণ' : ''));
+      steps.push({ cls:cls, title:Listings.STAGES[j], when:when });
+    }
+  }
+
+  return '<div class="track-list">' + steps.map(function(s, i){
+    var last = i === steps.length - 1;
+    return '<div class="track-step ' + s.cls + '">' +
+      '<div class="track-rail"><div class="track-dot">' + (s.cls === 'done' ? '✓' : '') + '</div>' +
+        (last ? '' : '<div class="track-line"></div>') + '</div>' +
+      '<div class="track-text"><div class="track-title">' + s.title + '</div>' +
+        (s.when ? '<div class="track-when">' + s.when + '</div>' : '') + '</div>' +
+    '</div>';
+  }).join('') + '</div>';
+}
+
+function render(){
+  var body = document.getElementById('body');
+
+  if(!listing){
+    body.innerHTML = '<div style="height:30px;"></div>' +
+      '<div class="empty-card"><div class="badge-circle badge-rust">🛒</div>' +
+        '<p>জমাটি খুঁজে পাওয়া যায়নি।</p>' +
+        '<div style="height:14px;"></div>' +
+        '<a class="calc-btn moss" href="submissions.html">জমার তালিকায় ফিরুন</a></div>';
+    return;
+  }
+
+  var st = Listings.statusOf(listing);
+  var c = Listings.cat(listing.cat);
+  /* Once a rep has closed the sale there is nothing left to call off. */
+  var canCancel = !listing.cancelled && listing.stage < 3;
+
+  body.innerHTML =
+    '<div class="proj-card" style="margin-top:14px;">' +
+      '<div class="order-top">' +
+        '<div><div class="order-id">' + listing.id + '</div>' +
+          '<div class="order-date">' + listing.date + ' · ' + listing.catLabel + '</div></div>' +
+        '<span class="tag-pill ' + st.pill + '">' + st.label + '</span>' +
+      '</div>' +
+      '<div class="order-items">' +
+        '<div class="cart-thumb tint-' + c.tint + '">' + c.emoji + '</div>' +
+        '<div class="order-summary-text">' + listing.summary + '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="shop-section-title">অবস্থা</div>' +
+    trackHTML(listing) +
+
+    '<div class="shop-section-title">পণ্যের তথ্য</div>' +
+    '<div class="info-block">' +
+      listing.fields.map(function(f){
+        return '<div class="info-row"><div class="info-label">' + f.label + '</div>' +
+               '<div class="info-value">' + f.value + '</div></div>';
+      }).join('') +
+    '</div>' +
+
+    '<div class="shop-section-title">যোগাযোগের তথ্য</div>' +
+    '<div class="info-block">' +
+      '<div class="info-row"><div class="info-label">বিক্রেতা</div>' +
+        '<div class="info-value strong">' +
+        (listing.seller.name || '—') +
+        (listing.seller.phone ? ' · ' + listing.seller.phone : '') + '</div></div>' +
+      '<div class="info-row"><div class="info-label">ঠিকানা</div>' +
+        '<div class="info-value">' + Listings.sellerLine(listing.seller) + '</div></div>' +
+      '<div class="info-row"><div class="info-label">পছন্দের সময়</div>' +
+        '<div class="info-value">' + (listing.seller.callTime || '—') + '</div></div>' +
+    '</div>' +
+
+    '<div class="action-stack">' +
+      (canCancel ? '<button class="calc-btn outline" style="color:var(--rust); border-color:var(--rust);" ' +
+                   'onclick="openCancel()">জমা বাতিল করুন</button>' : '') +
+      '<a class="calc-btn moss" href="index.html">আরও পণ্য জমা দিন</a>' +
+      '<a class="calc-btn outline" href="../buy/index.html">কেনাকাটা করুন</a>' +
+    '</div>' +
+    '<div style="height:14px;"></div>';
+}
+
+function openCancel(){ document.getElementById('cancel-modal').classList.add('open'); }
+function closeCancel(){ document.getElementById('cancel-modal').classList.remove('open'); }
+
+function confirmCancel(){
+  Listings.cancel(listing.id);
+  listing = Listings.byId(listing.id);
+  closeCancel();
+  render();
+  Shop.toast('জমা ' + listing.id + ' বাতিল হয়েছে', '✕');
+}
+
+render();
+</script>
+</body>
+</html>

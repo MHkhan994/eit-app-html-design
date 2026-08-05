@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — তথ্য জমা হয়েছে</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="plain-header"><a class="back-btn" href="index.html">←</a></div>
+
+      <div class="screen-body" id="body"></div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · কোনো তথ্য সত্যিকারে পাঠানো হয় না</div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script src="../assets/js/sell.js"></script>
+<script>
+Listings.seed();
+
+var listing = Listings.byId(Shop.qs('id')) || Listings.all()[0];
+var body = document.getElementById('body');
+
+if(!listing){
+  body.innerHTML =
+    '<div style="height:30px;"></div>' +
+    '<div class="empty-card"><div class="badge-circle badge-rust">🛒</div>' +
+      '<p>জমাটি খুঁজে পাওয়া যায়নি।</p>' +
+      '<div style="height:14px;"></div>' +
+      '<a class="calc-btn moss" href="index.html">নতুন করে জমা দিন</a></div>';
+} else {
+  var c = Listings.cat(listing.cat);
+
+  body.innerHTML =
+    '<div class="success-hero">' +
+      '<div class="success-ring">✓</div>' +
+      '<h1>তথ্য জমা হয়েছে!</h1>' +
+      '<p>আপনার ' + listing.catLabel + ' বিক্রির তথ্য আমরা পেয়েছি। যাচাই শেষে আমাদের প্রতিনিধি ' +
+        '<b>২৪ ঘণ্টার</b> মধ্যে আপনাকে কল করে দাম ও পিকআপ ঠিক করবেন।</p>' +
+      '<div class="order-no">' + listing.id + '</div>' +
+    '</div>' +
+
+    '<div class="shop-section-title" style="padding-top:22px;">পণ্যের তথ্য</div>' +
+    '<div class="info-block">' +
+      '<div class="info-row"><div class="info-label">ক্যাটাগরি</div>' +
+        '<div class="info-value strong">' + c.emoji + ' ' + listing.catLabel + '</div></div>' +
+      listing.fields.map(function(f){
+        return '<div class="info-row"><div class="info-label">' + f.label + '</div>' +
+               '<div class="info-value">' + f.value + '</div></div>';
+      }).join('') +
+    '</div>' +
+
+    '<div class="shop-section-title">যোগাযোগের তথ্য</div>' +
+    '<div class="info-block">' +
+      '<div class="info-row"><div class="info-label">বিক্রেতা</div>' +
+        '<div class="info-value strong">' +
+        (listing.seller.name || '—') +
+        (listing.seller.phone ? ' · ' + listing.seller.phone : '') + '</div></div>' +
+      '<div class="info-row"><div class="info-label">ঠিকানা</div>' +
+        '<div class="info-value">' + Listings.sellerLine(listing.seller) + '</div></div>' +
+      '<div class="info-row"><div class="info-label">পছন্দের সময়</div>' +
+        '<div class="info-value">' + (listing.seller.callTime || '—') + '</div></div>' +
+    '</div>' +
+
+    '<div class="action-stack">' +
+      '<a class="calc-btn moss" href="submission-detail.html?id=' + listing.id + '">অবস্থা দেখুন</a>' +
+      '<a class="calc-btn outline" href="index.html">আরও পণ্য জমা দিন</a>' +
+    '</div>' +
+    '<div style="height:14px;"></div>';
+}
+</script>
+</body>
+</html>

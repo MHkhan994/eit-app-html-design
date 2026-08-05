@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — আমার জমা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>আমার জমা</h1>
+      </div>
+
+      <div class="screen-body">
+        <div class="tabs">
+          <div class="tab active" onclick="setTab('all', this)">সব</div>
+          <div class="tab" onclick="setTab('active', this)">চলমান</div>
+          <div class="tab" onclick="setTab('done', this)">সম্পন্ন</div>
+          <div class="tab" onclick="setTab('cancelled', this)">বাতিল</div>
+        </div>
+
+        <div id="list"></div>
+
+        <div style="height:18px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · উদাহরণের জমা দুটি সাজানো</div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script src="../assets/js/sell.js"></script>
+<script>
+var activeTab = 'all';
+
+var EMPTY_TEXT = {
+  all:       'এখনো কোনো তথ্য জমা দেওয়া হয়নি।',
+  active:    'এই মুহূর্তে কোনো চলমান জমা নেই।',
+  done:      'এখনো কোনো বিক্রি সম্পন্ন হয়নি।',
+  cancelled: 'কোনো বাতিল হওয়া জমা নেই।'
+};
+
+function cardHTML(l){
+  var st = Listings.statusOf(l);
+  var c = Listings.cat(l.cat);
+
+  return '<a class="order-card" href="submission-detail.html?id=' + l.id + '">' +
+    '<div class="order-top">' +
+      '<div><div class="order-id">' + l.id + '</div>' +
+        '<div class="order-date">' + l.date + '</div></div>' +
+      '<span class="tag-pill ' + st.pill + '">' + st.label + '</span>' +
+    '</div>' +
+    '<div class="order-items">' +
+      '<div class="cart-thumb tint-' + c.tint + '">' + c.emoji + '</div>' +
+      '<div class="order-summary-text"><b>' + l.catLabel + '</b><br>' + l.summary + '</div>' +
+    '</div>' +
+    '<div class="order-foot">' +
+      '<span class="order-total" style="font-size:12.5px;">' + (l.seller.callTime || 'যেকোনো সময়') + ' কল</span>' +
+      '<span class="order-chev">বিস্তারিত ›</span>' +
+    '</div>' +
+  '</a>';
+}
+
+function render(){
+  var list = Listings.all().filter(function(l){
+    return activeTab === 'all' || Listings.statusOf(l).tab === activeTab;
+  });
+
+  document.getElementById('list').innerHTML = list.length
+    ? list.map(cardHTML).join('')
+    : '<div class="empty-card"><div class="badge-circle badge-gold">🛒</div>' +
+      '<p>' + EMPTY_TEXT[activeTab] + '</p>' +
+      '<div style="height:14px;"></div>' +
+      '<a class="calc-btn moss" href="index.html">পণ্য জমা দিন</a></div>';
+}
+
+function setTab(tab, el){
+  activeTab = tab;
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  render();
+}
+
+Listings.seed();
+render();
+</script>
+</body>
+</html>
