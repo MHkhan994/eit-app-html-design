@@ -27,17 +27,22 @@
       </div>
 
       <div class="screen-body">
-        <div class="comm-hero">
-          <h1>খামারের সরঞ্জাম ও ফিড</h1>
-          <p>যাচাই করা বিক্রেতার কাছ থেকে সরাসরি কিনুন — সারা দেশে ডেলিভারি</p>
+        <div class="shop-slider">
+          <div class="slide-track" id="slide-track"></div>
+          <div class="slide-dots" id="slide-dots"></div>
         </div>
 
-        <div class="search-bar shop-search">
-          <span class="search-icon">🔍</span>
-          <input class="calc-input" id="shop-search" type="text" placeholder="পণ্য খুঁজুন…" oninput="renderGrid()">
+        <div class="search-row shop-search">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input class="calc-input" id="shop-search" type="text" placeholder="পণ্য খুঁজুন…" oninput="renderGrid()">
+          </div>
+          <button class="filter-btn" id="filter-btn" onclick="openFilter()" title="ফিল্টার">
+            🎚️<span class="fb-dot"></span>
+          </button>
         </div>
 
-        <div class="capa-chip-row" id="cat-row"></div>
+        <div class="filter-bar" id="filter-bar"></div>
 
         <div class="prod-grid" id="prod-grid"></div>
 
@@ -47,6 +52,23 @@
         </div>
 
         <div style="height:18px;"></div>
+      </div>
+
+      <!-- Category filter drawer — the same .sheet component the Community
+           post menu uses, rather than a centred dialog. -->
+      <div class="sheet-overlay" id="filter-sheet" onclick="filterBackdrop(event)">
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <div class="sheet-head">
+            <div class="badge-circle sm badge-moss">🎚️</div>
+            <div>
+              <div class="sheet-title">ক্যাটাগরি ফিল্টার</div>
+              <div class="sheet-sub">একটি ক্যাটাগরি বেছে নিন</div>
+            </div>
+          </div>
+          <div class="filter-grid" id="filter-grid"></div>
+          <button class="sheet-cancel" onclick="closeFilter()">বন্ধ করুন</button>
+        </div>
       </div>
 
       <div class="toast" id="toast"></div>
@@ -67,19 +89,98 @@
 <script>
 var activeCat = 'all';
 
-function renderChips(){
-  document.getElementById('cat-row').innerHTML = Shop.CATEGORIES.map(function(c){
+/* ── Promo slider ────────────────────────────────────────────────────────────
+   Each slide drops you into the catalog already filtered to what it advertises,
+   so the banner is a real entry point rather than decoration. */
+var SLIDES = [
+  { cat:'chick', emoji:'🐣', bg:'linear-gradient(135deg,var(--moss),var(--moss-dark))',
+    title:'নতুন ব্যাচের বাচ্চা এখন স্টকে', sub:'Cobb 500 · Ross 308 · সোনালী · Hy-Line Brown' },
+  { cat:'all', emoji:'🚚', bg:'linear-gradient(135deg,var(--gold),#C8862A)', ink:true,
+    title:'৳5,000+ অর্ডারে ফ্রি ডেলিভারি', sub:'সারা দেশে, রেগুলার ডেলিভারিতে প্রযোজ্য' },
+  { cat:'vaccine', emoji:'💉', bg:'linear-gradient(135deg,var(--rust),#9C3F23)',
+    title:'ভ্যাকসিন কোল্ড-চেইনে ডেলিভারি', sub:'২–৮°সে বজায় রেখে সরাসরি খামারে' },
+  { cat:'feed', emoji:'🌾', bg:'linear-gradient(135deg,var(--moss-dark),#1F3B2C)',
+    title:'ফিড ও সাপ্লিমেন্টে ছাড়', sub:'নির্বাচিত পণ্যে ১৫% পর্যন্ত সাশ্রয়' }
+];
+
+var slideIdx = 0, slideTimer = null;
+
+function renderSlides(){
+  document.getElementById('slide-track').innerHTML = SLIDES.map(function(s){
+    return '<a class="shop-slide' + (s.ink ? ' ink' : '') + '" style="background:' + s.bg +
+        ';" href="#" onclick="slideTap(\'' + s.cat + '\'); return false;">' +
+      '<div class="slide-circle"></div>' +
+      '<div class="slide-emoji">' + s.emoji + '</div>' +
+      '<div class="slide-text"><h3>' + s.title + '</h3><p>' + s.sub + '</p></div>' +
+    '</a>';
+  }).join('');
+  document.getElementById('slide-dots').innerHTML =
+    SLIDES.map(function(_, i){ return '<div class="dot' + (i === 0 ? ' active' : '') + '"></div>'; }).join('');
+}
+
+function paintDots(){
+  document.querySelectorAll('#slide-dots .dot').forEach(function(d, i){
+    d.classList.toggle('active', i === slideIdx);
+  });
+}
+
+function goSlide(i){
+  var t = document.getElementById('slide-track');
+  slideIdx = (i + SLIDES.length) % SLIDES.length;
+  t.scrollTo({ left: slideIdx * (t.clientWidth + 12), behavior:'smooth' });
+  paintDots();
+}
+
+function autoSlide(){
+  clearInterval(slideTimer);
+  slideTimer = setInterval(function(){ goSlide(slideIdx + 1); }, 4500);
+}
+
+function slideTap(cat){
+  setCat(cat);
+  document.getElementById('prod-grid').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+/* Manual swipes drive the dots too, and push the auto-advance back. */
+function watchSlides(){
+  var t = document.getElementById('slide-track'), settle = null;
+  t.addEventListener('scroll', function(){
+    clearTimeout(settle);
+    settle = setTimeout(function(){
+      var i = Math.round(t.scrollLeft / (t.clientWidth + 12));
+      if(i !== slideIdx){ slideIdx = Math.max(0, Math.min(SLIDES.length - 1, i)); paintDots(); }
+      autoSlide();
+    }, 90);
+  });
+}
+
+/* ── Filter drawer ── */
+function catCount(key){
+  return Shop.PRODUCTS.filter(function(p){ return key === 'all' || p.cat === key; }).length;
+}
+
+function renderFilterGrid(){
+  document.getElementById('filter-grid').innerHTML = Shop.CATEGORIES.map(function(c){
     return '<button class="filter-chip' + (c.key === activeCat ? ' active' : '') +
-           '" onclick="setCat(\'' + c.key + '\')">' + c.label + '</button>';
+           '" onclick="setCat(\'' + c.key + '\', true)">' + c.label +
+           '<span class="fc-count">' + catCount(c.key) + '</span></button>';
   }).join('');
 }
 
-function setCat(key){
+function openFilter(){
+  renderFilterGrid();
+  document.getElementById('filter-sheet').classList.add('open');
+}
+function closeFilter(){ document.getElementById('filter-sheet').classList.remove('open'); }
+function filterBackdrop(e){ if(e.target.id === 'filter-sheet') closeFilter(); }
+
+function setCat(key, fromSheet){
   activeCat = key;
-  renderChips();
+  if(fromSheet) closeFilter();
   renderGrid();
 }
 
+/* ── Grid ── */
 function cardHTML(p){
   var off = p.old > p.price ? Math.round((1 - p.price / p.old) * 100) : 0;
   var href = 'product.html?id=' + p.id;
@@ -89,7 +190,10 @@ function cardHTML(p){
     '<div class="prod-body">' +
       '<a class="prod-link" href="' + href + '">' +
         '<div class="prod-name">' + p.name + '</div>' +
-        '<div class="prod-unit">প্রতি ' + p.unit + '</div>' +
+        '<div class="prod-unit">প্রতি ' + p.unit +
+          /* Live-bird lines sell by the batch — say so before ＋ quietly drops
+             500 chicks in the cart. */
+          (Shop.minQty(p) > 1 ? ' · ন্যূনতম ' + Shop.minQty(p) : '') + '</div>' +
         '<div class="prod-price-row"><span class="prod-price">' + Shop.money(p.price) + '</span>' +
           (p.old > p.price ? '<span class="prod-price-old">' + Shop.money(p.old) + '</span>' : '') +
         '</div>' +
@@ -106,18 +210,36 @@ function renderGrid(){
                      p.brand.toLowerCase().indexOf(q) !== -1;
     return catHit && qHit;
   });
+
   document.getElementById('prod-grid').innerHTML = list.map(cardHTML).join('');
   document.getElementById('empty').style.display = list.length ? 'none' : 'block';
+
+  /* With the chips hidden in the drawer, this line is the only thing telling
+     you a filter is on — and the only way to clear it without reopening it. */
+  var label = '';
+  Shop.CATEGORIES.forEach(function(c){ if(c.key === activeCat) label = c.label; });
+  document.getElementById('filter-bar').innerHTML =
+    (activeCat === 'all'
+      ? ''
+      : '<span class="filter-tag">' + label +
+        '<button onclick="setCat(\'all\')" title="ফিল্টার সরান">✕</button></span>') +
+    '<span class="result-count">' + list.length + 'টি পণ্য</span>';
+
+  document.getElementById('filter-btn').classList.toggle('on', activeCat !== 'all');
 }
 
 function addToCart(id){
-  Cart.add(id, 1);
+  var p = Shop.byId(id);
+  var n = Shop.minQty(p);
+  Cart.add(id, n);
   Shop.paintBadge();
-  Shop.toast(Shop.byId(id).name + ' কার্টে যোগ হয়েছে', '🛒');
+  Shop.toast((n > 1 ? n + ' ' + p.unit + ' ' : '') + p.name + ' কার্টে যোগ হয়েছে', '🛒');
 }
 
 Orders.seed();
-renderChips();
+renderSlides();
+watchSlides();
+autoSlide();
 renderGrid();
 Shop.paintBadge();
 </script>

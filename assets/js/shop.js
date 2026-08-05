@@ -168,19 +168,135 @@ var Shop = (function(){
       brand:'BioGuard', rating:4.7, reviews:49, stock:95,
       desc:'অন্ত্রের উপকারী ব্যাকটেরিয়া বাড়ায়, ফলে হজম ভালো হয় ও অ্যান্টিবায়োটিকের প্রয়োজন কমে।',
       specs:[['মাত্রা','৫০০ গ্রাম / টন ফিড'],['ফর্ম','পাউডার'],['প্যাক','১ কেজি'],['মেয়াদ','১৮ মাস']],
-      seller:{ name:'BioGuard এগ্রো', initials:'BG', tint:'rust', verified:true, loc:'চট্টগ্রাম' } }
+      seller:{ name:'BioGuard এগ্রো', initials:'BG', tint:'rust', verified:true, loc:'চট্টগ্রাম' } },
+
+    /* ── বাচ্চা / day-old chicks ──
+       Breeds are the ones this app already names elsewhere (Cobb 500 and Ross
+       308 on the broiler standard-data screens, Hy-Line Brown on layer, Color
+       SA51A on Sonali, Muscovy on duck) rather than new ones, and the prices
+       track Home's market row: IR ৩৪৳ / Color ৬০৳ / Layer ৩০৳. Sold per bird
+       with a minimum order, the way a hatchery actually books them. */
+    { id:'chick-broiler-cobb', minQty:500, step:100, name:'ব্রয়লার ডে-ওল্ড বাচ্চা (Cobb 500)', group:'livestock', cat:'chick',
+      price:34, old:38, unit:'বাচ্চা', emoji:'🐣', tint:'gold',
+      brand:'Cobb 500', rating:4.6, reviews:212, stock:12000,
+      desc:'হ্যাচারি থেকে সরাসরি সরবরাহ করা ব্রয়লার ডে-ওল্ড বাচ্চা। হ্যাচারিতেই Marek\'s ভ্যাকসিন দেওয়া থাকে। ন্যূনতম 500টি বাচ্চার অর্ডার নেওয়া হয়।',
+      specs:[['জাত','Cobb 500'],['বয়স','১ দিন'],['গড় ওজন','৪০–৪৫ গ্রাম'],['ন্যূনতম অর্ডার','500 বাচ্চা']],
+      seller:{ name:'ETI হ্যাচারি', initials:'EH', tint:'moss', verified:true, loc:'গাজীপুর' } },
+
+    { id:'chick-broiler-ross', minQty:500, step:100, name:'ব্রয়লার ডে-ওল্ড বাচ্চা (Ross 308)', group:'livestock', cat:'chick',
+      price:36, old:0, unit:'বাচ্চা', emoji:'🐣', tint:'rust',
+      brand:'Ross 308', rating:4.5, reviews:167, stock:9000,
+      desc:'Ross 308 লাইনের ডে-ওল্ড ব্রয়লার বাচ্চা। সমান ওজনের ব্যাচ, হ্যাচারিতে Marek\'s ভ্যাকসিন করা। ন্যূনতম 500টি বাচ্চার অর্ডার নেওয়া হয়।',
+      specs:[['জাত','Ross 308'],['বয়স','১ দিন'],['গড় ওজন','৪০–৪৪ গ্রাম'],['ন্যূনতম অর্ডার','500 বাচ্চা']],
+      seller:{ name:'ETI হ্যাচারি', initials:'EH', tint:'moss', verified:true, loc:'গাজীপুর' } },
+
+    { id:'chick-sonali', minQty:300, step:100, name:'সোনালী / কালার ডে-ওল্ড বাচ্চা (SA51A)', group:'livestock', cat:'chick',
+      price:60, old:66, unit:'বাচ্চা', emoji:'🐤', tint:'moss',
+      brand:'Color SA51A', rating:4.7, reviews:189, stock:7500,
+      desc:'সোনালী (কালার) ডে-ওল্ড বাচ্চা। দেশি বাজারে চাহিদা বেশি, রোগ প্রতিরোধ ক্ষমতা তুলনামূলক ভালো। ন্যূনতম 300টি বাচ্চার অর্ডার নেওয়া হয়।',
+      specs:[['জাত','Color (SA51A)'],['বয়স','১ দিন'],['গড় ওজন','৩৪–৩৮ গ্রাম'],['ন্যূনতম অর্ডার','300 বাচ্চা']],
+      seller:{ name:'ETI হ্যাচারি', initials:'EH', tint:'moss', verified:true, loc:'গাজীপুর' } },
+
+    { id:'chick-layer', minQty:500, step:100, name:'লেয়ার ডে-ওল্ড বাচ্চা (Hy-Line Brown)', group:'livestock', cat:'chick',
+      price:30, old:35, unit:'বাচ্চা', emoji:'🐥', tint:'gold',
+      brand:'Hy-Line Brown', rating:4.6, reviews:143, stock:8200,
+      desc:'Hy-Line Brown লেয়ার ডে-ওল্ড বাচ্চা, সেক্সড ফিমেল। হ্যাচারিতে Marek\'s ভ্যাকসিন করা। ন্যূনতম 500টি বাচ্চার অর্ডার নেওয়া হয়।',
+      specs:[['জাত','Hy-Line Brown'],['বয়স','১ দিন'],['সেক্সিং','ফিমেল'],['ন্যূনতম অর্ডার','500 বাচ্চা']],
+      seller:{ name:'ETI হ্যাচারি', initials:'EH', tint:'moss', verified:true, loc:'গাজীপুর' } },
+
+    { id:'chick-duck', minQty:100, step:50, name:'হাঁসের বাচ্চা (Muscovy Duck)', group:'livestock', cat:'chick',
+      price:55, old:0, unit:'বাচ্চা', emoji:'🦆', tint:'rust',
+      brand:'Muscovy Duck', rating:4.3, reviews:58, stock:2400,
+      desc:'Muscovy জাতের হাঁসের বাচ্চা। মাংস ও ডিম দুই উদ্দেশ্যেই পালন করা যায়। ন্যূনতম 100টি বাচ্চার অর্ডার নেওয়া হয়।',
+      specs:[['জাত','Muscovy Duck'],['বয়স','১ দিন'],['গড় ওজন','৪৫–৫০ গ্রাম'],['ন্যূনতম অর্ডার','100 বাচ্চা']],
+      seller:{ name:'ETI হ্যাচারি', initials:'EH', tint:'moss', verified:true, loc:'গাজীপুর' } },
+
+    /* ── লেয়ার পুলেট / grown pullets ── priced per bird, vaccinated to age */
+    { id:'pullet-layer-16', minQty:50, step:10, name:'লেয়ার পুলেট ১৬ সপ্তাহ (রেডি-টু-লে)', group:'livestock', cat:'pullet',
+      price:420, old:465, unit:'পাখি', emoji:'🐔', tint:'moss',
+      brand:'Hy-Line Brown', rating:4.7, reviews:74, stock:1800,
+      desc:'১৬ সপ্তাহ বয়সী রেডি-টু-লে লেয়ার পুলেট — বয়স অনুযায়ী পূর্ণ ভ্যাকসিন সিডিউল সম্পন্ন। শেডে তুলেই ২–৩ সপ্তাহের মধ্যে উৎপাদন শুরু হয়।',
+      specs:[['জাত','Hy-Line Brown'],['বয়স','১৬ সপ্তাহ'],['গড় ওজন','১.৩৫–১.৪৫ কেজি'],['ভ্যাকসিন','সিডিউল সম্পন্ন']],
+      seller:{ name:'সবুজ পোলট্রি ফার্ম', initials:'SP', tint:'gold', verified:true, loc:'ময়মনসিংহ' } },
+
+    { id:'pullet-layer-12', minQty:50, step:10, name:'লেয়ার পুলেট ১২ সপ্তাহ', group:'livestock', cat:'pullet',
+      price:310, old:0, unit:'পাখি', emoji:'🐔', tint:'gold',
+      brand:'Hy-Line Brown', rating:4.5, reviews:46, stock:2200,
+      desc:'১২ সপ্তাহ বয়সী গ্রোয়িং পুলেট। নিজের শেডে বাকি রিয়ারিং করে নিলে রেডি-টু-লে কেনার চেয়ে খরচ কম পড়ে।',
+      specs:[['জাত','Hy-Line Brown'],['বয়স','১২ সপ্তাহ'],['গড় ওজন','১.০৫–১.১৫ কেজি'],['ভ্যাকসিন','বয়স পর্যন্ত সম্পন্ন']],
+      seller:{ name:'সবুজ পোলট্রি ফার্ম', initials:'SP', tint:'gold', verified:true, loc:'ময়মনসিংহ' } },
+
+    { id:'pullet-sonali-8', minQty:50, step:10, name:'সোনালী পুলেট ৮ সপ্তাহ', group:'livestock', cat:'pullet',
+      price:185, old:210, unit:'পাখি', emoji:'🐓', tint:'rust',
+      brand:'Color SA51A', rating:4.4, reviews:39, stock:1500,
+      desc:'৮ সপ্তাহ বয়সী সোনালী পুলেট। ব্রুডিং পর্ব শেষ, ফলে মর্টালিটির ঝুঁকি অনেক কম।',
+      specs:[['জাত','Color (SA51A)'],['বয়স','৮ সপ্তাহ'],['গড় ওজন','৬৫০–৭৫০ গ্রাম'],['ভ্যাকসিন','বয়স পর্যন্ত সম্পন্ন']],
+      seller:{ name:'সবুজ পোলট্রি ফার্ম', initials:'SP', tint:'gold', verified:true, loc:'ময়মনসিংহ' } },
+
+    /* ── ভ্যাকসিন ──
+       Only the vaccines this app's own Vaccination Schedule module already
+       names (ND Live, ND Killed, IBD Live, IB Live, Marek's, Fowl Pox), with
+       the routes it records where it records them. Every description defers
+       the actual dosing to the vial insert — a mockup should not be the thing
+       a farmer doses from. */
+    { id:'vac-nd-live', name:'ND Live ভ্যাকসিন (রানীক্ষেত)', group:'vaccine', cat:'vaccine',
+      price:180, old:210, unit:'ভায়াল', emoji:'💉', tint:'gold',
+      brand:'BioVet', rating:4.7, reviews:126, stock:340,
+      desc:'রানীক্ষেত (Newcastle) রোগ প্রতিরোধে লাইভ ভ্যাকসিন। সাধারণত চোখে ড্রপ হিসেবে দেওয়া হয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','১০০০ ডোজ / ভায়াল'],['প্রয়োগ','চোখে ড্রপ'],['সংরক্ষণ','২–৮°সে'],['ধরন','লাইভ']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } },
+
+    { id:'vac-nd-killed', name:'ND Killed ভ্যাকসিন (রানীক্ষেত)', group:'vaccine', cat:'vaccine',
+      price:650, old:0, unit:'ভায়াল', emoji:'💉', tint:'rust',
+      brand:'BioVet', rating:4.6, reviews:71, stock:180,
+      desc:'দীর্ঘমেয়াদি সুরক্ষার জন্য রানীক্ষেতের কিল্ড (ইনঅ্যাক্টিভেটেড) ভ্যাকসিন। ইনজেকশনের মাধ্যমে দেওয়া হয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','৫০০ ডোজ / ভায়াল'],['প্রয়োগ','ইনজেকশন'],['সংরক্ষণ','২–৮°সে, জমাবেন না'],['ধরন','কিল্ড']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } },
+
+    { id:'vac-ibd-live', name:'IBD Live ভ্যাকসিন (গামবোরো)', group:'vaccine', cat:'vaccine',
+      price:320, old:360, unit:'ভায়াল', emoji:'🧫', tint:'moss',
+      brand:'BioVet', rating:4.6, reviews:98, stock:265,
+      desc:'গামবোরো (Infectious Bursal Disease) প্রতিরোধে লাইভ ভ্যাকসিন। মেটারনাল অ্যান্টিবডি অনুযায়ী সঠিক দিনে দেওয়াটাই মূল বিষয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','১০০০ ডোজ / ভায়াল'],['প্রয়োগ','খাবার পানি / চোখে ড্রপ'],['সংরক্ষণ','২–৮°সে'],['ধরন','লাইভ']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } },
+
+    { id:'vac-ib-live', name:'IB Live ভ্যাকসিন (ব্রংকাইটিস)', group:'vaccine', cat:'vaccine',
+      price:260, old:0, unit:'ভায়াল', emoji:'💉', tint:'gold',
+      brand:'BioVet', rating:4.5, reviews:64, stock:210,
+      desc:'ইনফেকশাস ব্রংকাইটিস (IB) প্রতিরোধে লাইভ ভ্যাকসিন। সাধারণত চোখে ড্রপ হিসেবে দেওয়া হয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','১০০০ ডোজ / ভায়াল'],['প্রয়োগ','চোখে ড্রপ'],['সংরক্ষণ','২–৮°সে'],['ধরন','লাইভ']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } },
+
+    { id:'vac-marek', name:"Marek's ভ্যাকসিন", group:'vaccine', cat:'vaccine',
+      price:850, old:940, unit:'ভায়াল', emoji:'🧫', tint:'rust',
+      brand:'BioVet', rating:4.8, reviews:52, stock:90,
+      desc:'মারেক্স ডিজিজ প্রতিরোধে ভ্যাকসিন — হ্যাচারিতে একদিন বয়সে সাবকিউটেনিয়াস ইনজেকশনে দেওয়া হয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','১০০০ ডোজ / ভায়াল'],['প্রয়োগ','SC ইনজেকশন'],['সংরক্ষণ','লিকুইড নাইট্রোজেন / ২–৮°সে'],['বয়স','১ দিন']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } },
+
+    { id:'vac-fowl-pox', name:'Fowl Pox ভ্যাকসিন (বসন্ত)', group:'vaccine', cat:'vaccine',
+      price:240, old:275, unit:'ভায়াল', emoji:'💉', tint:'moss',
+      brand:'BioVet', rating:4.4, reviews:43, stock:155,
+      desc:'ফাউল পক্স (বসন্ত) প্রতিরোধে লাইভ ভ্যাকসিন। উইং ওয়েব পদ্ধতিতে দেওয়া হয়। প্রয়োগের আগে ভায়ালের নির্দেশিকা দেখে নিন।',
+      specs:[['ডোজ','১০০০ ডোজ / ভায়াল'],['প্রয়োগ','উইং ওয়েব'],['সংরক্ষণ','২–৮°সে'],['ধরন','লাইভ']],
+      seller:{ name:'বায়োভেট ফার্মা', initials:'BV', tint:'indigo', verified:true, loc:'ঢাকা' } }
   ];
 
+  /* Live birds and consumables lead — those are the repeat purchases. Hardware
+     is bought once a cycle, so it sits after them. */
   var CATEGORIES = [
     { key:'all',        label:'সব' },
+    { key:'chick',      label:'বাচ্চা' },
+    { key:'pullet',     label:'লেয়ার পুলেট' },
+    { key:'feed',       label:'ফিড' },
+    { key:'supplement', label:'সাপ্লিমেন্ট' },
+    { key:'vaccine',    label:'ভ্যাকসিন' },
     { key:'feeder',     label:'ফিডার' },
     { key:'drinker',    label:'ড্রিংকার' },
     { key:'brooder',    label:'ব্রুডার' },
     { key:'incubator',  label:'ইনকিউবেটর' },
     { key:'cage',       label:'খাঁচা' },
-    { key:'tools',      label:'যন্ত্রপাতি' },
-    { key:'feed',       label:'ফিড' },
-    { key:'supplement', label:'সাপ্লিমেন্ট' }
+    { key:'tools',      label:'যন্ত্রপাতি' }
   ];
 
   /* Delivery. Regular is waived once the basket clears the free-shipping floor. */
@@ -279,10 +395,12 @@ var Shop = (function(){
     toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2200);
   }
 
+  /* The badge counts distinct lines, not units — a 500-chick order would put
+     "500" inside a 17px bubble. */
   function paintBadge(){
-    var n = Cart.count();
+    var n = Cart.lineCount();
     document.querySelectorAll('.cart-count').forEach(function(el){
-      el.textContent = n;
+      el.textContent = n > 99 ? '99+' : n;
       el.style.display = n > 0 ? 'flex' : 'none';
     });
   }
@@ -292,12 +410,25 @@ var Shop = (function(){
     return '<div class="' + (cls || 'prod-thumb') + ' tint-' + p.tint + '">' + p.emoji + '</div>';
   }
 
+  /* Live birds are booked by the batch, not one at a time — a chick line that
+     says "ন্যূনতম ৫০০ বাচ্চা" has to be orderable at 500, stepping by 100.
+     Hardware and consumables fall back to the plain 1-at-a-time default. */
+  var MAX_QTY = 20000;
+  function minQty(p){ return (p && p.minQty) || 1; }
+  function stepQty(p){ return (p && p.step) || 1; }
+  function clampQty(p, n){
+    var lo = minQty(p);
+    n = parseInt(n, 10) || lo;
+    return Math.min(MAX_QTY, Math.max(lo, n));
+  }
+
   return {
     PRODUCTS: PRODUCTS, CATEGORIES: CATEGORIES,
     SHIPPING: SHIPPING, PAYMENTS: PAYMENTS, FREE_DELIVERY_OVER: FREE_DELIVERY_OVER,
     byId: byId, money: money, qs: qs, stars: stars,
     bnNum: bnNum, dateLabel: dateLabel, dateInDays: dateInDays,
     toast: toast, paintBadge: paintBadge, thumb: thumb,
+    minQty: minQty, stepQty: stepQty, clampQty: clampQty, MAX_QTY: MAX_QTY,
     readJSON: readJSON, writeJSON: writeJSON
   };
 })();
@@ -313,28 +444,34 @@ var Cart = (function(){
     var raw = Shop.readJSON(KEY, []);
     if(!Array.isArray(raw)) return [];
     return raw.filter(function(l){ return l && Shop.byId(l.id) && l.qty > 0; })
-              .map(function(l){ return { id:l.id, qty:Math.min(99, Math.max(1, parseInt(l.qty, 10) || 1)) }; });
+              .map(function(l){ return { id:l.id, qty:Shop.clampQty(Shop.byId(l.id), l.qty) }; });
   }
 
   function write(items){ Shop.writeJSON(KEY, items); }
 
   function add(id, qty){
-    if(!Shop.byId(id)) return;
-    var n = Math.max(1, parseInt(qty, 10) || 1);
+    var p = Shop.byId(id);
+    if(!p) return;
+    var n = Shop.clampQty(p, qty);
     var items = read(), found = false;
     for(var i = 0; i < items.length; i++){
-      if(items[i].id === id){ items[i].qty = Math.min(99, items[i].qty + n); found = true; break; }
+      if(items[i].id === id){
+        items[i].qty = Math.min(Shop.MAX_QTY, items[i].qty + n); found = true; break;
+      }
     }
-    if(!found) items.push({ id:id, qty:Math.min(99, n) });
+    if(!found) items.push({ id:id, qty:n });
     write(items);
   }
 
+  /* Below the product's minimum there is no valid quantity, so the caller is
+     told to drop the line rather than being silently snapped back up to it. */
   function setQty(id, qty){
-    var n = parseInt(qty, 10) || 0;
-    if(n < 1) return remove(id);
+    var p = Shop.byId(id);
+    if(!p) return;
+    if((parseInt(qty, 10) || 0) < Shop.minQty(p)) return remove(id);
     var items = read();
     for(var i = 0; i < items.length; i++){
-      if(items[i].id === id){ items[i].qty = Math.min(99, n); break; }
+      if(items[i].id === id){ items[i].qty = Shop.clampQty(p, qty); break; }
     }
     write(items);
   }
@@ -346,6 +483,8 @@ var Cart = (function(){
   function count(){
     return read().reduce(function(sum, l){ return sum + l.qty; }, 0);
   }
+
+  function lineCount(){ return read().length; }
 
   function subtotal(){
     return read().reduce(function(sum, l){
@@ -359,7 +498,8 @@ var Cart = (function(){
     return read().map(function(l){
       var p = Shop.byId(l.id);
       return { id:p.id, name:p.name, emoji:p.emoji, tint:p.tint, unit:p.unit,
-               price:p.price, qty:l.qty, total:p.price * l.qty };
+               price:p.price, qty:l.qty, total:p.price * l.qty,
+               minQty:Shop.minQty(p), step:Shop.stepQty(p) };
     });
   }
 
@@ -372,7 +512,8 @@ var Cart = (function(){
   function clear(){ write([]); }
 
   return { read:read, write:write, add:add, setQty:setQty, remove:remove,
-           count:count, subtotal:subtotal, lines:lines, shippingFee:shippingFee, clear:clear };
+           count:count, lineCount:lineCount, subtotal:subtotal, lines:lines,
+           shippingFee:shippingFee, clear:clear };
 })();
 
 

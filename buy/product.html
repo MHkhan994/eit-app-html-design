@@ -35,7 +35,8 @@
 <script src="../assets/js/shop.js"></script>
 <script>
 var product = Shop.byId(Shop.qs('id')) || Shop.PRODUCTS[0];
-var qty = 1;
+/* Live-bird lines open at their batch minimum, not at 1. */
+var qty = Shop.minQty(product);
 
 function specRows(p){
   return p.specs.map(function(s){
@@ -96,7 +97,11 @@ function render(){
     '</div>' +
 
     '<div class="qty-row">' +
-      '<span class="qty-label">পরিমাণ</span>' +
+      '<span class="qty-label">পরিমাণ' +
+        (Shop.minQty(p) > 1
+          ? '<small>ন্যূনতম ' + Shop.minQty(p) + ' ' + p.unit + ', ' + Shop.stepQty(p) + ' করে</small>'
+          : '') +
+      '</span>' +
       '<div class="qty-stepper">' +
         '<button class="qty-btn" onclick="bump(-1)">−</button>' +
         '<span class="qty-val" id="qty">' + qty + '</span>' +
@@ -130,7 +135,7 @@ function render(){
 }
 
 function bump(d){
-  qty = Math.min(99, Math.max(1, qty + d));
+  qty = Shop.clampQty(product, qty + d * Shop.stepQty(product));
   document.getElementById('qty').textContent = qty;
 }
 
