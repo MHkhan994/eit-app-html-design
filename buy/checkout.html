@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — চেকআউট</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="cart.html">←</a>
+        <h1>চেকআউট</h1>
+      </div>
+
+      <div class="screen-body">
+        <div id="empty" style="display:none;">
+          <div style="height:40px;"></div>
+          <div class="empty-card">
+            <div class="badge-circle badge-gold">🛒</div>
+            <p>কার্টে কোনো পণ্য নেই, তাই চেকআউট করা যাচ্ছে না।</p>
+            <div style="height:14px;"></div>
+            <a class="calc-btn moss" href="index.html">কেনাকাটা শুরু করুন</a>
+          </div>
+        </div>
+
+        <div id="flow">
+          <div class="shop-section-title" style="padding-top:14px;">ডেলিভারি ঠিকানা</div>
+
+          <label class="addr-card">
+            <input type="radio" name="addr" checked>
+            <div class="addr-body">
+              <div class="addr-name" id="sa-name"></div>
+              <div class="addr-text" id="sa-text"></div>
+            </div>
+          </label>
+
+          <button class="addr-toggle" onclick="toggleNewAddr()">＋ নতুন ঠিকানা যোগ করুন</button>
+
+          <!-- Inputs stay empty placeholders; the saved card above is the
+               pre-filled example data. -->
+          <div class="calc-card" id="new-addr" style="display:none; margin-top:0;">
+            <div class="calc-field"><label>প্রাপকের নাম</label>
+              <input class="calc-input" type="text" placeholder="যেমন: মোঃ রফিকুল ইসলাম"></div>
+            <div class="calc-field"><label>মোবাইল নম্বর</label>
+              <input class="calc-input" type="tel" placeholder="০১৭XXXXXXXX"></div>
+            <div class="field-row">
+              <div class="fr-col"><div class="calc-field"><label>জেলা</label>
+                <select class="calc-input calc-select">
+                  <option value="">নির্বাচন করুন</option>
+                  <option>ঢাকা</option><option>চট্টগ্রাম</option><option>রাজশাহী</option>
+                  <option>খুলনা</option><option>বরিশাল</option><option>সিলেট</option>
+                  <option>রংপুর</option><option>ময়মনসিংহ</option>
+                </select></div></div>
+              <div class="fr-col"><div class="calc-field"><label>উপজেলা</label>
+                <input class="calc-input" type="text" placeholder="যেমন: সাভার"></div></div>
+            </div>
+            <div class="calc-field"><label>বিস্তারিত ঠিকানা</label>
+              <textarea class="calc-input" rows="3" placeholder="বাড়ি, রোড, ব্লক, গ্রাম / এলাকা"></textarea></div>
+            <button class="calc-btn moss" onclick="saveNewAddr()">ঠিকানা সংরক্ষণ করুন</button>
+          </div>
+
+          <div class="shop-section-title">ডেলিভারি অপশন</div>
+          <div class="pay-list" id="ship-list"></div>
+
+          <div class="shop-section-title">পেমেন্ট মাধ্যম</div>
+          <div class="pay-list" id="pay-list"></div>
+
+          <div class="shop-section-title">অর্ডার সামারি</div>
+          <div class="calc-results" id="summary"></div>
+
+          <div style="height:8px;"></div>
+        </div>
+      </div>
+
+      <div class="buy-bar" id="bar" style="display:none;">
+        <div class="bar-total"><span>সর্বমোট</span><b id="bar-total">৳0</b></div>
+        <button class="calc-btn moss" onclick="placeOrder()">অর্ডার নিশ্চিত করুন</button>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+var ship = 'regular';
+var pay = 'cod';
+
+function renderShip(){
+  var sub = Cart.subtotal();
+  document.getElementById('ship-list').innerHTML =
+    ['regular', 'express'].map(function(k){
+      var o = Shop.SHIPPING[k];
+      var fee = Cart.shippingFee(k, sub);
+      return '<label class="pay-option' + (ship === k ? ' on' : '') + '" onclick="setShip(\'' + k + '\')">' +
+        '<input type="radio" name="ship"' + (ship === k ? ' checked' : '') + '>' +
+        '<span class="pay-ico">' + o.ico + '</span>' +
+        '<span class="pay-body"><span class="pay-name">' + o.label + '</span>' +
+          '<span class="pay-sub">' + o.sub + ' · আনুমানিক ' +
+          Shop.dateInDays(k === 'express' ? 2 : 5) + '</span></span>' +
+        '<span class="pay-fee">' + (fee === 0 ? 'ফ্রি' : Shop.money(fee)) + '</span>' +
+      '</label>';
+    }).join('');
+}
+
+function renderPay(){
+  document.getElementById('pay-list').innerHTML = Shop.PAYMENTS.map(function(o){
+    return '<label class="pay-option' + (pay === o.key ? ' on' : '') + '" onclick="setPay(\'' + o.key + '\')">' +
+      '<input type="radio" name="pay"' + (pay === o.key ? ' checked' : '') + '>' +
+      '<span class="pay-ico">' + o.ico + '</span>' +
+      '<span class="pay-body"><span class="pay-name">' + o.label + '</span>' +
+        '<span class="pay-sub">' + o.sub + '</span></span>' +
+    '</label>';
+  }).join('');
+}
+
+function renderSummary(){
+  var lines = Cart.lines();
+  var sub = Cart.subtotal();
+  var fee = Cart.shippingFee(ship, sub);
+  var total = sub + fee;
+
+  document.getElementById('summary').innerHTML =
+    lines.map(function(l){
+      return '<div class="calc-result-row"><span class="label">' + l.name +
+             ' <b style="color:var(--text-secondary); font-weight:600;">× ' + l.qty + '</b></span>' +
+             '<span class="value">' + Shop.money(l.total) + '</span></div>';
+    }).join('') +
+    '<div class="calc-result-row"><span class="label">সাবটোটাল</span>' +
+      '<span class="value">' + Shop.money(sub) + '</span></div>' +
+    '<div class="calc-result-row"><span class="label">ডেলিভারি চার্জ</span>' +
+      '<span class="value' + (fee === 0 ? ' free' : '') + '">' + (fee === 0 ? 'ফ্রি' : Shop.money(fee)) + '</span></div>' +
+    '<div class="calc-result-row total"><span class="label">সর্বমোট</span>' +
+      '<span class="value">' + Shop.money(total) + '</span></div>';
+
+  document.getElementById('bar-total').textContent = Shop.money(total);
+}
+
+function setShip(k){ ship = k; renderShip(); renderSummary(); }
+function setPay(k){ pay = k; renderPay(); }
+
+function toggleNewAddr(){
+  var el = document.getElementById('new-addr');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function saveNewAddr(){
+  document.getElementById('new-addr').style.display = 'none';
+  Shop.toast('ঠিকানা সংরক্ষিত হয়েছে', '📍');
+}
+
+function placeOrder(){
+  var lines = Cart.lines();
+  if(!lines.length) return;
+  var sub = Cart.subtotal();
+  var fee = Cart.shippingFee(ship, sub);
+  var id = Orders.place({
+    date: Shop.dateLabel(), items: lines,
+    subtotal: sub, shipping: ship, shippingFee: fee, total: sub + fee,
+    payment: pay, address: SAVED_ADDRESS
+  });
+  Cart.clear();
+  window.location.href = 'order-success.html?id=' + id;
+}
+
+Orders.seed();
+
+if(!Cart.lines().length){
+  document.getElementById('flow').style.display = 'none';
+  document.getElementById('empty').style.display = 'block';
+} else {
+  document.getElementById('sa-name').textContent = SAVED_ADDRESS.name + ' · ' + SAVED_ADDRESS.phone;
+  document.getElementById('sa-text').textContent = addressLine(SAVED_ADDRESS);
+  renderShip();
+  renderPay();
+  renderSummary();
+  document.getElementById('bar').style.display = 'flex';
+}
+</script>
+</body>
+</html>

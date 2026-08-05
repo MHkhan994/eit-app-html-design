@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — অর্ডার সফল</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="plain-header"><a class="back-btn" href="index.html">←</a></div>
+
+      <div class="screen-body" id="body"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+Orders.seed();
+
+var order = Orders.byId(Shop.qs('id')) || Orders.all()[0];
+var body = document.getElementById('body');
+
+if(!order){
+  body.innerHTML =
+    '<div style="height:30px;"></div>' +
+    '<div class="empty-card"><div class="badge-circle badge-rust">📦</div>' +
+      '<p>অর্ডারটি খুঁজে পাওয়া যায়নি।</p>' +
+      '<div style="height:14px;"></div>' +
+      '<a class="calc-btn moss" href="index.html">কেনাকাটা শুরু করুন</a></div>';
+} else {
+  var eta = Shop.dateInDays(order.shipping === 'express' ? 2 : 5);
+
+  body.innerHTML =
+    '<div class="success-hero">' +
+      '<div class="success-ring">✓</div>' +
+      '<h1>অর্ডার সফল হয়েছে!</h1>' +
+      '<p>আপনার অর্ডার নেওয়া হয়েছে। আমাদের প্রতিনিধি শীঘ্রই কল করে নিশ্চিত করবেন।<br>' +
+        'আনুমানিক ডেলিভারি: <b>' + eta + '</b></p>' +
+      '<div class="order-no">' + order.id + '</div>' +
+    '</div>' +
+
+    '<div class="shop-section-title" style="padding-top:22px;">অর্ডার সামারি</div>' +
+    '<div class="calc-results">' +
+      order.items.map(function(l){
+        return '<div class="calc-result-row"><span class="label">' + l.name +
+               ' <b style="color:var(--text-secondary); font-weight:600;">× ' + l.qty + '</b></span>' +
+               '<span class="value">' + Shop.money(l.total) + '</span></div>';
+      }).join('') +
+      '<div class="calc-result-row"><span class="label">ডেলিভারি চার্জ</span>' +
+        '<span class="value' + (order.shippingFee === 0 ? ' free' : '') + '">' +
+        (order.shippingFee === 0 ? 'ফ্রি' : Shop.money(order.shippingFee)) + '</span></div>' +
+      '<div class="calc-result-row total"><span class="label">সর্বমোট</span>' +
+        '<span class="value">' + Shop.money(order.total) + '</span></div>' +
+    '</div>' +
+
+    '<div class="shop-section-title">ডেলিভারি তথ্য</div>' +
+    '<div class="info-block">' +
+      '<div class="info-row"><div class="info-label">প্রাপক</div>' +
+        '<div class="info-value strong">' + order.address.name + ' · ' + order.address.phone + '</div></div>' +
+      '<div class="info-row"><div class="info-label">ঠিকানা</div>' +
+        '<div class="info-value">' + addressLine(order.address) + '</div></div>' +
+      '<div class="info-row"><div class="info-label">পেমেন্ট মাধ্যম</div>' +
+        '<div class="info-value">' + paymentLabel(order.payment) + '</div></div>' +
+    '</div>' +
+
+    '<div class="action-stack">' +
+      '<a class="calc-btn moss" href="order-detail.html?id=' + order.id + '">অর্ডার ট্র্যাক করুন</a>' +
+      '<a class="calc-btn outline" href="index.html">আরও কেনাকাটা করুন</a>' +
+    '</div>' +
+    '<div style="height:10px;"></div>';
+}
+</script>
+</body>
+</html>

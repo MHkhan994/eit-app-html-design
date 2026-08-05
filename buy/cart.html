@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — কার্ট</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>কার্ট</h1>
+      </div>
+
+      <div class="screen-body" id="body"></div>
+
+      <div class="buy-bar" id="bar" style="display:none;">
+        <div class="bar-total"><span>সর্বমোট</span><b id="bar-total">৳0</b></div>
+        <a class="calc-btn moss" href="checkout.html">চেকআউট করুন</a>
+      </div>
+
+      <div class="modal-overlay" id="rm-modal">
+        <div class="modal-card">
+          <div class="modal-title">পণ্যটি সরাবেন?</div>
+          <div class="modal-text" id="rm-text"></div>
+          <div class="modal-actions">
+            <button class="modal-btn" onclick="closeRemove()">না</button>
+            <button class="modal-btn danger" onclick="confirmRemove()">সরান</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+var pendingId = null;
+
+function rowHTML(l){
+  return '<div class="cart-row">' +
+    '<div class="cart-thumb tint-' + l.tint + '">' + l.emoji + '</div>' +
+    '<div class="cart-info">' +
+      '<div class="cart-name">' + l.name + '</div>' +
+      '<div class="cart-unit">' + Shop.money(l.price) + ' × প্রতি ' + l.unit + '</div>' +
+      '<div class="cart-line">' +
+        '<div class="qty-stepper sm">' +
+          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty - 1) + ')">−</button>' +
+          '<span class="qty-val">' + l.qty + '</span>' +
+          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty + 1) + ')">＋</button>' +
+        '</div>' +
+        '<span class="cart-total">' + Shop.money(l.total) + '</span>' +
+      '</div>' +
+    '</div>' +
+    '<button class="cart-remove" onclick="askRemove(\'' + l.id + '\')">🗑</button>' +
+  '</div>';
+}
+
+function render(){
+  var lines = Cart.lines();
+  var body = document.getElementById('body');
+
+  if(!lines.length){
+    body.innerHTML =
+      '<div style="height:40px;"></div>' +
+      '<div class="empty-card">' +
+        '<div class="badge-circle badge-gold">🛒</div>' +
+        '<p>আপনার কার্ট এখনো খালি।<br>সরঞ্জাম ও ফিড দেখে পছন্দমতো যোগ করুন।</p>' +
+        '<div style="height:14px;"></div>' +
+        '<a class="calc-btn moss" href="index.html">কেনাকাটা শুরু করুন</a>' +
+      '</div>';
+    document.getElementById('bar').style.display = 'none';
+    return;
+  }
+
+  var sub = Cart.subtotal();
+  var fee = Cart.shippingFee('regular', sub);
+  var total = sub + fee;
+  var short = Shop.FREE_DELIVERY_OVER - sub;
+
+  body.innerHTML =
+    '<div class="cart-list">' + lines.map(rowHTML).join('') + '</div>' +
+
+    (short > 0
+      ? '<div class="notice" style="margin:16px 16px 0;"><p>আর <b>' + Shop.money(short) +
+        '</b> কিনলে রেগুলার ডেলিভারি একদম ফ্রি।</p></div>'
+      : '<div class="notice" style="margin:16px 16px 0;"><p>🎉 আপনি ফ্রি রেগুলার ডেলিভারি পাচ্ছেন।</p></div>') +
+
+    '<div class="shop-section-title" style="padding-top:16px;">মূল্যের হিসাব</div>' +
+    '<div class="calc-results">' +
+      '<div class="calc-result-row"><span class="label">সাবটোটাল (' + lines.length + ' আইটেম)</span>' +
+        '<span class="value">' + Shop.money(sub) + '</span></div>' +
+      '<div class="calc-result-row"><span class="label">ডেলিভারি চার্জ (রেগুলার)</span>' +
+        '<span class="value' + (fee === 0 ? ' free' : '') + '">' + (fee === 0 ? 'ফ্রি' : Shop.money(fee)) + '</span></div>' +
+      '<div class="calc-result-row total"><span class="label">সর্বমোট</span>' +
+        '<span class="value">' + Shop.money(total) + '</span></div>' +
+    '</div>' +
+    '<div style="height:8px;"></div>';
+
+  document.getElementById('bar').style.display = 'flex';
+  document.getElementById('bar-total').textContent = Shop.money(total);
+}
+
+function setQty(id, n){
+  if(n < 1){ askRemove(id); return; }
+  Cart.setQty(id, n);
+  render();
+}
+
+function askRemove(id){
+  pendingId = id;
+  document.getElementById('rm-text').textContent = Shop.byId(id).name + ' কার্ট থেকে সরানো হবে।';
+  document.getElementById('rm-modal').classList.add('open');
+}
+
+function closeRemove(){
+  pendingId = null;
+  document.getElementById('rm-modal').classList.remove('open');
+}
+
+function confirmRemove(){
+  var name = Shop.byId(pendingId).name;
+  Cart.remove(pendingId);
+  closeRemove();
+  render();
+  Shop.toast(name + ' সরানো হয়েছে', '🗑');
+}
+
+Orders.seed();
+render();
+</script>
+</body>
+</html>

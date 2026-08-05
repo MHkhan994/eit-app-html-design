@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — অর্ডার বিস্তারিত</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="orders.html">←</a>
+        <h1>অর্ডার বিস্তারিত</h1>
+      </div>
+
+      <div class="screen-body" id="body"></div>
+
+      <div class="modal-overlay" id="cancel-modal">
+        <div class="modal-card">
+          <div class="modal-title">অর্ডার বাতিল করবেন?</div>
+          <div class="modal-text">বাতিল করলে অর্ডারটি আর প্রক্রিয়া করা হবে না। এটি ফিরিয়ে আনা যাবে না।</div>
+          <div class="modal-actions">
+            <button class="modal-btn" onclick="closeCancel()">না, থাক</button>
+            <button class="modal-btn danger" onclick="confirmCancel()">হ্যাঁ, বাতিল করুন</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+Orders.seed();
+
+var order = Orders.byId(Shop.qs('id')) || Orders.all()[0];
+
+function trackHTML(o){
+  var steps = [];
+
+  if(o.cancelled){
+    /* Stop the rail where the order actually got to, then close it with the
+       cancellation rather than pretending the remaining stages happened. */
+    for(var i = 0; i <= o.stage; i++){
+      steps.push({ cls:'done', title:Orders.STAGES[i], when:i === 0 ? o.date : '' });
+    }
+    steps.push({ cls:'cancelled', title:'অর্ডার বাতিল হয়েছে', when:'গ্রাহকের অনুরোধে' });
+  } else {
+    for(var j = 0; j < Orders.STAGES.length; j++){
+      var cls = j < o.stage ? 'done' : (j === o.stage ? 'active' : '');
+      var when = j === 0 ? o.date
+               : (j === o.stage ? 'চলমান' : (j > o.stage ? 'অপেক্ষমাণ' : ''));
+      steps.push({ cls:cls, title:Orders.STAGES[j], when:when });
+    }
+  }
+
+  return '<div class="track-list">' + steps.map(function(s, i){
+    var last = i === steps.length - 1;
+    return '<div class="track-step ' + s.cls + '">' +
+      '<div class="track-rail"><div class="track-dot">' + (s.cls === 'done' ? '✓' : '') + '</div>' +
+        (last ? '' : '<div class="track-line"></div>') + '</div>' +
+      '<div class="track-text"><div class="track-title">' + s.title + '</div>' +
+        (s.when ? '<div class="track-when">' + s.when + '</div>' : '') + '</div>' +
+    '</div>';
+  }).join('') + '</div>';
+}
+
+function render(){
+  var body = document.getElementById('body');
+
+  if(!order){
+    body.innerHTML = '<div style="height:30px;"></div>' +
+      '<div class="empty-card"><div class="badge-circle badge-rust">📦</div>' +
+        '<p>অর্ডারটি খুঁজে পাওয়া যায়নি।</p>' +
+        '<div style="height:14px;"></div>' +
+        '<a class="calc-btn moss" href="orders.html">অর্ডার তালিকায় ফিরুন</a></div>';
+    return;
+  }
+
+  var st = Orders.statusOf(order);
+  var canCancel = !order.cancelled && order.stage <= 2;
+  var eta = order.shipping === 'express' ? '১–২ কর্মদিবস' : '৩–৫ কর্মদিবস';
+
+  body.innerHTML =
+    '<div class="proj-card" style="margin-top:14px;">' +
+      '<div class="order-top">' +
+        '<div><div class="order-id">' + order.id + '</div>' +
+          '<div class="order-date">' + order.date + ' · ' + Shop.bnNum(order.items.length) + 'টি পণ্য</div></div>' +
+        '<span class="tag-pill ' + st.pill + '">' + st.label + '</span>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="shop-section-title">অর্ডার ট্র্যাকিং</div>' +
+    trackHTML(order) +
+
+    '<div class="shop-section-title">পণ্য তালিকা</div>' +
+    '<div class="cart-list" style="padding-top:0;">' +
+      order.items.map(function(l){
+        return '<div class="cart-row">' +
+          '<div class="cart-thumb tint-' + l.tint + '">' + l.emoji + '</div>' +
+          '<div class="cart-info">' +
+            '<div class="cart-name">' + l.name + '</div>' +
+            '<div class="cart-unit">' + Shop.money(l.price) + ' × ' + Shop.bnNum(l.qty) + ' ' + l.unit + '</div>' +
+            '<div class="cart-line"><span></span>' +
+              '<span class="cart-total">' + Shop.money(l.total) + '</span></div>' +
+          '</div></div>';
+      }).join('') +
+    '</div>' +
+
+    '<div class="shop-section-title" style="padding-top:16px;">ডেলিভারি তথ্য</div>' +
+    '<div class="info-block">' +
+      '<div class="info-row"><div class="info-label">প্রাপক</div>' +
+        '<div class="info-value strong">' + order.address.name + ' · ' + order.address.phone + '</div></div>' +
+      '<div class="info-row"><div class="info-label">ঠিকানা</div>' +
+        '<div class="info-value">' + addressLine(order.address) + '</div></div>' +
+      '<div class="info-row"><div class="info-label">ডেলিভারি অপশন</div>' +
+        '<div class="info-value">' + Shop.SHIPPING[order.shipping].label + ' · ' + eta + '</div></div>' +
+      '<div class="info-row"><div class="info-label">পেমেন্ট মাধ্যম</div>' +
+        '<div class="info-value">' + paymentLabel(order.payment) + '</div></div>' +
+    '</div>' +
+
+    '<div class="shop-section-title">মূল্যের হিসাব</div>' +
+    '<div class="calc-results">' +
+      '<div class="calc-result-row"><span class="label">সাবটোটাল</span>' +
+        '<span class="value">' + Shop.money(order.subtotal) + '</span></div>' +
+      '<div class="calc-result-row"><span class="label">ডেলিভারি চার্জ</span>' +
+        '<span class="value' + (order.shippingFee === 0 ? ' free' : '') + '">' +
+        (order.shippingFee === 0 ? 'ফ্রি' : Shop.money(order.shippingFee)) + '</span></div>' +
+      '<div class="calc-result-row total"><span class="label">সর্বমোট</span>' +
+        '<span class="value">' + Shop.money(order.total) + '</span></div>' +
+    '</div>' +
+
+    '<div class="action-stack">' +
+      (canCancel ? '<button class="calc-btn outline" style="color:var(--rust); border-color:var(--rust);" ' +
+                   'onclick="openCancel()">অর্ডার বাতিল করুন</button>' : '') +
+      '<a class="calc-btn moss" href="index.html">আরও কেনাকাটা করুন</a>' +
+    '</div>' +
+    '<div style="height:10px;"></div>';
+}
+
+function openCancel(){ document.getElementById('cancel-modal').classList.add('open'); }
+function closeCancel(){ document.getElementById('cancel-modal').classList.remove('open'); }
+
+function confirmCancel(){
+  Orders.cancel(order.id);
+  order = Orders.byId(order.id);
+  closeCancel();
+  render();
+  Shop.toast('অর্ডার ' + order.id + ' বাতিল হয়েছে', '✕');
+}
+
+render();
+</script>
+</body>
+</html>
