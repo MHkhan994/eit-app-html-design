@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Investment Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:38</span><span>●●● 42%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="index.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Investment Dashboard</h1>
+          <p>Plan a poultry project, cost it out and forecast the return</p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-tile"><div class="stat-label">Projects</div><div class="stat-value moss">2</div></div>
+          <div class="stat-tile"><div class="stat-label">Bird Capacity</div><div class="stat-value">3,000</div></div>
+        </div>
+
+        <div class="page-action" style="padding-top:14px">
+          <a class="calc-btn gold" href="investment-project-new.html">+ New Project</a>
+        </div>
+
+        <div class="group-label">Saved Projects</div>
+
+        <a class="record-card" href="investment-project.html" style="display:block;text-decoration:none">
+          <div class="proj-card-top" style="margin-bottom:10px">
+            <div class="badge-circle sm badge-gold">🏗️</div>
+            <div>
+              <div class="proj-name">Bandarban Broiler Project</div>
+              <div class="proj-sub">Created 05 Aug 2026</div>
+            </div>
+          </div>
+          <div class="std-chips">
+            <span class="std-chip energy">Farm <b>Broiler</b></span>
+            <span class="std-chip mineral">Birds <b>2,000</b></span>
+            <span class="std-chip amino">District <b>Bandarban</b></span>
+          </div>
+          <div class="sex-chips" style="margin-top:10px">
+            <span class="tag-pill status-pending">No Profit Forecast Saved</span>
+          </div>
+        </a>
+
+        <a class="record-card" href="investment-project.html" style="display:block;text-decoration:none">
+          <div class="proj-card-top" style="margin-bottom:10px">
+            <div class="badge-circle sm badge-moss">🏗️</div>
+            <div>
+              <div class="proj-name">Munshiganj Broiler Project</div>
+              <div class="proj-sub">Created 04 Aug 2026</div>
+            </div>
+          </div>
+          <div class="std-chips">
+            <span class="std-chip energy">Farm <b>Broiler</b></span>
+            <span class="std-chip mineral">Birds <b>1,000</b></span>
+            <span class="std-chip amino">District <b>Munshiganj</b></span>
+          </div>
+          <div class="sex-chips" style="margin-top:10px">
+            <span class="tag-pill status-pending">No Profit Forecast Saved</span>
+          </div>
+        </a>
+
+        <div class="empty-state" style="padding:14px 16px 0">Tap a project to open it. Use the ⋮ menu on a card to edit or delete it.</div>
+
+        <div class="page-action" style="padding-bottom:18px">
+          <button class="calc-btn outline" type="button" onclick="document.getElementById('rowMenu').classList.add('open')">⋮ Project Options</button>
+        </div>
+      </div>
+
+      <!-- Recorded 3-dot menu on a project card -->
+      <div class="modal-overlay" id="rowMenu">
+        <div class="modal-card">
+          <div class="modal-title">Munshiganj Broiler Project</div>
+          <a class="modal-option" href="investment-project-new.html">Edit</a>
+          <a class="modal-option" href="#" onclick="document.getElementById('rowMenu').classList.remove('open');return false;">Delete</a>
+          <div class="modal-actions">
+            <button class="modal-btn" type="button" onclick="document.getElementById('rowMenu').classList.remove('open')">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

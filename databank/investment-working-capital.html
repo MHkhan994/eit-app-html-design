@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Working Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:39</span><span>●●● 41%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="investment-project.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Working Capital</h1>
+          <p>Bandarban Broiler Project · one 35-day cycle</p>
+        </div>
+
+        <!-- Working Capital Auto Summary -->
+        <div class="acc-sec">
+          <button class="acc-head open" type="button" onclick="toggleAcc('auto',this)">
+            <span class="acc-ico moss">🧮</span><span class="acc-title">Working Capital Auto Summary</span><span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body active" id="auto">
+            <div class="std-chips" style="margin-bottom:12px">
+              <span class="std-chip energy">Farm <b>Broiler</b></span>
+              <span class="std-chip mineral">House <b>Open House</b></span>
+              <span class="std-chip amino">Floor <b>Deep Litter</b></span>
+              <span class="std-chip energy">Birds <b>2,000</b></span>
+            </div>
+            <div class="cost-list" style="margin-top:0;padding-top:0;border-top:none">
+              <div class="cost-row"><span>Estimated Cycle / Rearing Period</span><b>35 days</b></div>
+              <div class="cost-row"><span>Feed Requirement Per Bird</span><b>2.8 kg</b></div>
+              <div class="cost-row"><span>Total Feed Required</span><b>5,600 kg</b></div>
+            </div>
+            <div class="cost-list">
+              <div class="cost-row"><span>Required Labour</span><b>2 person</b></div>
+              <div class="cost-row"><span>Total Labour Cost</span><b>35,000</b></div>
+              <div class="cost-row"><span>Total Electricity + Diesel Cost</span><b>11,667</b></div>
+            </div>
+            <div class="cost-list">
+              <div class="cost-row"><span>Chick Price</span><b>55</b></div>
+              <div class="cost-row"><span>Feed Price</span><b>60</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Working Capital Cost -->
+        <div class="acc-sec">
+          <button class="acc-head open" type="button" onclick="toggleAcc('wc',this)">
+            <span class="acc-ico rust">🔄</span><span class="acc-title">Working Capital Cost</span><span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body active" id="wc">
+            <div class="switch-row">
+              <span class="switch-label">Enable Manual Edit Mode</span>
+              <label><input class="sr-only" type="checkbox"><span class="switch"></span></label>
+            </div>
+
+            <!-- Unlabelled in the original, same as the Fixed Capital block. Rows 3–11 map
+                 one-for-one onto the result list below; the first two are the unit prices the
+                 summary above states (2,000 × 55 = Chick cost, 5,600 × 60 = Feed cost). -->
+            <div class="field-row">
+              <div class="fr-col">
+                <div class="form-label">Chick Price / bird</div>
+                <input class="calc-input" type="text" value="55">
+              </div>
+              <div class="fr-col">
+                <div class="form-label">Feed Price / kg</div>
+                <input class="calc-input" type="text" value="60">
+              </div>
+            </div>
+
+            <div class="form-label">Chick / DOC Cost</div>
+            <input class="calc-input" type="text" value="110000">
+            <div class="form-label">Feed Cost</div>
+            <input class="calc-input" type="text" value="336000">
+            <div class="form-label">Vaccine Cost</div>
+            <input class="calc-input" type="text" value="10000">
+            <div class="form-label">Medicine Cost</div>
+            <input class="calc-input" type="text" value="20000">
+            <div class="form-label">Labour Cost</div>
+            <input class="calc-input" type="text" value="35000">
+            <div class="form-label">Electricity / Gas Cost</div>
+            <input class="calc-input" type="text" value="11667">
+            <div class="form-label">Litter Cost</div>
+            <input class="calc-input" type="text" value="10000">
+            <div class="form-label">Transport Cost</div>
+            <input class="calc-input" type="text" value="10000">
+            <div class="form-label">Misc / Emergency Cost</div>
+            <input class="calc-input" type="text" value="10000" style="margin-bottom:0">
+
+            <div class="cost-list">
+              <div class="cost-row"><span>Chick / DOC Cost</span><b>110,000</b></div>
+              <div class="cost-row"><span>Feed Cost</span><b>336,000</b></div>
+              <div class="cost-row"><span>Vaccine Cost</span><b>10,000</b></div>
+              <div class="cost-row"><span>Medicine Cost</span><b>20,000</b></div>
+              <div class="cost-row"><span>Labour Cost</span><b>35,000</b></div>
+              <div class="cost-row"><span>Electricity / Gas Cost</span><b>11,667</b></div>
+              <div class="cost-row"><span>Litter Cost</span><b>10,000</b></div>
+              <div class="cost-row"><span>Transport Cost</span><b>10,000</b></div>
+              <div class="cost-row"><span>Misc / Emergency Cost</span><b>10,000</b></div>
+              <div class="cost-total"><span>Total Working Capital</span><b>552,667 Tk</b></div>
+            </div>
+
+            <a class="calc-btn gold" href="investment-project.html" style="margin-top:14px">SAVE WORKING CAPITAL</a>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleAcc(id, btn){
+  document.getElementById(id).classList.toggle('active');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
