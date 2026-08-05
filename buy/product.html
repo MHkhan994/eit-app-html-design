@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — পণ্যের বিবরণ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header with-action" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>পণ্যের বিবরণ</h1>
+        <a class="bar-icon" href="cart.html" title="কার্ট">🛒<span class="cart-count">0</span></a>
+      </div>
+
+      <div class="screen-body" id="body"></div>
+
+      <div class="buy-bar" id="bar" style="display:none;">
+        <button class="calc-btn gold" onclick="addCurrent(false)">কার্টে যোগ করুন</button>
+        <button class="calc-btn moss" onclick="addCurrent(true)">এখনই কিনুন</button>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+var product = Shop.byId(Shop.qs('id')) || Shop.PRODUCTS[0];
+var qty = 1;
+
+function specRows(p){
+  return p.specs.map(function(s){
+    return '<div class="calc-result-row"><span class="label">' + s[0] + '</span>' +
+           '<span class="value">' + s[1] + '</span></div>';
+  }).join('');
+}
+
+function relatedHTML(p){
+  var rel = Shop.PRODUCTS.filter(function(o){ return o.cat === p.cat && o.id !== p.id; });
+  if(rel.length < 3){
+    rel = rel.concat(Shop.PRODUCTS.filter(function(o){
+      return o.group === p.group && o.cat !== p.cat && o.id !== p.id;
+    }));
+  }
+  rel = rel.slice(0, 6);
+  if(!rel.length) return '';
+  return '<div class="shop-section-title">একই ধরনের পণ্য</div><div class="hscroll">' +
+    rel.map(function(o){
+      return '<div class="prod-card"><a class="prod-link" href="product.html?id=' + o.id + '">' +
+        '<div class="prod-thumb tint-' + o.tint + '">' + o.emoji + '</div>' +
+        '<div class="prod-body"><div class="prod-name">' + o.name + '</div>' +
+        '<div class="prod-price-row"><span class="prod-price">' + Shop.money(o.price) + '</span></div>' +
+        '</div></a></div>';
+    }).join('') + '</div>';
+}
+
+function render(){
+  var p = product;
+  var off = p.old > p.price ? Math.round((1 - p.price / p.old) * 100) : 0;
+  var inStock = p.stock > 0;
+
+  document.getElementById('body').innerHTML =
+    '<div class="prod-hero tint-' + p.tint + '">' + p.emoji + '</div>' +
+
+    /* Stand-in gallery: real product photography isn't available yet, so the
+       thumbnail strip repeats the emoji tile across the badge tints. */
+    '<div class="prod-thumbs">' +
+      '<div class="prod-thumb-mini tint-' + p.tint + ' on">' + p.emoji + '</div>' +
+      '<div class="prod-thumb-mini tint-moss">' + p.emoji + '</div>' +
+      '<div class="prod-thumb-mini tint-gold">' + p.emoji + '</div>' +
+    '</div>' +
+
+    '<div class="prod-detail-head">' +
+      '<h1>' + p.name + '</h1>' +
+      '<div class="prod-brand">ব্র্যান্ড: ' + p.brand + ' · প্রতি ' + p.unit + '</div>' +
+      '<div class="rating-row">' +
+        '<span class="stars">' + Shop.stars(p.rating) + '</span>' +
+        '<span class="rating-count">' + p.rating + ' · ' + p.reviews + ' রিভিউ</span>' +
+        '<span class="stock-tag' + (inStock ? '' : ' out') + '">' +
+          (inStock ? 'স্টকে আছে (' + p.stock + ')' : 'স্টকে নেই') + '</span>' +
+      '</div>' +
+      '<div class="prod-price-block">' +
+        '<span class="prod-price">' + Shop.money(p.price) + '</span>' +
+        (off ? '<span class="prod-price-old">' + Shop.money(p.old) + '</span>' +
+               '<span class="prod-off-inline">' + off + '% ছাড়</span>' : '') +
+      '</div>' +
+    '</div>' +
+
+    '<div class="qty-row">' +
+      '<span class="qty-label">পরিমাণ</span>' +
+      '<div class="qty-stepper">' +
+        '<button class="qty-btn" onclick="bump(-1)">−</button>' +
+        '<span class="qty-val" id="qty">' + qty + '</span>' +
+        '<button class="qty-btn" onclick="bump(1)">＋</button>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="calc-card"><div class="card-title">পণ্যের বর্ণনা</div>' +
+      '<div style="font-size:13px; line-height:1.85; color:var(--text-charcoal);">' + p.desc + '</div>' +
+    '</div>' +
+
+    '<div class="shop-section-title">স্পেসিফিকেশন</div>' +
+    '<div class="calc-results">' + specRows(p) + '</div>' +
+
+    '<div class="shop-section-title">বিক্রেতা</div>' +
+    '<div class="seller-card">' +
+      '<div class="avatar ' + p.seller.tint + '">' + p.seller.initials + '</div>' +
+      '<div class="seller-info">' +
+        '<div class="seller-name">' + p.seller.name +
+          (p.seller.verified ? '<span class="post-verified">✓</span>' : '') + '</div>' +
+        '<div class="seller-loc">📍 ' + p.seller.loc + '</div>' +
+      '</div>' +
+      '<a class="calc-btn outline sm" href="../doctor/index.html">যোগাযোগ</a>' +
+    '</div>' +
+
+    relatedHTML(p) +
+    '<div style="height:10px;"></div>';
+
+  document.getElementById('bar').style.display = 'flex';
+  document.title = 'ETI-App — ' + p.name;
+}
+
+function bump(d){
+  qty = Math.min(99, Math.max(1, qty + d));
+  document.getElementById('qty').textContent = qty;
+}
+
+function addCurrent(goCheckout){
+  Cart.add(product.id, qty);
+  Shop.paintBadge();
+  if(goCheckout){ window.location.href = 'checkout.html'; return; }
+  Shop.toast(qty + ' ' + product.unit + ' ' + product.name + ' কার্টে যোগ হয়েছে', '🛒');
+}
+
+Orders.seed();
+render();
+Shop.paintBadge();
+</script>
+</body>
+</html>

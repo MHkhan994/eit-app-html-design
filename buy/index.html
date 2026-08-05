@@ -18,18 +18,38 @@
         <div class="bar-row">
           <div class="menu-icon"><span></span><span></span><span></span></div>
           <div class="app-title">Poultry Solution Hub</div>
+          <div class="bar-actions">
+            <a class="bar-icon" href="orders.html" title="আমার অর্ডার">📦</a>
+            <a class="bar-icon" href="cart.html" title="কার্ট">🛒<span class="cart-count">0</span></a>
+          </div>
         </div>
         <div class="accent-stripe"></div>
       </div>
 
       <div class="screen-body">
-        <div class="placeholder-page">
-          <div class="placeholder-icon">🔍</div>
-          <h3>কিনুন (Buy)</h3>
-          <p>Send a screen recording of this section and I'll build it next, matching the same design system.</p>
-          <span class="badge-soon">NOT YET BUILT</span>
+        <div class="comm-hero">
+          <h1>খামারের সরঞ্জাম ও ফিড</h1>
+          <p>যাচাই করা বিক্রেতার কাছ থেকে সরাসরি কিনুন — সারা দেশে ডেলিভারি</p>
         </div>
+
+        <div class="search-bar shop-search">
+          <span class="search-icon">🔍</span>
+          <input class="calc-input" id="shop-search" type="text" placeholder="পণ্য খুঁজুন…" oninput="renderGrid()">
+        </div>
+
+        <div class="capa-chip-row" id="cat-row"></div>
+
+        <div class="prod-grid" id="prod-grid"></div>
+
+        <div class="empty-card" id="empty" style="display:none;">
+          <div class="badge-circle badge-rust">🔍</div>
+          <p>এই খোঁজে কোনো পণ্য পাওয়া যায়নি।<br>অন্য শব্দ বা ক্যাটাগরি চেষ্টা করুন।</p>
+        </div>
+
+        <div style="height:18px;"></div>
       </div>
+
+      <div class="toast" id="toast"></div>
 
       <div class="bottom-nav">
         <a class="nav-item" href="../index.html"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></a>
@@ -42,5 +62,64 @@
     </div>
   </div>
 </div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+var activeCat = 'all';
+
+function renderChips(){
+  document.getElementById('cat-row').innerHTML = Shop.CATEGORIES.map(function(c){
+    return '<button class="filter-chip' + (c.key === activeCat ? ' active' : '') +
+           '" onclick="setCat(\'' + c.key + '\')">' + c.label + '</button>';
+  }).join('');
+}
+
+function setCat(key){
+  activeCat = key;
+  renderChips();
+  renderGrid();
+}
+
+function cardHTML(p){
+  var off = p.old > p.price ? Math.round((1 - p.price / p.old) * 100) : 0;
+  var href = 'product.html?id=' + p.id;
+  return '<div class="prod-card">' +
+    '<a href="' + href + '"><div class="prod-thumb tint-' + p.tint + '">' + p.emoji +
+      (off ? '<span class="prod-off">-' + off + '%</span>' : '') + '</div></a>' +
+    '<div class="prod-body">' +
+      '<a class="prod-link" href="' + href + '">' +
+        '<div class="prod-name">' + p.name + '</div>' +
+        '<div class="prod-unit">প্রতি ' + p.unit + '</div>' +
+        '<div class="prod-price-row"><span class="prod-price">' + Shop.money(p.price) + '</span>' +
+          (p.old > p.price ? '<span class="prod-price-old">' + Shop.money(p.old) + '</span>' : '') +
+        '</div>' +
+      '</a>' +
+      '<button class="prod-add" onclick="addToCart(\'' + p.id + '\')">＋ কার্টে যোগ</button>' +
+    '</div></div>';
+}
+
+function renderGrid(){
+  var q = document.getElementById('shop-search').value.trim().toLowerCase();
+  var list = Shop.PRODUCTS.filter(function(p){
+    var catHit = activeCat === 'all' || p.cat === activeCat;
+    var qHit = !q || p.name.toLowerCase().indexOf(q) !== -1 ||
+                     p.brand.toLowerCase().indexOf(q) !== -1;
+    return catHit && qHit;
+  });
+  document.getElementById('prod-grid').innerHTML = list.map(cardHTML).join('');
+  document.getElementById('empty').style.display = list.length ? 'none' : 'block';
+}
+
+function addToCart(id){
+  Cart.add(id, 1);
+  Shop.paintBadge();
+  Shop.toast(Shop.byId(id).name + ' কার্টে যোগ হয়েছে', '🛒');
+}
+
+Orders.seed();
+renderChips();
+renderGrid();
+Shop.paintBadge();
+</script>
 </body>
 </html>

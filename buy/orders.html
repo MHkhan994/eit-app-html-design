@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — আমার অর্ডার</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header with-action" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>আমার অর্ডার</h1>
+        <a class="bar-icon" href="cart.html" title="কার্ট">🛒<span class="cart-count">0</span></a>
+      </div>
+
+      <div class="screen-body">
+        <div class="tabs">
+          <div class="tab active" onclick="setTab('active', this)">চলমান</div>
+          <div class="tab" onclick="setTab('done', this)">সম্পন্ন</div>
+          <div class="tab" onclick="setTab('cancelled', this)">বাতিল</div>
+        </div>
+
+        <div id="list"></div>
+        <div style="height:18px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script>
+var activeTab = 'active';
+
+var EMPTY_TEXT = {
+  active:    'এই মুহূর্তে কোনো চলমান অর্ডার নেই।',
+  done:      'এখনো কোনো অর্ডার সম্পন্ন হয়নি।',
+  cancelled: 'কোনো বাতিল হওয়া অর্ডার নেই।'
+};
+
+function cardHTML(o){
+  var st = Orders.statusOf(o);
+  var first = o.items[0];
+  var more = o.items.length > 1 ? ' + আরও ' + Shop.bnNum(o.items.length - 1) + 'টি পণ্য' : '';
+
+  return '<a class="order-card" href="order-detail.html?id=' + o.id + '">' +
+    '<div class="order-top">' +
+      '<div><div class="order-id">' + o.id + '</div>' +
+        '<div class="order-date">' + o.date + '</div></div>' +
+      '<span class="tag-pill ' + st.pill + '">' + st.label + '</span>' +
+    '</div>' +
+    '<div class="order-items">' +
+      '<div class="cart-thumb tint-' + first.tint + '">' + first.emoji + '</div>' +
+      '<div class="order-summary-text">' + first.name + more + '</div>' +
+    '</div>' +
+    '<div class="order-foot">' +
+      '<span class="order-total">' + Shop.money(o.total) + '</span>' +
+      '<span class="order-chev">বিস্তারিত ›</span>' +
+    '</div>' +
+  '</a>';
+}
+
+function render(){
+  var list = Orders.all().filter(function(o){ return Orders.statusOf(o).tab === activeTab; });
+  document.getElementById('list').innerHTML = list.length
+    ? list.map(cardHTML).join('')
+    : '<div class="empty-card"><div class="badge-circle badge-gold">📦</div>' +
+      '<p>' + EMPTY_TEXT[activeTab] + '</p></div>';
+}
+
+function setTab(tab, el){
+  activeTab = tab;
+  document.querySelectorAll('.tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  render();
+}
+
+Orders.seed();
+render();
+Shop.paintBadge();
+</script>
+</body>
+</html>
