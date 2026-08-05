@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Mortality Simulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:39</span><span>●●● 41%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="investment-project.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Mortality Simulation</h1>
+          <p>Revenue at each mortality rate · Bird Capacity 2,000</p>
+        </div>
+
+        <div class="calc-card" style="margin-bottom:12px">
+          <!-- Unlabelled in the original; both are fixed by the table's own arithmetic
+               (1,980 birds × 2 kg × 180 = 712,800). -->
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Market Price / kg</div>
+              <input class="calc-input" type="text" value="180" style="margin-bottom:0">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Average Body Weight (kg)</div>
+              <input class="calc-input" type="text" value="2" style="margin-bottom:0">
+            </div>
+          </div>
+        </div>
+
+        <div class="data-table compact" style="margin:0 16px 18px">
+          <table>
+            <tr><th>Mortality</th><th>Live Birds</th><th>Expected Revenue</th></tr>
+            <tr><td><b>1.0%</b></td><td>1,980</td><td><b>712,800</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>2.0%</b></td><td>1,960</td><td><b>705,600</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>3.0%</b></td><td>1,940</td><td><b>698,400</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>4.0%</b></td><td>1,920</td><td><b>691,200</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>5.0%</b></td><td>1,900</td><td><b>684,000</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>6.0%</b></td><td>1,880</td><td><b>676,800</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>7.0%</b></td><td>1,860</td><td><b>669,600</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>8.0%</b></td><td>1,840</td><td><b>662,400</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>9.0%</b></td><td>1,820</td><td><b>655,200</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>10.0%</b></td><td>1,800</td><td><b>648,000</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>12.0%</b></td><td>1,760</td><td><b>633,600</b> <span class="sub">Tk</span></td></tr>
+            <tr><td><b>15.0%</b></td><td>1,700</td><td><b>612,000</b> <span class="sub">Tk</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

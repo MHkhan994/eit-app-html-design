@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Market Price Update</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:39</span><span>●●● 41%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="investment-project.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Editable Market Price</h1>
+          <p>Price assumptions this project's costings are built on</p>
+        </div>
+
+        <div class="calc-card">
+          <!-- The original renders these fifteen fields with NO labels of any kind — just
+               underlined numbers, and it never shows them empty, so no placeholder text was
+               ever visible either. Only five values are pinned by other screens (chick 55,
+               shed 700, feed 60, live weight price 180 — see Fixed/Working Capital and the
+               Mortality Simulation), and naming the other ten would mean inventing which bird
+               type each price belongs to. Left unlabelled, exactly as recorded. -->
+          <div class="card-note" style="margin:-2px 0 12px">The app ships this screen without field labels. Values shown are the recorded defaults.</div>
+
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="55"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="55"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="55"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="55"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="700"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="60"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="60"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="60"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="55"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="60"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="180"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="260"></div>
+          </div>
+          <div class="field-row">
+            <div class="fr-col"><input class="calc-input" type="text" value="260"></div>
+            <div class="fr-col"><input class="calc-input" type="text" value="10"></div>
+          </div>
+          <input class="calc-input" type="text" value="18">
+
+          <a class="calc-btn gold" href="investment-project.html">SAVE MARKET PRICE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

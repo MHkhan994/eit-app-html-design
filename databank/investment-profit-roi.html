@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Profit and ROI Forecast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:40</span><span>●●● 41%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="investment-project.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Profit and ROI Forecast</h1>
+          <p>Bandarban Broiler Project · Broiler</p>
+        </div>
+
+        <div class="calc-card" style="margin-bottom:12px">
+          <div class="std-chips" style="margin-bottom:12px">
+            <span class="std-chip energy">Birds <b>2,000</b></span>
+            <span class="std-chip mineral">Est. Live Birds <b>1,900</b></span>
+          </div>
+          <div class="cost-list" style="margin-top:0;padding-top:0;border-top:none">
+            <div class="cost-row"><span>Fixed Capital</span><b>4,067,558 Tk</b></div>
+            <div class="cost-row"><span>Working Capital</span><b>552,667 Tk</b></div>
+            <div class="cost-total"><span>Total Investment</span><b>4,620,225 Tk</b></div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="form-section-title moss"><span class="sec-icon">🎯</span>Forecast Inputs</div>
+
+          <!-- Unlabelled in the original. Fixed by the figures it produces: 2,000 birds less
+               5% mortality = 1,900 live; 1,900 × 2.0 kg × 180 = 684,000 revenue. The last two
+               fields are both 0 and never named anywhere, so they carry generic labels. -->
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Mortality (%)</div>
+              <input class="calc-input" type="text" value="5">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Market Price / kg</div>
+              <input class="calc-input" type="text" value="180">
+            </div>
+          </div>
+          <div class="form-label">Average Body Weight (kg)</div>
+          <input class="calc-input" type="text" value="2.0">
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">Other Income</div>
+              <input class="calc-input" type="text" value="0">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">Other Cost</div>
+              <input class="calc-input" type="text" value="0">
+            </div>
+          </div>
+
+          <a class="calc-btn gold" href="investment-project.html" style="margin-top:4px">SAVE PROFIT FORECAST</a>
+        </div>
+
+        <div class="stat-grid" style="padding-top:0">
+          <div class="stat-tile"><div class="stat-label">Expected Revenue</div><div class="stat-value">684,000</div></div>
+          <div class="stat-tile"><div class="stat-label">Expected Net Profit</div><div class="stat-value moss">131,333</div></div>
+          <div class="stat-tile"><div class="stat-label">Profit / Bird</div><div class="stat-value moss">66 Tk</div></div>
+          <div class="stat-tile"><div class="stat-label">ROI</div><div class="stat-value gold">2.84%</div></div>
+        </div>
+
+        <div style="height:18px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

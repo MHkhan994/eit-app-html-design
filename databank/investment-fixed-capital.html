@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — Fixed Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>5:39</span><span>●●● 42%</span></div>
+
+      <div class="page-head tight">
+        <a class="back-btn" href="investment-project.html">←</a>
+      </div>
+
+      <div class="screen-body">
+        <div class="audit-hero tight">
+          <h1>Fixed Capital</h1>
+          <p>Bandarban Broiler Project · Broiler · 2,000 birds</p>
+        </div>
+
+        <!-- Farm Area Requirement -->
+        <div class="acc-sec">
+          <button class="acc-head open" type="button" onclick="toggleAcc('area',this)">
+            <span class="acc-ico moss">📐</span><span class="acc-title">Farm Area Requirement</span><span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body active" id="area">
+            <div class="std-chips" style="margin-bottom:12px">
+              <span class="std-chip energy">Farm <b>Broiler</b></span>
+              <span class="std-chip mineral">House <b>Open House</b></span>
+              <span class="std-chip amino">Floor <b>Deep Litter</b></span>
+              <span class="std-chip energy">Birds <b>2,000</b></span>
+            </div>
+            <div class="cost-list" style="margin-top:0;padding-top:0;border-top:none">
+              <div class="cost-row"><span>Required Shed Area</span><b>3,000 sqft</b></div>
+              <div class="cost-row"><span>Extra Utility / Biosecurity Area</span><b>1,500 sqft</b></div>
+              <div class="cost-total"><span>Total Land Required</span><b>10.33 decimal</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Equipment and Automation -->
+        <div class="acc-sec">
+          <button class="acc-head open" type="button" onclick="toggleAcc('equip',this)">
+            <span class="acc-ico gold">⚙️</span><span class="acc-title">Equipment and Automation</span><span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body active" id="equip">
+            <div class="form-label">Feeding System</div>
+            <select class="calc-input calc-select">
+              <option>Manual Feeding</option>
+              <option>Pan Feeding</option>
+              <option selected>Chain Feeding</option>
+            </select>
+
+            <div class="form-label">Drinking System</div>
+            <select class="calc-input calc-select">
+              <option>Manual Drinker</option>
+              <option selected>Nipple System</option>
+            </select>
+
+            <div class="form-label">Layer Cage Type</div>
+            <select class="calc-input calc-select" style="margin-bottom:0">
+              <option selected>Local Cage</option>
+              <option>Imported Cage</option>
+            </select>
+
+            <div class="cost-list">
+              <div class="cost-row"><span>Feeding System</span><b>Chain Feeding</b></div>
+              <div class="cost-row"><span>Feeder / Line Qty</span><b>9</b></div>
+              <div class="cost-row"><span>Feeding Cost</span><b>405,000</b></div>
+            </div>
+            <div class="cost-list">
+              <div class="cost-row"><span>Drinking System</span><b>Nipple System</b></div>
+              <div class="cost-row"><span>Nipple / Drinker Qty</span><b>200</b></div>
+              <div class="cost-row"><span>Drinking Cost</span><b>40,000</b></div>
+            </div>
+            <div class="cost-list">
+              <div class="cost-row"><span>Exhaust Fan Qty</span><b>0</b></div>
+              <div class="cost-row"><span>Fan Cost</span><b>0</b></div>
+              <div class="cost-row"><span>Cooling Pad Cost</span><b>0</b></div>
+            </div>
+            <div class="cost-list">
+              <div class="cost-row"><span>Layer Cage Type</span><b>Local Cage</b></div>
+              <div class="cost-row"><span>Layer Cage Bird Capacity</span><b>0</b></div>
+              <div class="cost-row"><span>Layer Cage Cost</span><b>0</b></div>
+              <div class="cost-row"><span>Slat System Cost</span><b>0</b></div>
+              <div class="cost-row"><span>Nest Qty</span><b>0</b></div>
+              <div class="cost-row"><span>Nest Cost</span><b>0</b></div>
+              <div class="cost-total"><span>Estimated Equipment Cost</span><b>445,000</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fixed Capital Cost -->
+        <div class="acc-sec">
+          <button class="acc-head open" type="button" onclick="toggleAcc('fixed',this)">
+            <span class="acc-ico rust">🏦</span><span class="acc-title">Fixed Capital Cost</span><span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body active" id="fixed">
+            <div class="switch-row">
+              <span class="switch-label">Enable Manual Edit Mode</span>
+              <label><input class="sr-only" type="checkbox"><span class="switch"></span></label>
+            </div>
+
+            <!-- The original renders these as bare underlined numbers with no labels at all.
+                 Labels here come from the result block below (rows 3–11 map to it one-for-one)
+                 and from the arithmetic for the first two: 10.33 decimal × 100,000 = Land Cost,
+                 3,000 sqft × 700 = Shed Construction. -->
+            <div class="field-row">
+              <div class="fr-col">
+                <div class="form-label">Land Price / decimal</div>
+                <input class="calc-input" type="text" value="100000">
+              </div>
+              <div class="fr-col">
+                <div class="form-label">Shed Cost / sqft</div>
+                <input class="calc-input" type="text" value="700">
+              </div>
+            </div>
+
+            <div class="form-label">Land Cost</div>
+            <input class="calc-input" type="text" value="1033058">
+            <div class="form-label">Shed Construction</div>
+            <input class="calc-input" type="text" value="2100000">
+            <div class="form-label">Equipment</div>
+            <input class="calc-input" type="text" value="445000">
+            <div class="form-label">Generator / Solar</div>
+            <input class="calc-input" type="text" value="150000">
+            <div class="form-label">Electrical Setup</div>
+            <input class="calc-input" type="text" value="105000">
+            <div class="form-label">Water System</div>
+            <input class="calc-input" type="text" value="50000">
+            <div class="form-label">Biosecurity</div>
+            <input class="calc-input" type="text" value="40000">
+            <div class="form-label">Office / Store</div>
+            <input class="calc-input" type="text" value="100000">
+            <div class="form-label">Other Fixed Cost</div>
+            <input class="calc-input" type="text" value="44500" style="margin-bottom:0">
+
+            <div class="cost-list">
+              <div class="cost-row"><span>Land Cost</span><b>1,033,058</b></div>
+              <div class="cost-row"><span>Shed Construction</span><b>2,100,000</b></div>
+              <div class="cost-row"><span>Equipment</span><b>445,000</b></div>
+              <div class="cost-row"><span>Generator / Solar</span><b>150,000</b></div>
+              <div class="cost-row"><span>Electrical Setup</span><b>105,000</b></div>
+              <div class="cost-row"><span>Water System</span><b>50,000</b></div>
+              <div class="cost-row"><span>Biosecurity</span><b>40,000</b></div>
+              <div class="cost-row"><span>Office / Store</span><b>100,000</b></div>
+              <div class="cost-row"><span>Other Fixed Cost</span><b>44,500</b></div>
+              <div class="cost-total"><span>Total Fixed Capital</span><b>4,067,558 Tk</b></div>
+            </div>
+
+            <a class="calc-btn gold" href="investment-project.html" style="margin-top:14px">SAVE FIXED CAPITAL</a>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggleAcc(id, btn){
+  document.getElementById(id).classList.toggle('active');
+  btn.classList.toggle('open');
+}
+</script>
+</body>
+</html>
