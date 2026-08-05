@@ -23,12 +23,30 @@
       </div>
 
       <div class="screen-body">
-        <div class="placeholder-page">
-          <div class="placeholder-icon">🛒</div>
-          <h3>বেচুন (Sell)</h3>
-          <p>Send a screen recording of this section and I'll build it next, matching the same design system.</p>
-          <span class="badge-soon">NOT YET BUILT</span>
+        <div style="height:14px;"></div>
+        <div class="title-card">
+          <div class="title-card-head"><span class="emoji">🛒</span><h2>আপনার পণ্য বিক্রি করুন</h2></div>
+          <p>পণ্যের তথ্য জমা দিন — আমাদের প্রতিনিধি যাচাই করে আপনাকে সরাসরি কল করবেন এবং দাম ঠিক করে নেবেন।</p>
         </div>
+
+        <div class="shop-section-title">কী বিক্রি করবেন?</div>
+
+        <!-- Cards are built from Listings.CATEGORIES so the landing, the
+             submissions list and the forms can never drift apart. -->
+        <div class="icon-grid" id="cat-grid"></div>
+
+        <div class="page-action">
+          <a class="calc-btn outline" href="submissions.html">আমার জমা দেওয়া তথ্য</a>
+        </div>
+
+        <div class="notice">
+          <p><strong>কীভাবে কাজ করে:</strong><br>
+          ১) পণ্যের তথ্য ও যোগাযোগের নম্বর জমা দিন<br>
+          ২) আমাদের টিম তথ্য যাচাই করে<br>
+          ৩) প্রতিনিধি ২৪ ঘণ্টার মধ্যে ফোন করে দাম ও পিকআপ ঠিক করেন</p>
+        </div>
+
+        <div style="height:18px;"></div>
       </div>
 
       <div class="bottom-nav">
@@ -41,6 +59,20 @@
       </div>
     </div>
   </div>
+  <div class="caption">ETI-App prototype · static mockup · কোনো সোর্স রেকর্ডিং নেই, উদাহরণের জমাগুলো সাজানো</div>
 </div>
+
+<script src="../assets/js/shop.js"></script>
+<script src="../assets/js/sell.js"></script>
+<script>
+Listings.seed();
+
+document.getElementById('cat-grid').innerHTML = Listings.CATEGORIES.map(function(c){
+  return '<a class="grid-card" href="' + c.page + '">' +
+    '<div class="grid-illustration"><div class="badge-circle ' + c.badge + '">' + c.emoji + '</div></div>' +
+    '<div class="grid-label">' + c.label + '<span class="grid-sub">' + c.unit + '</span></div>' +
+  '</a>';
+}).join('');
+</script>
 </body>
 </html>

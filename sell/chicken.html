@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — রেডি মুরগী বিক্রি</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="subpage-header" style="background:var(--moss);">
+        <a class="back-btn" href="index.html">←</a>
+        <h1>রেডি মুরগী বিক্রি</h1>
+      </div>
+
+      <div class="screen-body">
+        <div style="height:14px;"></div>
+
+        <div class="calc-card">
+          <div class="form-section-title moss"><span class="sec-icon">🐔</span>পণ্যের তথ্য</div>
+
+          <div class="form-label">জাত / ধরন</div>
+          <select class="calc-input calc-select" id="c-breed">
+            <option value="">নির্বাচন করুন</option>
+            <option>ব্রয়লার</option>
+            <option>সোনালী</option>
+            <option>কালার বার্ড</option>
+            <option>Cobb 500</option>
+            <option>Ross 308</option>
+            <option>Indian River</option>
+            <option>Siam Broiler</option>
+            <option>লেয়ার (কালিং)</option>
+          </select>
+
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">বয়স (দিন)</div>
+              <input class="calc-input" type="text" id="c-age" placeholder="যেমন: ৩২">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">সংখ্যা (পিস)</div>
+              <input class="calc-input" type="text" id="c-count" placeholder="যেমন: ১৫০০">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">গড় ওজন (কেজি)</div>
+              <input class="calc-input" type="text" id="c-weight" placeholder="যেমন: ১.৮">
+            </div>
+            <div class="fr-col">
+              <div class="form-label">মোট ওজন (কেজি)</div>
+              <input class="calc-input" type="text" id="c-total" placeholder="আনুমানিক">
+            </div>
+          </div>
+
+          <div class="form-label">প্রত্যাশিত দাম (৳ / কেজি) — ঐচ্ছিক</div>
+          <input class="calc-input" type="text" id="c-price" placeholder="না দিলে প্রতিনিধি দাম বলবেন">
+
+          <div class="form-label">খাদ্য / ঔষধ সংক্রান্ত মন্তব্য</div>
+          <textarea class="calc-input" id="c-notes" rows="3" placeholder="ব্যবহৃত ফিড, সর্বশেষ ঔষধ ও উইথড্রয়াল পিরিয়ড ইত্যাদি"></textarea>
+        </div>
+
+        <div class="calc-card">
+          <div class="form-section-title moss"><span class="sec-icon">🖼️</span>ছবি</div>
+          <div class="drop-zone">
+            <div class="dz-ico">🖼️</div>
+            <p>পণ্যের ছবি যোগ করুন</p>
+            <span>ছবি থাকলে প্রতিনিধি দ্রুত যাচাই করতে পারেন</span>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="form-section-title moss"><span class="sec-icon">📞</span>যোগাযোগের তথ্য</div>
+
+          <div class="form-label">বিক্রেতার নাম</div>
+          <input class="calc-input" type="text" id="s-name" placeholder="যেমন: মোঃ রফিকুল ইসলাম">
+
+          <div class="form-label">মোবাইল নম্বর</div>
+          <input class="calc-input" type="tel" id="s-phone" placeholder="০১৭XXXXXXXX">
+
+          <div class="field-row">
+            <div class="fr-col">
+              <div class="form-label">জেলা</div>
+              <select class="calc-input calc-select" id="s-district">
+                <option value="">নির্বাচন করুন</option>
+                <option>ঢাকা</option><option>চট্টগ্রাম</option><option>রাজশাহী</option>
+                <option>খুলনা</option><option>বরিশাল</option><option>সিলেট</option>
+                <option>রংপুর</option><option>ময়মনসিংহ</option>
+              </select>
+            </div>
+            <div class="fr-col">
+              <div class="form-label">উপজেলা</div>
+              <input class="calc-input" type="text" id="s-upazila" placeholder="যেমন: সাভার">
+            </div>
+          </div>
+
+          <div class="form-label">খামারের ঠিকানা</div>
+          <textarea class="calc-input" id="s-detail" rows="2" placeholder="গ্রাম / এলাকা, রোড, ল্যান্ডমার্ক"></textarea>
+
+          <div class="form-label">যোগাযোগের পছন্দের সময়</div>
+          <div class="chip-select-row">
+            <input class="sr-only" type="radio" name="calltime" id="ct-morning" data-label="সকাল" checked>
+            <label class="chip-radio" for="ct-morning">সকাল</label>
+            <input class="sr-only" type="radio" name="calltime" id="ct-noon" data-label="দুপুর">
+            <label class="chip-radio" for="ct-noon">দুপুর</label>
+            <input class="sr-only" type="radio" name="calltime" id="ct-evening" data-label="বিকাল">
+            <label class="chip-radio" for="ct-evening">বিকাল</label>
+            <input class="sr-only" type="radio" name="calltime" id="ct-any" data-label="যেকোনো সময়">
+            <label class="chip-radio" for="ct-any">যেকোনো সময়</label>
+          </div>
+        </div>
+
+        <div class="action-stack">
+          <button class="calc-btn moss" type="button" onclick="askSubmit()">তথ্য জমা দিন</button>
+          <a class="calc-btn outline" href="index.html">বাতিল</a>
+        </div>
+
+        <div style="height:18px;"></div>
+      </div>
+
+      <div class="modal-overlay" id="confirm">
+        <div class="modal-card">
+          <div class="modal-title">তথ্য জমা দেবেন?</div>
+          <div class="modal-text">জমা দেওয়ার পর আমাদের প্রতিনিধি ২৪ ঘণ্টার মধ্যে আপনাকে কল করবেন।</div>
+          <div class="modal-actions">
+            <button class="modal-btn" onclick="closeConfirm()">না, থাক</button>
+            <button class="modal-btn" onclick="doSubmit()">হ্যাঁ, জমা দিন</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · মোট ওজন নিজে লিখতে হয়, অ্যাপ কোনো হিসাব করে না</div>
+</div>
+
+<script src="../assets/js/shop.js"></script>
+<script src="../assets/js/sell.js"></script>
+<script>
+Listings.seed();
+
+var SPEC = [
+  { label:'জাত / ধরন',      id:'c-breed' },
+  { label:'বয়স',            id:'c-age',    suffix:' দিন' },
+  { label:'সংখ্যা',          id:'c-count',  suffix:' পিস' },
+  { label:'গড় ওজন',         id:'c-weight', suffix:' কেজি' },
+  { label:'মোট ওজন',        id:'c-total',  suffix:' কেজি' },
+  { label:'প্রত্যাশিত দাম',  id:'c-price',  prefix:'৳', suffix:' / কেজি' },
+  { label:'খাদ্য / ঔষধ',     id:'c-notes' }
+];
+
+function askSubmit(){ document.getElementById('confirm').classList.add('open'); }
+function closeConfirm(){ document.getElementById('confirm').classList.remove('open'); }
+
+function doSubmit(){
+  var fields = Listings.collect('chicken', SPEC);
+  var id = Listings.place({
+    cat:'chicken', catLabel:'রেডি মুরগী',
+    summary:Listings.summary(fields, ['জাত / ধরন', 'সংখ্যা', 'গড় ওজন'], 'রেডি মুরগী'),
+    fields:fields, seller:Listings.collectSeller()
+  });
+  closeConfirm();
+  window.location.href = 'success.html?id=' + id;
+}
+</script>
+</body>
+</html>

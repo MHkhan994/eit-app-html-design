@@ -85,9 +85,11 @@ eti-app/
 ├── assets/
 │   ├── css/styles.css          design tokens + component styles (shared by every page)
 │   ├── js/app.js               showSub() — toggles Home's subpanels; showFieldGroup() — generic radio-driven field-set swap
+│   ├── js/shop.js              Buy: catalog + Cart + Orders. Sell loads it too, for Shop's money/date/qs/toast/storage helpers
+│   ├── js/sell.js              Sell: Listings + form collect helpers. Load AFTER shop.js — it calls Shop.readJSON/dateLabel
 │   └── images/                 real images once available (currently emoji placeholders)
-├── buy/index.html
-├── sell/index.html
+├── buy/                        catalog → product → cart → checkout → success → orders → tracking
+├── sell/                       lead capture — landing + 4 category forms → success → submissions → tracking
 ├── doctor/index.html
 ├── databank/                   9-tool list + each tool's full inner flow
 ├── accounting/                 drill-down from Home's হিসাব নিকাশ grid card — 10-tool list + calculators
