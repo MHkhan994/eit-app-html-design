@@ -54,9 +54,9 @@ function rowHTML(l){
       '<div class="cart-unit">' + Shop.money(l.price) + ' × প্রতি ' + l.unit + '</div>' +
       '<div class="cart-line">' +
         '<div class="qty-stepper sm">' +
-          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty - 1) + ')">−</button>' +
+          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty - l.step) + ')">−</button>' +
           '<span class="qty-val">' + l.qty + '</span>' +
-          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty + 1) + ')">＋</button>' +
+          '<button class="qty-btn" onclick="setQty(\'' + l.id + '\',' + (l.qty + l.step) + ')">＋</button>' +
         '</div>' +
         '<span class="cart-total">' + Shop.money(l.total) + '</span>' +
       '</div>' +
@@ -74,7 +74,7 @@ function render(){
       '<div style="height:40px;"></div>' +
       '<div class="empty-card">' +
         '<div class="badge-circle badge-gold">🛒</div>' +
-        '<p>আপনার কার্ট এখনো খালি।<br>সরঞ্জাম ও ফিড দেখে পছন্দমতো যোগ করুন।</p>' +
+        '<p>আপনার কার্ট এখনো খালি।<br>বাচ্চা, ফিড, ভ্যাকসিন ও সরঞ্জাম দেখে পছন্দমতো যোগ করুন।</p>' +
         '<div style="height:14px;"></div>' +
         '<a class="calc-btn moss" href="index.html">কেনাকাটা শুরু করুন</a>' +
       '</div>';
@@ -110,8 +110,10 @@ function render(){
   document.getElementById('bar-total').textContent = Shop.money(total);
 }
 
+/* Stepping below a product's batch minimum means dropping the line, so it goes
+   through the same remove confirmation rather than snapping back to the floor. */
 function setQty(id, n){
-  if(n < 1){ askRemove(id); return; }
+  if(n < Shop.minQty(Shop.byId(id))){ askRemove(id); return; }
   Cart.setQty(id, n);
   render();
 }
