@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — নতুন অ্যাকাউন্ট</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <div class="plain-header">
+        <a class="back-btn" href="login.html">←</a>
+        <h1>নতুন অ্যাকাউন্ট</h1>
+      </div>
+
+      <div class="screen-body auth-page">
+
+        <div class="auth-brand" style="padding-top:6px;">
+          <div class="auth-logo">🐣</div>
+          <div class="auth-name">অ্যাকাউন্ট খুলুন</div>
+          <div class="auth-sub">এক মিনিটেই শেষ — এরপর একটি ভেরিফিকেশন কোড পাঠানো হবে।</div>
+        </div>
+
+        <div class="calc-card">
+          <div class="calc-field">
+            <label for="r-name">আপনার নাম</label>
+            <input class="calc-input" type="text" id="r-name" autocomplete="name"
+                   placeholder="যেমন: মোঃ রফিকুল ইসলাম">
+          </div>
+
+          <div class="calc-field">
+            <label for="r-id">মোবাইল নম্বর বা ইমেইল</label>
+            <input class="calc-input" type="text" id="r-id" autocomplete="username"
+                   placeholder="০১৭xxxxxxxx  বা  you@example.com">
+            <p class="auth-lead" style="margin:6px 0 0;">এই ঠিকানাতেই কোড যাবে, আর পরে এটি দিয়েই লগ ইন করবেন।</p>
+          </div>
+
+          <div class="calc-field">
+            <label for="r-farm">খামারের ধরন</label>
+            <select class="calc-input calc-select" id="r-farm">
+              <option value="">নির্বাচন করুন</option>
+              <option>ব্রয়লার</option>
+              <option>লেয়ার</option>
+              <option>সোনালী</option>
+              <option>প্যারেন্ট স্টক</option>
+              <option>হ্যাচারি</option>
+              <option>ডিলার / ব্যবসায়ী</option>
+            </select>
+          </div>
+
+          <div class="calc-field">
+            <label for="r-district">জেলা</label>
+            <input class="calc-input" type="text" id="r-district" placeholder="যেমন: গাজীপুর">
+          </div>
+
+          <div class="calc-field">
+            <label for="r-pw">পাসওয়ার্ড</label>
+            <div class="pw-field">
+              <input class="calc-input" type="password" id="r-pw" autocomplete="new-password"
+                     placeholder="কমপক্ষে ৬ অক্ষর">
+              <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন"
+                      onclick="Auth.togglePw(this)">👁</button>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label for="r-pw2">পাসওয়ার্ড আবার দিন</label>
+            <div class="pw-field">
+              <input class="calc-input" type="password" id="r-pw2" autocomplete="new-password"
+                     placeholder="একই পাসওয়ার্ড লিখুন">
+              <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন"
+                      onclick="Auth.togglePw(this)">👁</button>
+            </div>
+          </div>
+
+          <div style="height:6px;"></div>
+          <div class="checklist-row">
+            <input type="checkbox" id="r-terms">
+            <label for="r-terms">আমি শর্তাবলী ও গোপনীয়তা নীতিতে সম্মত</label>
+          </div>
+
+          <div style="height:14px;"></div>
+          <button class="calc-btn moss" type="button" id="r-submit">অ্যাকাউন্ট খুলুন</button>
+        </div>
+
+        <div class="auth-alt">আগেই অ্যাকাউন্ট আছে?<a href="login.html">লগ ইন করুন</a></div>
+
+        <div class="notice" style="margin-top:18px;">
+          <p><strong>ডিজাইন মকআপ:</strong> কোনো অ্যাকাউন্ট তৈরি হয় না এবং কোনো কোড সত্যিকারে
+          পাঠানো হয় না — বোতামটি শুধু ভেরিফিকেশন স্ক্রিনে নিয়ে যায়।</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · কোনো তথ্য সত্যিকারে পাঠানো হয় না</div>
+</div>
+
+<script src="../assets/js/auth.js"></script>
+<script>
+var idField = document.getElementById('r-id');
+Auth.initIdField(idField);
+
+/* Coming back from Verify's "change identifier" link, the value returns in the
+   query string so it lands in the field ready to be corrected. */
+idField.value = Auth.qs('id');
+
+/* The identifier is read at click time and carried in the query string, so
+   Verify can say where the code went. Nothing is validated or stored. */
+document.getElementById('r-submit').addEventListener('click', function(){
+  var id = idField.value.trim();
+  window.location.href = 'verify.html?flow=register&id=' + encodeURIComponent(id);
+});
+</script>
+</body>
+</html>

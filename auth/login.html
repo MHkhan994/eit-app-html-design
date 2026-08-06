@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — লগ ইন</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <!-- Entry point of the flow: no back arrow, and no bottom nav — the
+           brand block is this screen's header. -->
+      <div class="screen-body auth-page">
+
+        <div class="auth-brand">
+          <div class="auth-logo">🐔</div>
+          <div class="auth-name">Poultry Solution Hub</div>
+          <div class="auth-sub">খামারের হিসাব, বাজার আর পরামর্শ — সবই এক জায়গায়।</div>
+        </div>
+
+        <div class="calc-card">
+          <div class="auth-title">লগ ইন করুন</div>
+          <p class="auth-lead">মোবাইল নম্বর <b>অথবা</b> ইমেইল — যেটি দিয়ে অ্যাকাউন্ট খুলেছেন সেটিই দিন।</p>
+
+          <div class="calc-field">
+            <label for="l-id">মোবাইল নম্বর বা ইমেইল</label>
+            <input class="calc-input" type="text" id="l-id" autocomplete="username"
+                   placeholder="০১৭xxxxxxxx  বা  you@example.com">
+          </div>
+
+          <div class="calc-field">
+            <label for="l-pw">পাসওয়ার্ড</label>
+            <div class="pw-field">
+              <input class="calc-input" type="password" id="l-pw" autocomplete="current-password"
+                     placeholder="পাসওয়ার্ড দিন">
+              <button type="button" class="pw-toggle" aria-label="পাসওয়ার্ড দেখুন"
+                      onclick="Auth.togglePw(this)">👁</button>
+            </div>
+            <a class="auth-link" href="forgot-password.html">পাসওয়ার্ড ভুলে গেছেন?</a>
+          </div>
+
+          <div class="checklist-row">
+            <input type="checkbox" id="l-remember">
+            <label for="l-remember">আমাকে মনে রাখুন</label>
+          </div>
+
+          <div style="height:14px;"></div>
+          <a class="calc-btn moss" href="../index.html">লগ ইন</a>
+        </div>
+
+        <div class="auth-alt">অ্যাকাউন্ট নেই?<a href="register.html">নতুন অ্যাকাউন্ট খুলুন</a></div>
+
+        <div class="notice" style="margin-top:18px;">
+          <p><strong>ডিজাইন মকআপ:</strong> এটি দেখানোর জন্য তৈরি একটি নমুনা স্ক্রিন। কোনো পাসওয়ার্ড
+          যাচাই করা হয় না, কোনো তথ্য সংরক্ষণ বা পাঠানো হয় না — যেকোনো কিছু লিখে লগ ইন চাপলেই হোম
+          স্ক্রিনে যাবেন।</p>
+        </div>
+
+        <div class="auth-foot">লগ ইন করলে আপনি আমাদের শর্তাবলী ও গোপনীয়তা নীতিতে সম্মত হচ্ছেন।</div>
+      </div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · কোনো তথ্য সত্যিকারে পাঠানো হয় না</div>
+</div>
+
+<script src="../assets/js/auth.js"></script>
+<script>
+Auth.initIdField(document.getElementById('l-id'));
+</script>
+</body>
+</html>

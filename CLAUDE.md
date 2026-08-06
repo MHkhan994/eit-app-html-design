@@ -87,7 +87,9 @@ eti-app/
 │   ├── js/app.js               showSub() — toggles Home's subpanels; showFieldGroup() — generic radio-driven field-set swap
 │   ├── js/shop.js              Buy: catalog + Cart + Orders. Sell loads it too, for Shop's money/date/qs/toast/storage helpers
 │   ├── js/sell.js              Sell: Listings + form collect helpers. Load AFTER shop.js — it calls Shop.readJSON/dateLabel
+│   ├── js/auth.js              Auth: qs/toast/togglePw/initOtp/initResend. Standalone — auth pages load this and nothing else
 │   └── images/                 real images once available (currently emoji placeholders)
+├── auth/                       login → register → verify → forgot-password → reset-password (standalone, gates nothing)
 ├── buy/                        catalog → product → cart → checkout → success → orders → tracking
 ├── sell/                       lead capture — landing + 4 category forms → success → submissions → tracking
 ├── doctor/index.html

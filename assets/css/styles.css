@@ -1125,3 +1125,50 @@ a.list-card{ text-decoration:none; color:inherit; }
 .shop-slide.ink p{ color:rgba(35,40,31,.74); }
 .shop-slide.ink .slide-emoji{ background:rgba(255,255,255,.5); }
 .shop-slide.ink .slide-circle{ background:var(--card-white); opacity:.3; }
+
+/* ══════════════════════════════════════════════════════════════════
+   Auth — sign in, registration, verification, password recovery.
+   The only screens designed from the design system rather than
+   transcribed from a client recording. No app-bar and no bottom nav:
+   the centred brand block is what gives them their "front door" feel,
+   since a full-width header bar would eat the top of a short form.
+   ══════════════════════════════════════════════════════════════════ */
+.auth-page{ padding-bottom:26px; }
+
+.auth-brand{ text-align:center; padding:22px 24px 16px; }
+.auth-logo{ width:74px; height:74px; border-radius:50%; background:var(--moss-soft); display:flex; align-items:center; justify-content:center; font-size:34px; margin:0 auto 12px; }
+.auth-name{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:20px; color:var(--text-charcoal); }
+.auth-sub{ font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-top:6px; }
+
+/* Card heading + lead line, tighter than .form-section-title since an auth
+   card holds one block of fields, not several sections. */
+.auth-title{ font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:16px; color:var(--text-charcoal); }
+.auth-lead{ font-size:12px; color:var(--text-secondary); line-height:1.6; margin:5px 0 14px; }
+.auth-lead b{ color:var(--text-charcoal); font-weight:700; }
+
+/* Password field: the reveal button sits inside the input's right padding.
+   Only used inside .calc-field, where .calc-input already has no margin. */
+.pw-field{ position:relative; }
+.pw-field .calc-input{ margin-bottom:0; padding-right:46px; }
+.pw-toggle{ position:absolute; right:4px; top:0; bottom:0; width:42px; display:flex; align-items:center; justify-content:center; background:none; border:none; font-size:15px; line-height:1; color:var(--text-secondary); cursor:pointer; }
+
+/* Six code boxes that behave as one input — real <input>s rather than a
+   custom key-capture widget, so mobile keyboards stay predictable. */
+.otp-row{ display:flex; justify-content:center; gap:9px; margin:4px 0 2px; }
+.otp-box{ width:100%; max-width:47px; height:56px; text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:21px; color:var(--text-charcoal); background:var(--card-white); border:1px solid var(--border-soft); border-radius:var(--r-md); }
+.otp-box:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 2px rgba(232,169,62,0.35); }
+.otp-box.filled{ border-color:var(--moss); }
+
+.resend-line{ text-align:center; font-size:12px; color:var(--text-secondary); margin-top:15px; }
+.resend-line .resend-count{ font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--text-charcoal); }
+.resend-line button{ background:none; border:none; padding:0; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:12.5px; color:var(--moss); cursor:pointer; }
+.resend-line button[disabled]{ color:var(--text-secondary); opacity:.5; cursor:default; }
+
+/* Right-aligned "forgot password?" link, pulled up under the password field. */
+.auth-link{ display:block; text-align:right; font-size:12px; font-weight:600; color:var(--moss); text-decoration:none; margin-top:10px; }
+
+/* "No account yet? Register" row under the primary button. */
+.auth-alt{ text-align:center; font-size:12.5px; color:var(--text-secondary); padding:16px 16px 0; }
+.auth-alt a{ font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--moss); text-decoration:none; margin-left:4px; }
+
+.auth-foot{ text-align:center; font-size:11px; color:var(--text-secondary); line-height:1.7; padding:18px 26px 0; }

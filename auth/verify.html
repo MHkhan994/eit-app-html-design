@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETI-App — কোড যাচাই</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<div>
+  <div class="device">
+    <div class="screen">
+      <div class="status-bar"><span>8:14 PM</span><span>●●● 13%</span></div>
+
+      <!-- One verify screen serves both flows; ?flow=register|reset sets the
+           back arrow, the sub-line, the button and where it goes. -->
+      <div class="plain-header">
+        <a class="back-btn" href="register.html" id="v-back">←</a>
+        <h1>কোড যাচাই</h1>
+      </div>
+
+      <div class="screen-body auth-page">
+
+        <div class="auth-brand" style="padding-top:6px;">
+          <div class="auth-logo">📩</div>
+          <div class="auth-name">কোডটি লিখুন</div>
+          <div class="auth-sub" id="v-sent"></div>
+        </div>
+
+        <div class="calc-card">
+          <div class="auth-title" style="text-align:center;">৬ সংখ্যার কোড</div>
+          <div style="height:14px;"></div>
+
+          <div class="otp-row" id="otp">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ১ম সংখ্যা">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ২য় সংখ্যা">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ৩য় সংখ্যা">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ৪র্থ সংখ্যা">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ৫ম সংখ্যা">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="কোডের ৬ষ্ঠ সংখ্যা">
+          </div>
+
+          <div class="resend-line">
+            কোড পাননি?
+            <button type="button" id="resend-btn">আবার পাঠান</button>
+            <span class="resend-count" id="resend-count"></span>
+          </div>
+
+          <div style="height:18px;"></div>
+          <button class="calc-btn moss" type="button" id="v-confirm">যাচাই করুন</button>
+        </div>
+
+        <div class="auth-alt">ভুল নম্বর বা ইমেইল দিয়েছেন?<a href="register.html" id="v-change">পরিবর্তন করুন</a></div>
+
+        <div class="notice" style="margin-top:18px;">
+          <p><strong>ডিজাইন মকআপ:</strong> কোনো কোড পাঠানো বা মিলিয়ে দেখা হয় না — যেকোনো সংখ্যা
+          লিখলেই (বা খালি রাখলেও) পরের ধাপে যাবেন।</p>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+  <div class="caption">ETI-App prototype · static mockup · কোনো তথ্য সত্যিকারে পাঠানো হয় না</div>
+</div>
+
+<script src="../assets/js/auth.js"></script>
+<script>
+/* Unknown or missing flow falls back to register, so a bare verify.html still
+   renders a complete screen. */
+var flow = Auth.qs('flow') === 'reset' ? 'reset' : 'register';
+var id   = Auth.qs('id');
+var back = flow === 'reset' ? 'forgot-password.html' : 'register.html';
+var carry = id ? '?id=' + encodeURIComponent(id) : '';
+
+/* The identifier is typed by the user, so it goes in as a text node, never as
+   markup. */
+var sent = document.getElementById('v-sent');
+if(id){
+  sent.appendChild(document.createTextNode('৬ সংখ্যার কোডটি পাঠানো হয়েছে '));
+  var strong = document.createElement('b');
+  strong.textContent = id;
+  sent.appendChild(strong);
+  sent.appendChild(document.createTextNode(' ' + Auth.idLabel(id) + '।'));
+} else {
+  sent.textContent = 'আপনার মোবাইল নম্বর বা ইমেইলে ৬ সংখ্যার একটি কোড পাঠানো হয়েছে।';
+}
+
+document.getElementById('v-back').setAttribute('href', back + carry);
+document.getElementById('v-change').setAttribute('href', back + carry);
+
+var confirmBtn = document.getElementById('v-confirm');
+confirmBtn.textContent = flow === 'reset' ? 'কোড যাচাই করুন' : 'যাচাই করে শুরু করুন';
+confirmBtn.addEventListener('click', function(){
+  window.location.href = flow === 'reset' ? 'reset-password.html' + carry : '../index.html';
+});
+
+Auth.initOtp('otp');
+Auth.initResend({ seconds: 60, message: 'নতুন কোড পাঠানো হয়েছে' });
+</script>
+</body>
+</html>
